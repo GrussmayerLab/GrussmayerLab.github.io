@@ -18,21 +18,26 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: OLS OpenSuperRes
-email: m.l.k.engelhardt@tudelft.nl
+title: Grussmayer Lab
+email: m.l.k.engelhardt@tudelft.nl, r.huo@tudelft.nl
 description: >- # this means to ignore newlines until "baseurl:"
-  Super-resolution microscopy is an umbrella term for techniques that enable imaging below the physical diffraction barrier of light.
-  If you want to disentangle the jungle of acronyms you have come to the right place. 
-  Encounter the tips and tricks to establish SOFI, dSTORM, spPALM etc. in your lab with open license components and software.  
-baseurl: /ols  # the subpath of your site, e.g. /blog
-url: https://grussmayerlab.github.io/  # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: mo_engels
-github_username:  moengels
+  Life, on fundamental level, consists of interactions between individual molecules, forming ever larger and complexer structures. 
+  The interaction of these molecules and subsequent structures lead to intricate and arbitrarily complex mechanisms. 
+  We, the Grussmayer Lab at TU Delft, are a team of engineers, physicists and biologists, that develop methods in light microscopy to unveil these mechanisms.
+  Join us in our path to make these developments, as well as the work of the vast  imaging community available to the world.  
+  
+baseurl: ""  # the subpath of your site, e.g. /blog
+url: https://grussmayerlab.github.io # the base hostname & protocol for your site, e.g. http://example.com
+domain: GrussmayerLab.github.io 
+twitter_username: mo_engels, RanHuo10
+github_username:  moengels, r-huo
 
 # Build settings
-theme: minima
+#theme: minima
+remote_theme: "jeffreytse/jekyll-theme-yat"
 plugins:
   - jekyll-feed
+  - jekyll-menus
 
 # Exclude from processing.
 # The following items will not be processed, by default.

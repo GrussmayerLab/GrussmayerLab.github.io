@@ -1,2 +1,3 @@
-# Welcome to the Grussmayer lab website 
-This is still in development
+# Home 
+Welcome to the Grussmayer Lab website. 
+We are still under development, stay tuned for updates. 
