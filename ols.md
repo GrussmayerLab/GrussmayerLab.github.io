@@ -3,7 +3,7 @@ layout: home
 title: "Open Life Science"
 heading: "Open Life Science"
 subheading: "Cohort 6 - Superresolution 101"
-banner: "/assets/images/banners/htt_dalle.png"
+banner: "/images/banners/htt_dalle.png"
 permalink: /ols
 ---
 # Open Life Science 
