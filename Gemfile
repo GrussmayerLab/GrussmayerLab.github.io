@@ -35,3 +35,6 @@ gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 
 # add webrick as its not involved in regular ruby install 
 gem "webrick"
+
+# emable use of non-whitelisted remote-themes
+gem "jekyll-remote-theme"
