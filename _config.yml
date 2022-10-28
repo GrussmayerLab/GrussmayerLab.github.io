@@ -26,7 +26,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   We, the Grussmayer Lab at TU Delft, are a team of engineers, physicists and biologists, that develop methods in light microscopy to unveil these mechanisms.
   Join us in our path to make these developments, as well as the work of the vast  imaging community available to the world.  
   
-baseurl: "/grussmayerlab.github.io/"  # the subpath of your site, e.g. /blog
+baseurl: ""  # the subpath of your site, e.g. /blog
 url: https://grussmayerlab.github.io # the base hostname & protocol for your site, e.g. http://example.com
 domain: GrussmayerLab.github.io 
 twitter_username: mo_engels, RanHuo10
