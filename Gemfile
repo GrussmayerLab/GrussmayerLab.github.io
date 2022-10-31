@@ -38,3 +38,9 @@ gem "webrick"
 
 # emable use of non-whitelisted remote-themes
 gem "jekyll-remote-theme"
+
+# 
+gem 'faraday-retry'
+
+# image gallery plugin from https://github.com/aerobless/jekyll-photo-gallery
+gem "exifr"

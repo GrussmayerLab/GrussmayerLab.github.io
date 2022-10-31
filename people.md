@@ -1,10 +1,13 @@
 ---
-layout: post
-title: "People"
-permalink: /people
+layout: framework 
+title: "People" 
+permalink: /people 
 ---
-# Group members
 
+
+![The lab](/images/people/kg_group_01.jpg){:class="img-responsive"}
+
+# Members
 
 ## Kristin Grussmayer
 
@@ -36,4 +39,8 @@ I am Moritz Engelhardt, a PhD student at the TU Delft Faculty Graduate School of
 ## Klarinda de Zwaan
 
 
+
+# Alumni 
+
+## Hanna-Lena Wienecke
 

@@ -1,0 +1,41 @@
+<footer class="site-footer h-card">
+  <data class="u-url" href="{{ "/" | relative_url }}"></data>
+	<div class="wrapper">
+
+	   <div class="site-footer-inner">
+			{%- assign currentYear = 'now' | date: "%Y" -%}
+			{%- assign copyright = site.copyright
+				| replace: '{currentYear}', currentYear
+				| replace: '{author}', site.author
+				| replace: '(c)', '&copy;'
+				| replace: '(p)', '℗'
+				| replace: '(cleft)', '<span class="copyleft">&copy;</span>'
+			-%}
+		  <div>{{ copyright }}</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5">
+					<h3>Grussmayer Lab</h3>
+					<div class="row">
+						<div class="col-6">
+							<ul class="list-unstyled">
+								<li><a href="https://www.tudelft.nl/en/faculty-of-applied-sciences/about-faculty/departments/bionanoscience/research/research-labs/grussmayer-lab">TU Delft</a></li>
+								<li><a href="https://www.tudelft.nl/en/faculty-of-applied-sciences/about-faculty/departments/bionanoscience/">Department of Bionanoscience</a></li>
+								<li><a href="https://kavli.tudelft.nl/">Kavli Institute of Nanoscience Delft</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="row">
+						<ul class="nav">
+							<a href="https://twitter.com/mo_engels" class="nav-link"><i class="fa fa-twitter fa-lg"></i></a>    
+							<a href="https://github.com/GrussmayerLab" class="nav-link"><i class="fa fa-github fa-lg"></i></a>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
