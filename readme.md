@@ -1,5 +1,4 @@
 # Welcome to the Grussmayer Lab
-[![CC BY 4.0][cc-by-shield]][cc-by]
 ## Home
 This respository hosts the main lab website of the Grussmayer Lab. It was initiated as part of the OLS cohort 6 
 project for an open super-resolution platform. Stay tuned for our FAIR data, hardware and software and the story 
@@ -15,11 +14,17 @@ on twitter.
   [Creative Commons](https://creativecommons.org/) - Used to choose
     the license
 ## Authors
-  - **Ran Huo** - *PhD student, open mircoscopy environment \& fusing of super-resolution techniques * - 
-  **Moritz Engelhardt** - *PhD student, Light microscopy in Huntington's disease research*
+  - **Ran Huo** - *PhD student, open mircoscopy environment \& fusing of super-resolution techniques * 
+  - **Moritz Engelhardt** - *PhD student, Light microscopy in Huntington's disease research*
 ## License
 This work is licensed under a [Creative Commons Attribution 4.0 International License][cc-by]. [cc-by]: 
 http://creativecommons.org/licenses/by/4.0/ [cc-by-image]: https://i.creativecommons.org/l/by/4.0/88x31.png 
 [cc-by-shield]: https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg
 ## Acknowledgments
-  - Sara Elgebali -
+  - Sara Elgebali 
+
+## To do
+- [ ] [shields](https://github.com/badges/shields/blob/master/README.md)
+- [ ] OLS hardware/software sharing
+- [ ] how to allow contributions?
+ 
