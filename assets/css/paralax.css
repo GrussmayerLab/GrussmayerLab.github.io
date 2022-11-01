@@ -16,27 +16,25 @@ body, html{
   background-position:center;
   background-size:auto auto;
   background-repeat:no-repeat;
-
- 
   background-attachment:fixed;
 }
 
 .pimg1{
   background-image:url('../../images/banner/htt_dalle.png');
   min-height: 400px;
-  min-width: 100%;
+  max-width: 100% ;
 }
 
 .pimg2{
-  background-image:url('../../images/banner/icon_dalle.png');
-  min-height:400px;
-  max-width: 100%;
+  background-image:url('../../images/banner/kg_group_01_1200x800.png');
+  min-height: 400px;
+  min-width: 100% ;
 }
 
 .pimg3{
   background-image:url('../../images/banner/vis_dalle.png');
   min-height:400px;
-  max-width: 100%;
+  max-width: 1800px;
 }
 
 .section{
@@ -51,7 +49,7 @@ body, html{
 
 .section-dark{
   background-color:#181818;
-  color:#181818;
+  color:#f0ead6;
 }
 /* for text by AKG */
 .ptext{
