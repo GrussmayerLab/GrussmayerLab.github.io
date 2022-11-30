@@ -6,9 +6,8 @@ subheading: "Cohort 6 - Superresolution 101"
 banner: "/images/banner/htt_dalle.png"
 permalink: /ols
 ---
-# Open Life Science 
+# OpenBlink -  An open platform for reproducible super-resolution imaging hardware and analytical tools
 This is the Open Super Res platform initiated by the OLS-cohort 6 with great support by Sara El Gebali
 
-Progress can be observed [here](https://github.com/open-life-science/ols-6/issues/4)
-
+Progress can be observed [here](https://github.com/open-life-science/ols-6/issues/4) on Github.
 
