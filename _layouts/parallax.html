@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+---
+layout: default
+---
+
 
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 <head>
@@ -21,12 +24,7 @@
 </head>
 
 
-<body>
-	
-	{%- include views/banner.html -%}
-	
-    {%- include views/header.html -%}
-
+    <body>
     {%- include extensions/hashlocate.html -%}
 
     {%- include extensions/theme-toggle.html -%}
@@ -39,7 +37,4 @@
       </div>
     </main>
   </body>
-  
-  {%- include views/footer.html -%}
-  
 </html>

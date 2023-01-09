@@ -2,74 +2,99 @@
 layout: parallax
 permalink: /
 ---
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="assets/css/paralax.css">
+	<!-- Link Swiper's CSS -->
+	  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+	<link rel="stylesheet" href="assets/css/slider.css">
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Ledger" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
 </head>
+
 <body>
 
-  <div class="pimg1">
+  <header class="v-header container">
+      <div class="fullscreen-video-wrap">
+        <video autoplay="true" loop="true" muted="true">
+			<source src="images/banner/blink_kdz.mp4" type="video/mp4">
+		</video>
+      </div>
+      <div class="header-content ">
+        <div class="logo-name">
+          <h1 style="font-size: 60px; color:white; letter-spacing: .2rem;">GRUSSMAYER LAB</h1>
+        </div>
+		</div>
+		<!-- {%- include extensions/theme-toggle.html -%}-->
+    </header>
+
+	
+
+  <section class="section section-dark">
+    <h2>Microscopy to understand the dynamics of life at the nanoscale </h2>
+	<p>
+		Life, on fundamental level, consists of interactions between individual molecules, forming ever larger and more complex structures. 
+		The interaction of these molecules and subsequent structures lead to intricate and arbitrarily complex mechanisms. 
+		We are a team of engineers, physicists and biologists, with the goal to develop advanced 3D light microscopy methods to perform quantitative studies in live cells to answer fundamental questions in molecular and cell biology. 
+		We combine label-free and molecule-specific super-resolution fluorescence readouts to assess mechanical properties, dynamics and structure.
+		Join us in our path to make these developments, as well as the work of the vast imaging community, available to the world.  	
+	</p>
+  </section>
+
+  <div class="parallax-img2">
+    <div class="ptext">
+      <span class="border">
+        <a href="https://grussmayerlab.github.io/people" style="font-size: 40px; color:white">The lab</a>
+      </span>
+    </div>
+  </div>
+
+  <div class="section section-dark">
+    <h2>The Grussmayer Lab</h2>
+	  <p>
+	    Our interdisciplinary Bionanoscience group builds upon synergies from molecular/cell biology, (physical/bio) chemistry, (bio)physics and optics. We develop cutting-edge (super-resolution) microscopy and analysis tools, establish new classes of fluorescence probes and apply them directly to address relevant questions in molecular and cell biology.
+	  </p>
+  </div>
+
+
+  <div class="parallax-img3">
 	<div class="ptext">
 	  <span class="border">
-		Gru<span>&#223;</span>mayer Lab
+		<a href="https://grussmayerlab.github.io/research" style="font-size: 40px; color:white">Our research lines</a>
 	  </span>
 	</div>
   </div>
 
   <section class="section section-dark">
-	<h2>Microscopy to understand the dynamics of life at the nanoscale </h2>
-	<p>
-	  Our goal is to develop advanced 3D light microscopy methods to perform quantitative studies in live cells to answer fundamental questions in molecular and cell biology. We combine label-free and molecule-specific super-resolution fluorescence readouts to assess mechanical properties, dynamics and structure.
-	</p>
-  </section>
-
-  <div class="pimg2">
-	<div class="ptext">
-	  <span class="border">
-		<a href="https://grussmayerlab.github.io/people">The Lab</a>
-	  </span>
-	</div>
-  </div>
-
-  <section class="section section-dark">
-	<h2>The Gru<span>&#223;</span>mayer Lab</h2>
-	<p>
-		Our interdisciplinary Bionanoscience group builds upon synergies from molecular/cell biology, (physical/bio) chemistry, (bio)physics and optics. We develop cutting-edge (super-resolution) microscopy and analysis tools, establish new classes of fluorescence probes and apply them directly to address relevant questions in molecular and cell biology.
-	</p>
-  </section>
-
-  <div class="pimg3">
-	<div class="ptext">
-	  <span class="border trans">
-		Research
-	  </span>
-	</div>
-  </div>
-
-  <section class="section section-dark">
-	<h2>Main research lines</h2>
-	<p>
-		Probing protein oligomerization, self-assembly and aggregation
+		<div class="swiper mySwiper container">
+			<div class="swiper-wrapper content">
+				{% for post in site.research %}
+					{% include archive-idcard-proj-slider.html %}
+				{% endfor %}
+			</div>
 		
-		Multiplane microscopy
-		
-		Label-free imaging - Fourier-filtering quantitative phase imaging
-		
-		Fluorescence super-resolution imaging
-	</p>
-  </section>
+			<div class="swiper-button-next"></div>
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-pagination"></div>
+		</div>
+	</section>
 
-  <div class="pimg1">
-	<div class="ptext">
-	  <span class="border">
-		<a href="https://grussmayerlab.github.io/contact">Contact</a>
-	  </span>
-	</div>
-  </div>
 
+    <!-- Swiper JS -->
+   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <script src="assets/js/slider.js"></script>
 
 </body>
 </html>

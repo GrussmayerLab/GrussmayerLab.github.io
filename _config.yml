@@ -18,20 +18,33 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: GRUSSMAYER LAB
+title: "Grussmayer Lab" 
 email: m.l.k.engelhardt@tudelft.nl, r.huo@tudelft.nl
 description: >- # this means to ignore newlines until "baseurl:"
-  Life, on fundamental level, consists of interactions between individual molecules, forming ever larger and complexer structures. 
-  The interaction of these molecules and subsequent structures lead to intricate and arbitrarily complex mechanisms. 
-  We, the Grussmayer Lab at TU Delft, are a team of engineers, physicists and biologists, that develop methods in light microscopy to unveil these mechanisms.
-  Join us in our path to make these developments, as well as the work of the vast  imaging community available to the world.  
-  
+  | Microscopy to understand the dynamics of life at the nanoscale 
 baseurl: ""  # the subpath of your site, e.g. /blog
 url: https://grussmayerlab.github.io # the base hostname & protocol for your site, e.g. http://example.com
-domain: GrussmayerLab.github.io 
+domain: grussmayerLab.github.io 
 favicon: "favicon.ico" # the favicon for your site
-twitter_username: mo_engels, RanHuo10
+twitter_username: &twitter mo_engels, RanHuo10
 github_username:  moengels, r-huo
+
+locale: "en-US"
+name: &name "Grussmayer Lab"
+breadcrumbs: false # true, false (default)
+words_per_minute: 160
+
+# from r-henriques laboratory minimal_mistakes config.yml
+staticman:
+  allowedFields          : ['name', 'email', 'url', 'message']
+  branch                 : "gh-pages" # "master", "gh-pages"
+  commitMessage          : "New comment."
+  filename               : comment-{@timestamp}
+  format                 : "yml"
+  moderation             : true
+  path                   : "_data/comments/{options.slug}"
+  requiredFields         : ['name', 'email', 'message']
+
 
 # Build settings
 #theme: minima
@@ -40,9 +53,13 @@ plugins:
   - jekyll-feed
   - jekyll-menus
   - jekyll-remote-theme
-#  - jekyll-sitemap
-#  - jekyll-paginate
-#  - jekyll-spaceship
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-spaceship
+  - jekyll-seo-tag
+  - jekyll-gist
+  - jekyll-twitter-plugin
+  - jekyll-maps
 
 # Exclude from processing.
 # The following items will not be processed, by default.
@@ -63,6 +80,9 @@ exclude:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+include:
+  - _pages
 
 ####### 
 # CONFIG FROM YAT-THEME
@@ -103,7 +123,7 @@ exclude:
 #   "Copyright (c) 2017-{currentYear} <a href="https://example.com">{author}</a>"
 #   "Copyright © 2017-2021 Foobar"
 #
-copyright: "Unpublished Work (cleft) 2017-2022 {author}"
+copyright: "(cleft) Grussmayer Lab 2022"
 
 # Yat date format
 # refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this
@@ -170,9 +190,9 @@ theme_color: spacegrey
 # Default brand colors as below:
 # orangered: #ff5100
 greatgold: #f2cb05
-# greenblue: #389092
+greenblue: 078688
 #
-brand_color: greatgold
+brand_color: greenblue
 #
 # Custom color as below:
 # brand_color: "#1a8e42"
@@ -217,11 +237,11 @@ night_mode: "on"
 # Banner default settings
 # These banner settings are for global banner default, but you can also
 # config it by the front matter for one specific post
-# banner:
-#   video: null             # Video banner source
-#   loop: true              # Video loop
-#   volume: 0               # Video volume (100% is 1.0)
-#   start_at: 0             # Video start time
+banner:
+  video: null             # Video banner source
+  loop: true              # Video loop
+  volume: 0               # Video volume (100% is 1.0)
+  start_at: 0             # Video start time
 #   image: null             # Image banner source
 #   opacity: 1.0            # Banner opacity (100% is 1.0)
 #   background: "rgba(0, 0, 0, 0.8)"  # Banner background (Could be a image)
@@ -262,12 +282,274 @@ night_mode: "on"
 # Build settings
 # highlighter: none
 markdown: kramdown
-kmarkdown:
-  input: GFM
+highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
 
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
-  - jekyll-sitemap
-  - jekyll-paginate
-  - jekyll-spaceship
+# Markdown Processing
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
+
+
+# Collections
+collections:
+  teaching:
+    output: true
+    permalink: /:collection/:path/
+  publications:
+    output: true
+    permalink: /:collection/:path/
+  preprints:
+    output: true
+    permalink: /:collection/:path/
+  bookchapters:
+    output: true
+    permalink: /:collection/:path/
+  projects:
+    output: true
+    permalink: /:collection/:path/
+  team:
+    output: true
+    permalink: /:collection/:path/
+  news:
+    output: true
+    permalink: /:collection/:path/
+  techniques:
+    output: true
+    permalink: /:collection/:path/
+  outreach:
+    output: true
+    permalink: /:collection/:path/
+  maintech:
+    output: true
+    permalink: /:collection/:path/
+  mainoutreach:
+    output: true
+    permalink: /:collection/:path/
+  gallery:
+    output: true
+    permalink: /:collection/:path/
+  contact:
+    output: true
+    permalink: /:collection/:path/
+  collaborations:
+    output: true
+    permalink: /:collection/:path/
+  research:
+    output: true
+    permalink: /:collection/:path/
+  resources:
+    output: true
+    permalink: /:collection/:path/
+
+
+# Defaults
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: false
+      related: true
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+  # _teaching
+  - scope:
+      path: ""
+      type: teaching
+    values:
+      layout: single
+      author_profile: true
+      share: false
+      comments: true
+  # _publications
+  - scope:
+      path: ""
+      type: publications
+    values:
+      layout: single
+      author_profile: true
+      share: false
+      comments: true
+
+       # _news
+  - scope:
+      path: ""
+      type: news
+    values:
+      layout: single
+      author_profile: true
+      share: false
+      comments: true
+
+  # _projects
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: talk
+      author_profile: false
+      share: false
+      comment: true
+
+  # _team
+  - scope:
+      path: ""
+      type: team
+    values:
+      layout: single
+      author_profile: true
+      share: false
+      comment: true
+
+  # _collaborations
+  - scope:
+      path: ""
+      type: collaborations
+    values:
+      layout: single
+      author_profile: true
+      share: false
+      comment: true
+
+  # _outreach
+  - scope:
+      path: ""
+      type: outreach
+    values:
+      layout: talk
+      author_profile: false
+      share: false
+      comment: true
+
+  # _research
+  - scope:
+      path: ""
+      type: research
+    values:
+      layout: talk
+      author_profile: false
+      share: false
+      comment: true
+
+  # _resources
+  - scope:
+      path: ""
+      type: resources
+    values:
+      layout: talk
+      author_profile: false
+      share: false
+      comment: true
+
+  # _mainoutreach
+  - scope:
+      path: ""
+      type: mainoutreach
+    values:
+      layout: talk
+      author_profile: false
+      share: false
+      comment: true
+
+  # _techniques
+  - scope:
+      path: ""
+      type: techniques
+    values:
+      layout: talk
+      author_profile: false
+      share: false
+      comment: true
+
+  # _gallery
+  - scope:
+      path: ""
+      type: gallery
+    values:
+      layout: talk
+      author_profile: true
+      share: false
+      comment: true
+
+  # _contact
+  - scope:
+      path: ""
+      type: contact
+    values:
+      layout: talk
+      author_profile: true
+      share: false
+      comment: true
+
+# Sass/SCSS
+sass:
+  sass_dir: _sass
+  style: compressed # http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
+
+
+# Outputting
+permalink: /:categories/:title/
+# paginate: 5 # amount of posts to show
+# paginate_path: /page:num/
+timezone: Europe/Brussels # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+# Archives
+#  Type
+#  - GitHub Pages compatible archive pages built with Liquid ~> type: liquid (default)
+#  - Jekyll Archives plugin archive pages ~> type: jekyll-archives
+#  Path (examples)
+#  - Archive page should exist at path when using Liquid method or you can
+#    expect broken links (especially with breadcrumbs enabled)
+#  - <base_path>/tags/my-awesome-tag/index.html ~> path: /tags/
+#  - <base_path/categories/my-awesome-category/index.html ~> path: /categories/
+#  - <base_path/my-awesome-category/index.html ~> path: /
+category_archive:
+  type: liquid
+  path: /categories/
+tag_archive:
+  type: liquid
+  path: /tags/
+# https://github.com/jekyll/jekyll-archives
+# jekyll-archives:
+#   enabled:
+#     - categories
+#     - tags
+#   layouts:
+#     category: archive-taxonomy
+#     tag: archive-taxonomy
+#   permalinks:
+#     category: /categories/:name/
+#     tag: /tags/:name/
+
+
+# HTML Compression
+# - http://jch.penibelst.de/
+compress_html:
+  clippings: all
+  ignore:
+    envs: development
+
+
+# google maps setting
+maps: 
+  google:
+      api_key: AIzaSyAPbBROUHVpS4yMeuj0wXQEJfhjfAe-Q68
