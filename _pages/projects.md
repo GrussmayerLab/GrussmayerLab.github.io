@@ -1,7 +1,7 @@
 ---
 layout: archive
 title: "Open projects"
-permalink: /projects
+permalink: /projects/
 author_profile: false
 header: 
     overlay_image: "/banner/htt_dalle_dark.png"

@@ -2,7 +2,7 @@
 layout: archive
 title: "People"
 heading: "People"
-permalink: /people
+permalink: /people/
 header: 
     overlay_image: /people/kg_group_01.jpg
     overlay_filter: 0.5

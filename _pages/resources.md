@@ -1,7 +1,7 @@
 ---
 layout: archive
 title: "Resources"
-permalink: /resources
+permalink: /resources/
 author_profile: false
 header: 
     overlay_image: "/banner/htt_dalle_dark.png"
