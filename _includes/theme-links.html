@@ -1,0 +1,26 @@
+{% include base_path %}
+
+<div class="wrapper">
+{% for theme in site.research %}
+  {% assign post = theme %}
+
+  {% if page.theme contains theme.type %}
+    {% if post.link %}
+      <a href="{{ post.link }}">{{ post.title }}</a> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
+    {% else %}
+      <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ post.title }}</a>
+    {% endif %}
+  {% else %}
+    {% for pub in site.publications %}
+      {% if pub.authors contains page.authorname and pub.theme contains theme.type %}
+            {% if post.link %}
+            <a href="{{ post.link }}">{{ post.title }}</a> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
+          {% else %}
+            <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ post.title }}</a>
+          {% endif %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+</div>

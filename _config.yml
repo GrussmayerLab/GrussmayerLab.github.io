@@ -1,40 +1,38 @@
 # Welcome to Jekyll!
 #
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
+# This config file is meant for settings that affect your entire site, values
+# which you are expected to set up once and rarely need to edit after that.
 # For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you:
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+# `jekyll serve`. If you change this file, please restart the server process.
 
-title: "Grussmayer Lab" 
-email: m.l.k.engelhardt@tudelft.nl, r.huo@tudelft.nl
-description: >- # this means to ignore newlines until "baseurl:"
-  | Microscopy to understand the dynamics of life at the nanoscale 
-baseurl: ""  # the subpath of your site, e.g. /blog
-url: https://grussmayerlab.github.io # the base hostname & protocol for your site, e.g. http://example.com
-domain: grussmayerLab.github.io 
-favicon: "favicon.ico" # the favicon for your site
-twitter_username: &twitter mo_engels, RanHuo10
-github_username:  moengels, r-huo
-
-locale: "en-US"
-name: &name "Grussmayer Lab"
-breadcrumbs: false # true, false (default)
-words_per_minute: 160
-
-# from r-henriques laboratory minimal_mistakes config.yml
+# Site Settings
+locale                   : "en-UK"
+title                    : "Grussmayer Lab"
+title_separator          : "|"
+name                     : &name "Grussmayer lab members"
+description              : &description "Members of the Grussmayer Lab TU Delft"
+url                      : https://grussmayerlab.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+baseurl                  : "" # the subpath of your site, e.g. "/blog"
+repository               : "GrussmayerLab/GrussmayerLab.github.io"
+teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
+breadcrumbs              : true # true, false (default)
+words_per_minute         : 160
+future                   : true
+read_more                : "disabled" # if enabled, adds "Read more" links to excerpts
+talkmap_link             : false #change to true to add link to talkmap on talks page
+comments: 
+  provider               : staticman # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman", "custom"
+  utterances:
+    theme                : "github-light" # "github-light" (default), "github-dark"
+    issue_term           : "pathname" # "pathname" (default)
+  disqus:
+    shortname            :
+  discourse:
+    server               : # https://meta.discourse.org/t/embedding-discourse-comments-via-javascript/31963 , e.g.: meta.discourse.org
+  facebook:
+    appid                :
+    num_posts            : # 5 (default)
+    colorscheme          : # "light" (default), "dark"
 staticman:
   allowedFields          : ['name', 'email', 'url', 'message']
   branch                 : "gh-pages" # "master", "gh-pages"
@@ -44,248 +42,141 @@ staticman:
   moderation             : true
   path                   : "_data/comments/{options.slug}"
   requiredFields         : ['name', 'email', 'message']
+  transforms:
+    email                : "md5"
+  generatedFields:
+    date:
+      type               : "date"
+      options:
+        format           : "iso8601" # "iso8601" (default), "timestamp-seconds", "timestamp-milliseconds"
+atom_feed:
+  path                   : # blank (default) uses feed.xml
+search                   : true # true, false (default)
+search_full_content      : true # true, false (default)
+search_provider          : algolia # lunr (default), algolia, google
+lunr:
+  search_within_pages    : true # true, false (default)
+algolia:
+  application_id         : # YOUR_APPLICATION_ID
+  index_name             : # YOUR_INDEX_NAME
+  search_only_api_key    : # YOUR_SEARCH_ONLY_API_KEY
+  powered_by             : # true (default), false
+google:
+  search_engine_id       : # YOUR_SEARCH_ENGINE_ID
+  instant_search         : # false (default), true
 
 
-# Build settings
-#theme: minima
-remote_theme: "jeffreytse/jekyll-theme-yat"
-plugins:
-  - jekyll-feed
-  - jekyll-menus
-  - jekyll-remote-theme
-  - jekyll-sitemap
-  - jekyll-paginate
-  - jekyll-spaceship
-  - jekyll-seo-tag
-  - jekyll-gist
-  - jekyll-twitter-plugin
-  - jekyll-maps
+# SEO Related
+google_site_verification :
+bing_site_verification   :
+alexa_site_verification  :
+yandex_site_verification :
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+# Social Sharing
+twitter:
+  username               : &twitter mo_engels
+facebook:
+  username               :
+  app_id                 :
+  publisher              :
+og_image                 :  # Open Graph/Twitter default site image
+# For specifying social profiles
+# - https://developers.google.com/structured-data/customize/social-profiles
+social:
+  type                   : # Person or Organization (defaults to Person)
+  name                   : # If the user or organization name differs from the site's name
+  links: # An array of links to social media profiles
 
+
+# Analytics
+analytics:
+  provider               :  "google-universal" # false (default), "google", "google-universal", "custom"
+  google:
+    tracking_id          :
+
+
+# Site Author
+author:
+  name             : "Grussmayer Lab"
+  avatar           : "profile.png"
+  bio              : "Your biography for the left-hand sidebar"
+  location         : 
+  employer         :
+  pubmed           : 
+  googlescholar    : "https://scholar.google.de/citations?user=V6ZqAogAAAAJ&hl=de&oi=ao"
+  email            :
+  researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
+  uri              :
+  bitbucket        :
+  codepen          :
+  dribbble         :
+  flickr           :
+  facebook         :
+  foursquare       :
+  github           : "GrussmayerLab"
+  google_plus      :
+  keybase          :
+  instagram        :
+  impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
+  lastfm           :
+  linkedin         :
+  orcid            : "http://orcid.org/yourorcidurl"
+  pinterest        :
+  soundcloud       :
+  stackoverflow    : # http://stackoverflow.com/users/123456/username
+  steam            :
+  tumblr           :
+  twitter          : "mo_engels"
+  vine             :
+  weibo            :
+  xing             :
+  youtube          :
+  wikipedia        :
+
+
+# Reading Files
 include:
+  - .htaccess
   - _pages
+  - files
+exclude:
+  - "*.sublime-project"
+  - "*.sublime-workspace"
+  - .asset-cache
+  - .bundle
+  - .jekyll-assets-cache
+  - .sass-cache
+  - CHANGELOG
+  - Capfile
+  - Gemfile
+  - Gruntfile.js
+  - LICENSE
+  - README
+  - Rakefile
+  - assets/js/_main.js
+  - assets/js/plugins
+  - assets/js/vendor
+  - config
+  - gulpfile.js
+  - log
+  - node_modules
+  - package.json
+  - tmp
+  - vendor
+keep_files:
+  - .git
+  - .svn
+encoding: "utf-8"
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 
-####### 
-# CONFIG FROM YAT-THEME
-#
-# About Theme
-#
-# Yet another theme for elegant writers with modern flat style and beautiful
-# night/dark mode.
-#
-# Website: https://github.com/jeffreytse/jekyll-theme-yat
-#
-# You can do anything you want, including projects for your clients, as long
-# as you mention an attribution back (credit links in footer or project).
-# See the LICENCE file.
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you
-# use 'bundle exec jekyll serve'. If you change this file, please restart
-# the server process.
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
 
-# Copyright setting
-# You can use any html code, currently below placeholders are available:
-# * current year: {currentYear}
-# * author: {author} (Value is the same as site.author)
-# * copyright: (c) - ©
-# * copyleft: (cleft)
-# * sound recording copyright: (p) - ℗
-#
-# For example:
-#   "Copyright (c) 2017-{currentYear} <a href="https://example.com">{author}</a>"
-#   "Copyright © 2017-2021 Foobar"
-#
-copyright: "(cleft) Grussmayer Lab 2022"
-
-# Yat date format
-# refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this
-yat:
-  date_format: "%b %d, %Y"
-
-# If you want more debug log, you can set true
-# debug: false
-
-# If you don't want transparent header, you can set false
-# header_transparent: true
-
-# If you want to change the content width, you can set to another value
-# content_width: "1200px"
-
-# Google analytics
-# google_analytics: [Tracking ID]
-
-# If you want to generate website sitemap, you can set true
-# sitemap: false
-
-# If you want to change site language, you can set lang option
-# lang: "en"  # default lang is en
-
-# Translate languges
-# langs refer to https://cloud.google.com/translate/docs/languages
-# translate_langs:
-#   - lang: en
-#     img: https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png
-#     text: English
-#
-#   - lang: fr
-#     img: https://cdn.countryflags.com/thumbs/france/flag-400.png
-#     text: French
-#
-#   - lang: zh-CN
-#     img: https://cdn.countryflags.com/thumbs/china/flag-400.png
-#     text: Chinese(Simple)
-#
-#   - lang: ja
-#     img: https://cdn.countryflags.com/thumbs/japan/flag-400.png
-#     text: Japanese
-#
-#   - lang: ko
-#     img: https://cdn.countryflags.com/thumbs/south-korea/flag-400.png
-#     text: Korean
-#
-#   - lang: ru
-#     img: https://cdn.countryflags.com/thumbs/russia/flag-400.png
-#     text: Russian
-
-# You can choose a theme color
-# Default theme colors as below:
-# coolblack: #090a0b
-spacegrey: #353535
-# snowwhite: #ffffff
-#
-theme_color: spacegrey
-#
-# Custom color as below:
-# theme_color: "#882250"
-
-# You can choose a brand color
-# Default brand colors as below:
-# orangered: #ff5100
-greatgold: #f2cb05
-greenblue: 078688
-#
-brand_color: greenblue
-#
-# Custom color as below:
-# brand_color: "#1a8e42"
-
-# Night/Dark mode
-# Default mode is "auto", "auto" is for auto nightshift
-# (19:00 - 07:00), "manual" is for manual toggle, and
-# "on/off" is for default on/off.
-#
-# Whatever the user's choice is, it will supersede the
-# default setting of the site and be kept during the
-# visit (session). Only the dark mode setting is"manual",
-# it will be always kept on every visit (i.e. no matter
-# the browser is closed or not)
-#
-night_mode: "on"
-
-# Code badge setting
-# You can enable or disable the code badge and so on
-# code_badge:
-#   enabled: "true"
-#   color: "#fff"
-#   background_color: "#ff4e00"
-#   text_transform: "uppercase"  # ("uppercase", "lowercase", "capitalize")
-
-# If you want to link only specific pages in your header, uncomment
-# this and add the path to the pages in order as they should show up
-# header_pages:
-#   - index.html
-#   - archives.html
-#   - categories.html
-#   - tags.html
-#   - about.md
-
-# Page default value
-# defaults:
-#   home:
-#     heading: "Your awesome heading"
-#     subheading: "Your awesome subheading"
-#     banner: "Your image url"
-
-# Banner default settings
-# These banner settings are for global banner default, but you can also
-# config it by the front matter for one specific post
-banner:
-  video: null             # Video banner source
-  loop: true              # Video loop
-  volume: 0               # Video volume (100% is 1.0)
-  start_at: 0             # Video start time
-#   image: null             # Image banner source
-#   opacity: 1.0            # Banner opacity (100% is 1.0)
-#   background: "rgba(0, 0, 0, 0.8)"  # Banner background (Could be a image)
-#   height: "640px"         # Banner default height
-#   min_height: null        # Banner minimum height
-#   heading_style: null     # Custom heading style (e.g. "font-weight: bold; text-decoration: underline")
-#   subheading_style: null  # Custom subheading style (e.g. color: gold)
-
-# Excerpt size setting
-# excerpt_size: 350
-
-# Pagination setting
-# paginate: 5
-
-# Disqus comments
-# disqus:
-#   shortname: "Your Disqus username"
-
-# Gitment comments
-# gitment:
-#   username: "Your GitHub username"
-#   repo: "The repo to store comments"
-#   client_id: "Your client ID"
-#   client_secret: "Your client secret"
-#   redirect_uri: "Your redirect url"   # If you use a custom domain name
-
-# Utterances comments
-# See https://utteranc.es/
-# set follow_site_theme true to make utterances' theme follow the site's
-
-# utterances:
-#   repo: "owner/repo"
-#   issue_term: "title"
-#   label: "utterances comment"
-#   theme: "github-light"
-#   follow_site_theme: true
-
-# Build settings
-# highlighter: none
+# Conversion
 markdown: kramdown
 highlighter: rouge
 lsi: false
 excerpt_separator: "\n\n"
 incremental: false
+
 
 # Markdown Processing
 kramdown:
@@ -301,52 +192,22 @@ kramdown:
 
 # Collections
 collections:
-  teaching:
+  people:
     output: true
     permalink: /:collection/:path/
   publications:
     output: true
     permalink: /:collection/:path/
-  preprints:
-    output: true
-    permalink: /:collection/:path/
-  bookchapters:
-    output: true
-    permalink: /:collection/:path/
-  projects:
-    output: true
-    permalink: /:collection/:path/
-  team:
-    output: true
-    permalink: /:collection/:path/
-  news:
-    output: true
-    permalink: /:collection/:path/
-  techniques:
-    output: true
-    permalink: /:collection/:path/
-  outreach:
-    output: true
-    permalink: /:collection/:path/
-  maintech:
-    output: true
-    permalink: /:collection/:path/
-  mainoutreach:
-    output: true
-    permalink: /:collection/:path/
-  gallery:
-    output: true
-    permalink: /:collection/:path/
-  contact:
-    output: true
-    permalink: /:collection/:path/
-  collaborations:
+  resources:
     output: true
     permalink: /:collection/:path/
   research:
     output: true
     permalink: /:collection/:path/
-  resources:
+  projects:
+    output: true
+    permalink: /:collection/:path/
+  contact:
     output: true
     permalink: /:collection/:path/
 
@@ -362,7 +223,7 @@ defaults:
       author_profile: true
       read_time: true
       comments: true
-      share: false
+      share: true
       related: true
   # _pages
   - scope:
@@ -371,6 +232,14 @@ defaults:
     values:
       layout: single
       author_profile: true
+  # _people
+  - scope:
+      path: ""
+      type: people
+    values:
+      layout: single
+      author_profile: false
+      comments: false
   # _teaching
   - scope:
       path: ""
@@ -378,7 +247,7 @@ defaults:
     values:
       layout: single
       author_profile: true
-      share: false
+      share: true
       comments: true
   # _publications
   - scope:
@@ -386,119 +255,26 @@ defaults:
       type: publications
     values:
       layout: single
-      author_profile: true
-      share: false
-      comments: true
-
-       # _news
-  - scope:
-      path: ""
-      type: news
-    values:
-      layout: single
-      author_profile: true
-      share: false
-      comments: true
-
-  # _projects
-  - scope:
-      path: ""
-      type: projects
-    values:
-      layout: talk
       author_profile: false
       share: false
-      comment: true
-
-  # _team
-  - scope:
-      path: ""
-      type: team
-    values:
-      layout: single
-      author_profile: true
-      share: false
-      comment: true
-
-  # _collaborations
-  - scope:
-      path: ""
-      type: collaborations
-    values:
-      layout: single
-      author_profile: true
-      share: false
-      comment: true
-
-  # _outreach
-  - scope:
-      path: ""
-      type: outreach
-    values:
-      layout: talk
-      author_profile: false
-      share: false
-      comment: true
-
-  # _research
-  - scope:
-      path: ""
-      type: research
-    values:
-      layout: talk
-      author_profile: false
-      share: false
-      comment: true
-
+      comments: false
   # _resources
   - scope:
       path: ""
       type: resources
     values:
-      layout: talk
+      layout: single
       author_profile: false
       share: false
       comment: true
-
-  # _mainoutreach
+  # _talks
   - scope:
       path: ""
-      type: mainoutreach
-    values:
-      layout: talk
-      author_profile: false
-      share: false
-      comment: true
-
-  # _techniques
-  - scope:
-      path: ""
-      type: techniques
-    values:
-      layout: talk
-      author_profile: false
-      share: false
-      comment: true
-
-  # _gallery
-  - scope:
-      path: ""
-      type: gallery
+      type: talks
     values:
       layout: talk
       author_profile: true
-      share: false
-      comment: true
-
-  # _contact
-  - scope:
-      path: ""
-      type: contact
-    values:
-      layout: talk
-      author_profile: true
-      share: false
-      comment: true
+      share: true
 
 # Sass/SCSS
 sass:
@@ -508,9 +284,26 @@ sass:
 
 # Outputting
 permalink: /:categories/:title/
-# paginate: 5 # amount of posts to show
-# paginate_path: /page:num/
-timezone: Europe/Brussels # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+#paginate: 5 # amount of posts to show
+#paginate_path: /page:num/
+#timezone: Europe/Brussels # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jekyll-redirect-from
+# mimic GitHub Pages with --safe
+whitelist:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
+
 
 # Archives
 #  Type
@@ -547,9 +340,3 @@ compress_html:
   clippings: all
   ignore:
     envs: development
-
-
-# google maps setting
-maps: 
-  google:
-      api_key: AIzaSyAPbBROUHVpS4yMeuj0wXQEJfhjfAe-Q68

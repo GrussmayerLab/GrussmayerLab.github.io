@@ -1,0 +1,126 @@
+{% include base_path %}
+
+{% if post.header.teaser %}
+  {% capture teaser %}{{ post.header.teaser }}{% endcapture %}
+{% else %}
+  {% assign teaser = site.teaser %}
+{% endif %}
+
+{% if post.header.teaser_video %}
+  {% capture teaser_video %}{{ post.header.teaser_video }}{% endcapture %}
+{% else %}
+  {% assign teaser_video = site.teaser_video %}
+{% endif %}
+
+{% if post.id %}
+  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign title = post.title %}
+{% endif %}
+
+
+<head>
+  <script>
+    // Parse input date and extract year
+    function parseYearFromDate() {
+      var inputDate = document.getElementById('inputDate').value;
+      var date = new Date(inputDate);
+      var year = date.getFullYear();
+      document.getElementById('yearOutput').textContent = year;
+    }
+  </script>
+</head>
+
+
+<div class="idcard-grid-alumni">
+  <div class="year-container">
+    <p class="quote-text"><time datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | default: "1900-01-01" | date: "%Y, %B" }}</time></p>
+  </div>
+
+  <div class="desc-container">
+    <p class="quote-text"><b>{{post.title}}</b>, {{post.role}}</p>
+
+  </div>
+</div>
+
+
+
+
+
+
+<style>
+i {
+  color: darkgray;
+}
+
+.idcard-grid-alumni {
+  height: 25px;
+  width: 100%; 
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+a:link {
+  color: darkgray;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: darkgray;
+}
+
+.year-container {
+  position: relative;
+  border-radius: 50%;
+  flex: 1;
+  margin: 10px;
+}
+
+.menu-icon {
+  width: 200px; 
+  height: 200px; 
+  object-fit: cover;
+  object-position: 25% 25%; 
+}
+
+.menu-icon:hover {
+    opacity: 0.5;
+  }
+
+.desc-container {
+  position: relative;
+  border-radius: 50%;
+  flex: 3;
+  margin: 10px;
+}
+
+.date-text {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.quote-text {
+  margin-top: -20px;
+  font-size: 18px;
+}
+
+.info-text {
+  margin-top: -20px;
+  font-size: 18px;
+  display: inline-flex;
+}
+
+.desc-text {
+  margin-top: -20px;
+  font-size: 14px;
+}
+
+.icon-links{
+  margin-top: -30px;
+  display: inline-flex;
+}
+
+
+</style>  

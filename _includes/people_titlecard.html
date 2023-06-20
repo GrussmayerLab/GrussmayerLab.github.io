@@ -1,0 +1,53 @@
+{% include base_path %}
+
+{% if page.image contains "://" %}
+  {% capture img_path %}{{ page.image }}{% endcapture %}
+{% else %}
+  {% capture img_path %}{{ page.image | prepend: "/images/" | prepend: base_path }}{% endcapture %}
+{% endif %}
+
+{% if page.header.teaser contains "://" %}
+  {% capture header_path %}{{ page.header.teaser }}{% endcapture %}
+{% else %}
+  {% capture header_path %}{{ page.header.teaser | prepend: "/images/" | prepend: base_path }}{% endcapture %}
+{% endif %}
+
+
+
+
+<div class="title-card">
+  <img src="{{header_path}}" alt="Title Card Image">
+</div>
+
+
+
+
+<style>
+  /* CSS styling for the title card */
+  .title-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 50px;
+  }
+
+  .title-card img {
+    width: 80%;
+    height: auto;
+    object-fit: cover;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .title-card h1 {
+    margin-top: 10px;
+    font-size: 24px;
+    color: #333;
+  }
+</style>

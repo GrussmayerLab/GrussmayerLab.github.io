@@ -1,7 +1,6 @@
 ---
-layout: default
+layout: compress
 ---
-
 
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 <head>
@@ -13,24 +12,16 @@ layout: default
   <link rel="icon" href="{{ site.favicon }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
-  <link rel="stylesheet" href="/assets/css/paralax.css">
-  <link rel="stylesheet" href="{{ "/assets/css/main_wide.css" | relative_url }}">
-  <script src="{{ "/assets/js/main.js" | relative_url }}"></script>
+  <link rel="stylesheet" href="/assets/css/parallax.css">
+  <script src="{{ "/assets/js/_main.js" | relative_url }}"></script>
   {%- feed_meta -%}
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
   {%- include extensions/google-analytics.html -%}
   {%- endif -%}
-  {%- include extensions/code-highlight.html -%}
 </head>
 
 
     <body>
-    {%- include extensions/hashlocate.html -%}
-
-    {%- include extensions/theme-toggle.html -%}
-
-    {%- include extensions/click-to-top.html -%}
-
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
         {{ content }}

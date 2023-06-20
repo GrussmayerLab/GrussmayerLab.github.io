@@ -1,74 +1,65 @@
 ---
-layout: framework
+layout: archive
 title: "People"
 heading: "People"
 permalink: /people
-banner: "images/group.jpg"
+header: 
+    overlay_image: /people/kg_group_01.jpg
+    overlay_filter: 0.5
+excerpt: "KG lab members"
 author_profile: false # true to include follow button thats rather useless it seems without further configuration
+search: true
 ---
-<head>
-  <style>
-    .grid{
-      display: grid;
-      grid-template-columns: 1ft 1ft 1ft 1ft;
-    }
-      .box1 {
-        grid-column-start: 1;
-          grid-column-end: 4;
-        }
-  </style>
-</head>
 
+
+# Meet the team
+
+![Grussmayer_lab_2022]({{ site.url }}{{ site.baseurl }}/images/banner/kg_group_01_1200x800.png){:class="img-responsive"}
+*Grussmayer Lab, Oct 2022*
+
+<hr><br>
 
 <h1>Principal Investigator</h1>
 <hr><br>
-  <div class="grid">
-  {% for post in site.team %}
+  {% for post in site.people %}
     {% if post.tags contains 'PI' %}
-      {% include people_horizontal_double.html %}
+      {% include archive-idcard-proj.html %}
     {% endif %}
   {% endfor %}
-  </div>
 
-
+<hr-bold>
+<h1>Staff</h1>
+<hr><br>
+  {% for post in site.people %}
+    {% if post.tags contains 'staff' %}
+      {% include archive-idcard-proj.html %}
+    {% endif %}
+  {% endfor %}
 
 <hr-bold>
 <h1>Post-doctoral researchers</h1>
 <hr><br>
-  <div class="grid">
-  {% for post in site.team %}
+  {% for post in site.people %}
     {% if post.tags contains 'post-doc' %}
-      {% include people_horizontal_double.html  type="grid" %}
+      {% include archive-idcard-proj.html %}
     {% endif %}
   {% endfor %}
-  </div>
 
 <hr-bold>
 <h1>PhD students</h1>
 <hr><br>
-  {% for post in site.team %}
+  {% for post in site.people %}
     {% if post.tags contains 'phd' %}
-      {% include people_horizontal_double.html  type="grid" %}
+      {% include archive-idcard-proj.html%}
     {% endif %}
   {% endfor %}
 
 <hr-bold>
-<h1>Master students</h1>
+<h1>Undergraduate students</h1>
 <hr><br>
-
-  {% for post in site.team %}
-    {% if post.tags contains 'msc' %}
-      {% include people_horizontal_double.html  type="grid" %}
-    {% endif %}
-  {% endfor %}
-
-<hr-bold>
-<h1>Internship students</h1>
-<hr><br>
-
-  {% for post in site.team %}
-    {% if post.tags contains 'internship' %}
-      {% include people_horizontal_double.html  type="grid" %}
+  {% for post in site.people %}
+    {% if post.tags contains 'student' %}
+      {% include archive-idcard-proj.html %}
     {% endif %}
   {% endfor %}
 
@@ -76,12 +67,17 @@ author_profile: false # true to include follow button thats rather useless it se
 <hr-bold>
 <h1>Alumni</h1>
 <hr><br>
-  {% for post in site.team %}
+  {% assign sortedPages = site.people | sort: 'date' | reverse %}
+  {% for post in sortedPages %}
     {% if post.tags contains 'alumni' %}
-      {% include people_horizontal_double.html  type="grid" %}
+      {% include archive-idcard-proj-alumni.html %}
     {% endif %}
   {% endfor %}
 
+
+<hr-bold>
+<h1>Archive</h1>
+<hr><br>
 
 
 

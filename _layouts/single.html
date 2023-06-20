@@ -3,9 +3,8 @@ layout: default
 ---
 
 {% include base_path %}
-{% include slider_styles.html %}
 
-{% if page.header.overlay_color or page.header.overlay_image or page.header.image %}
+{% if page.header.overlay_color or page.header.overlay_image or page.header.image or page.header.video %}
   {% include page__hero.html %}
 {% endif %}
 
@@ -25,7 +24,7 @@ layout: default
     {% if page.modified %}<meta itemprop="dateModified" content="{{ page.modified | date: "%B %d, %Y" }}">{% endif %}
 
     <div class="page__inner-wrap">
-      {% unless page.header.overlay_color or page.header.overlay_image %}
+      {% unless page.header.overlay_color or page.header.overlay_image or page.header.video %}
         <header>
           {% if page.title %}<h1 class="page__title" itemprop="headline">{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}</h1>{% endif %}
           {% if page.read_time %}
@@ -34,83 +33,40 @@ layout: default
         {% if page.modified %}
           <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ page.modified | date: "%Y-%m-%d" }}">{{ page.modified | date: "%B %d, %Y" }}</time></p>
         {% endif %}
-
-        {% if page.authors %}
-          <i>{{ page.authors }}</i>
-        {% endif %}
-
-        {% if page.collection == 'team' or page.collection == 'collaborations' %}
-          <hr-bold>
-          <br>
-          <div class='pull-right' style='width: 25%; height: 210px; padding: 5px; object-fit: contain;'>
-           <img src='{{ page.header.teaser | prepend: "/images/" | prepend: base_path }}' style='object-fit: scale-down; max-height: 200px; margin-left: auto; margin-right: 1px;' >
-          </div>
-
-            <p> <b>{{ page.subject }}</b>
-
-            {% if page.collection == "collaborations" %}
-              <br> Started on {{ page.date-start | default: "1900-01-01" | date: "%B, %Y" }}
-            {% elsif page.date-start %}
-              <br> Started {{ page.date-start | default: "1900-01-01" | date: "%B, %Y" }}; ended {{ page.date-end | default: "1900-01-01" | date: "%B, %Y" }}
-            {% elsif page.date %}
-              <br> Started on {{ page.date | default: "1900-01-01" | date: "%B, %Y" }}
-            {% endif %}
-
-            {% if page.prom %}
-               <br><i>{{ page.prom }}</i>
-            {% endif %}
-
-            {% if page.supervisors %}
-               <br><i>Supervision: {{ page.supervisors }}</i>
-            {% endif %}
-
-            {% if page.cv %}
-              <br><a href="'{{ page.cv }}'" style="text-decoration: none"><i class="fa fa-fw fa-chain" aria-hidden="true"></i> CV</a>
-            {% endif %}
-            {% if page.uri %}
-              <br><a href="{{ page.uri }}" style="text-decoration: none"><i class="fa fa-fw fa-chain" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].website_label | default: "Website" }}</a>
-            {% endif %}
-            {% if page.email %}
-              <br><a href="mailto:{{ page.email }}" style="text-decoration: none"><i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].email_label | default: "Email" }}</a>
-            {% endif %}
-            {% if page.googlescholar %}
-              <br><a href="{{ page.googlescholar }}" style="text-decoration: none"><i class="ai ai-google-scholar-square ai-fw"></i> Google Scholar</a>
-            {% endif %}
-            {% if page.orcid %}
-              <br><a href="{{ page.orcid }}" style="text-decoration: none"><i class="ai ai-orcid-square ai-fw"></i> ORCID</a>
-            {% endif %}
-            {% if page.twitter %}
-              <br><a href="https://twitter.com/{{ page.twitter }}" style="text-decoration: none"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
-            {% endif %}
-            </p>
-        {% endif %}
-
-        {% if page.collection == 'news' %}
-        {% if page.header.teaser %}
-         <p><center><img src='{{ page.header.teaser | prepend: "/images/" | prepend: base_path }}' style='max-height: 350px; width: 80%; object-fit: contain;' >
-        <p><justify>
-        {% endif %}
+        
+        {% if page.collection == 'teaching' %}
+          <p> {{ page.type }}, <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
+        {% elsif page.venue and page.date %}
+          <p>Published in <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
+        {% elsif page.collection == 'people' %}
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Joined:" }}</strong> <time datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | default: "1900-01-01" | date: "%B, %Y" }}</time></p>
+        {% elsif page.date %}
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
         {% endif %}
 
 
+
+
+        
+             
         {% if page.citation and page.paperurl %}
           <p>Recommended citation: {{ page.citation }} <a href="{{ page.paperurl }}"><u>{{ page.paperurl }}</u></a></p>
         {% elsif page.citation %}
           <p>Recommended citation: {{ page.citation }} </p>
         {% endif %}
-
-
-        {% if page.citation and page.paperurl %}
-          <p>Recommended citation: {{ page.citation }} <a href="{{ page.paperurl }}"><u>{{ page.paperurl }}</u></a></p>
-        {% elsif page.citation %}
-          <p>Recommended citation: {{ page.citation }} </p>
-        {% elsif page.paperurl %}
-          <cite>(see publication in <a href="{{ page.paperurl }}"> Journal</a>  ) </cite>
-        {% endif %}
-
+    
         </header>
       {% endunless %}
 
+      {% if page.toc %}
+      <aside class="sidebar__right {% if page.toc_sticky %}sticky{% endif %}">
+        <nav class="toc">
+          <header><h4 class="nav__title"><i class="fas fa-{{ page.toc_icon | default: 'file-alt' }}"></i> {{ page.toc_label | default: site.data.ui-text[site.locale].toc_label | default: "On this page" }}</h4></header>
+          {% include toc.html sanitize=true html=content h_min=1 h_max=6 class="toc__menu" skip_no_ids=true %}
+        </nav>
+      </aside>
+      {% endif %}
+      
       <section class="page__content" itemprop="text">
         {{ content }}
         {% if page.link %}<div><a href="{{ page.link }}" class="btn">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}

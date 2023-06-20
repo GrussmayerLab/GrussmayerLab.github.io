@@ -6,47 +6,75 @@
   {% assign teaser = site.teaser %}
 {% endif %}
 
+{% if post.header.video %}
+  {% capture video %}{{ post.header.video }}{% endcapture %}
+{% else %}
+  {% assign video = site.video %}
+{% endif %}
+
 {% if post.id %}
   {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
 {% else %}
   {% assign title = post.title %}
 {% endif %}
 
+{% if post.tagline %}
+  {% assign tagline = post.tagline | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign tagline = post.tagline %}
+{% endif %}
+
 <div class="{{ include.type | default: "list" }}__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    {% if include.type == "grid" and teaser %}
+    {% if include.type == "grid" and teaser or video%}
       <div class="archive__item-teaser">
-        <img style='object-fit: contain; height:200px;' src=
-          {% if teaser contains "://" %}
-            "{{ teaser }}"
-          {% else %}
-            "{{ teaser | prepend: "/images/" | prepend: base_path }}"
-          {% endif %}
-          alt="">
+        {% if teaser %}
+          <img style='object-fit: cover; height:200px;' src=
+            {% if teaser contains "://" %}
+              "{{ teaser }}"
+            {% else %}
+              "{{ teaser | prepend: "/images/" | prepend: base_path }}"
+            {% endif %}
+            alt="">
+        {% else %}
+          <video style='object-fit: cover; height:200px; width:100%' autoplay muted loop>
+            <source src={% if teaser contains "://" %}
+                    "{{ video }}"
+                  {% else %}
+                    "{{ video | prepend: "/images/" | prepend: base_path }}"
+                  {% endif %} type="video/mp4">
+            <source src={% if teaser contains "://" %}
+                    "{{ video }}"
+                  {% else %}
+                    "{{ video | prepend: "/images/" | prepend: base_path }}"
+                  {% endif %}  type="video/webm">
+          </video>
+        {% endif %}
       </div>
     {% endif %}
 
     {% if post.feature %}
-     <div class='pull-right' style='width: 50%; height: 200px; padding: 15px; object-fit: contain;'>
+     <div class='pull-right' style='width: 50%; height: 300px; padding: 15px; object-fit: contain;'>
       <img style='object-fit: cover;' src="{{ post.feature | prepend: "/images/" | prepend: base_path }}">
      </div>
     {% endif %}
 
-    <h2 class="archive__item-title" itemprop="headline">
-      {% if post.link %}
-        <a href="{{ post.link }}">{{ title }}</a> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
-      {% else %}
-        <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
-      {% endif %}
-    </h2>
-
+    <center>
+      <h2 class="archive__item-title" itemprop="headline">
+        {% if post.link %}
+          <a href="{{ post.link }}">{{ title }}</a> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
+        {% else %}
+          <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
+        {% endif %}
+      </h2>
+    </center>
     {% if post.read_time %}
       <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
     {% endif %}
 
-    {% if post.tagline  %}
-    <center><i>{{ post.tagline }}</i></center>
-{% endif %}
+    {% if tagline  %}
+    <center><i>{{ tagline }}</i></center>
+    {% endif %}
 
 
   </article>

@@ -1,11 +1,16 @@
 ---
+layout: archive
 title: ""
 collection: projects
-tags: empty
+tags: student # student, phd, postdoc
 sidebar:
   nav: "Projs"
 date: 1906-01-01
 header: 
+  teaser: /banner/htt_dalle.png
+excerpt: ""
+tagline: "" 
+Supervisor: 
 ---
 
 # [Project Name]

@@ -7,14 +7,11 @@ sidebar:
   nav: "Projs"
 date: 2022-12-02
 header: 
-feature: ../images/banner/htt_dalle.png
-teaser: ../images/banner/htt_dalle.png
-banner: images/banner/htt_dalle.png
-desc: "Objective light sheet SOFI "
+  teaser: /banner/htt_dalle.png
+excerpt: "Objective light sheet SOFI "
 tagline: "lightsheet, SOFI" 
 Supervisor: Ran Huo
 ---
-
 
 # [Project Name]
 Supervision: 

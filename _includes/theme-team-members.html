@@ -1,7 +1,7 @@
 <h2> Team members: </h2>
 <div class="grid">
   <div class="wrapper">
-    {% for member in site.team %}
+    {% for member in site.people %}
       {% assign alumni = false %}
       {% if member.tags contains "alumni" %}
         {% assign alumni = true %}
@@ -22,7 +22,7 @@
       {% endif %}
     {% endfor %}
 
-    {% for member in site.team %}
+    {% for member in site.people %}
       {% assign alumni = false %}
       {% if member.tags contains "alumni" %}
         {% assign alumni = true %}

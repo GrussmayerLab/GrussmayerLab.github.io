@@ -20,49 +20,172 @@
 
 
 
-  <div class="card" style="padding: 10px;">
-    {% if teaser %}
-        <img style='object-fit: cover; width:100%;' src=
+<div class="idcard-grid">
+  <div class="img-container">
+      {% if teaser %}
+      <a href="{{ base_path }}{{ post.url }}" rel="permalink">
+        <img src=
           {% if teaser contains "://" %}
             "{{ teaser }}"
           {% else %}
             "{{ teaser | prepend: "/images/" | prepend: base_path }}"
           {% endif %}
-          alt="">
-    {% endif %}
-    {% if teaser_video %}
-    <video width="100%" object-fit: "cover" autoplay loop>
-      <source src=
-      {% if teaser_video contains "://" %}
-      "{{ teaser_video }}"
-    {% else %}
-      "{{ teaser_video | prepend: "/images/" | prepend: base_path }}"
-    {% endif %}
-    alt="" type="video/mp4">
-    </video>
-  {% endif %}
-    <div class="card-body">
-      <h3 class="archive__item-title" itemprop="headline">
-        {% if post.link %}
-          <a href="{{ post.link }}">{{ title }}</a> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
-        {% else %}
-          <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
-        {% endif %}
-      </h3>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        {% if post.tagline  %}
-          <i>{{ post.tagline }}</i>
-        {% endif %}
-      </li>
-      <li class="list-group-item">Dapibus ac facilisis in</li>
-      <li class="list-group-item">Vestibulum at eros</li>
-    </ul>
+          alt="" class="menu-icon">
+      </a>
+      {% endif %}
+      {% if teaser_video %}
+      <a href="{{ base_path }}{{ post.url }}" rel="permalink">
+          <video width="50%" object-fit: "cover" autoplay loop>
+            <source src=
+            {% if teaser_video contains "://" %}
+            "{{ teaser_video }}"
+          {% else %}
+            "{{ teaser_video | prepend: "/images/" | prepend: base_path }}"
+          {% endif %}
+          alt="" type="video/mp4">
+          </video>
+      </a>
+      {% endif %}
   </div>
+  <div class="text-container">
+    
+    <p class="title-text"><h2>{{post.title}}</h2></p>
+    {% if post.role %}
+      <p class="quote-text">{{post.role}}&nbsp;</p>
+    {% elsif post.tags %}
+      <p class="quote-text">{{post.tags}}&nbsp;</p>
+    {% endif %}
+
+    <p class="info-text">Themes: &nbsp;
+
+      {% for theme in site.research %}
+      {% assign research_post = theme %}
+    
+      {% if post.theme contains theme.type %}
+        {% if research_post.link %}
+          <a href="{{ post.link }}">{{ research_post.title }}</a> <a href="{{ base_path }}{{ research_post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
+        {% else %}
+          <a href="{{ base_path }}{{ research_post.url }}" rel="permalink">{{ research_post.title }}</a>
+        {% endif %}
+        <p class="info-text">&nbsp;|&nbsp;</p>
+      {% else %}
+        {% for pub in site.publications %}
+          {% if pub.authors contains page.authorname and pub.theme contains theme.type %}
+                {% if research_post.link %}
+                <a href="{{ research_post.link }}">{{ research_post.title }}</a> <a href="{{ base_path }}{{ research_post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
+              {% else %}
+                <a href="{{ base_path }}{{ research_post.url }}" rel="permalink">{{ research_post.title }}</a>
+              {% endif %}
+              <p class="info-text">&nbsp;|&nbsp;</p>
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+    </p>
+      <p class="icon-links">
+        {% if post.email %}
+          <a href="mailto:{{post.email}}"> <i class="fa fa-envelope"></i>&nbsp;</a>
+        {% endif %}
+        {% if post.github %}
+          <a href="https://github.com/{{ post.github }}"> <i class="fab fa-fw fa-github" aria-hidden="true"></i>&nbsp;</a>
+        {% endif %}
+        {% if post.googlescholar %}
+          <a href="{{ post.googlescholar }}"> <i class="fas fa-fw fa-graduation-cap"></i>&nbsp;</a>
+        {% endif %}
+        {% if post.twitter %}
+          <a href="https://twitter.com/{{ post.twitter }}"> <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i>&nbsp;</a>
+        {% endif %}
+        {% if post.uri %}
+          <a href="{{ post.uri }}"> <i class="fas fa-fw fa-link" aria-hidden="true"></i>&nbsp;</a>
+        {% endif %}
+        {% if post.orcid %}
+          <a href="{{ post.orcid }}"> <i class="ai ai-orcid-square ai-fw"></i>&nbsp;</a>
+        {% endif %}
+        </p>
+  </div>
+</div>
 
 
 
 
 
+
+<style>
+i {
+  color: darkgray;
+}
+
+.idcard-grid {
+  height: 200px;
+  width: 100%; 
+  border-radius: 10px;
+  margin-bottom: 50px;
+  margin-top: -20px;
+  display: flex;
+}
+
+a:link {
+  color: darkgray;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: darkgray;
+}
+
+.img-container {
+  position: relative;
+  border-radius: 50%;
+  flex: 1;
+  margin: 10px;
+}
+
+.menu-icon {
+  width: 200px; 
+  height: 200px; 
+  object-fit: cover;
+  object-position: 25% 25%; 
+}
+
+.menu-icon:hover {
+    opacity: 0.5;
+  }
+
+.text-container {
+  flex: 3;
+  margin-left: 20px;
+}
+
+.title-text {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: -5px;
+  
+}
+
+.quote-text {
+  margin-top: -25px;
+  font-size: 18px;
+}
+
+.info-text {
+  margin-top: -25px;
+  margin-bottom: -20px;
+  font-size: 18px;
+  display: inline-flex;
+}
+
+.desc-text {
+  margin-top: -30px;
+  font-size: 14px;
+}
+
+.icon-links{
+  margin-top: -30px;
+  display: inline-flex;
+}
+
+
+</style>  

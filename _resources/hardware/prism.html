@@ -1,0 +1,646 @@
+---
+title: "PRISM"
+header: 
+    video: /resources/multiplane.webm
+layout: archive
+tag: hardware
+permalink: /resources/prism/
+author_profile: false  
+toc: false
+toc_label: "Navigation"
+toc_sticky: true
+comments: true
+collection: resources
+---
+{% include base_path %}
+
+
+<p>This setup is based on the <a href="https://www.nature.com/articles/s41566-018-0109-4">foundational study</a> for correlative superresolution fluorescence and multiplane quantitative phase microscopy. It is intended as a workhorse microscope for the Grussmayer Lab at TU Delft and has two excitation and detection paths. On the excitation side, four continuous wave laser sources of conventional wavelengths for biological applications (405nm, 488nm, 561nm, 642nm) and a diode laser (830nm) are mounted. Excitation paths are (I) a dyanmicaly adjustable dichroic based Epi-TIRF illumination, (II) a mirror based objective TIRF and (III) a manually positionable LED based white light transillumination. Detection paths are (1) a splitter for robust simultaneous four color imaging and (2) a multiplane imaging systems based on a 2x2-plane image splitter prism. 
+
+The implementation we use at the Grussmayer Lab is based on a the RM21 MadCityLabs body, which is commercially licensed and can unfortunately not be shown in CAD. Hence we use reduced representations of the microscope in the following sections. 
+However the PRISM implementation is not restricted to this body and can be facilitated in essentially all widefield and camera-based configurations. 
+The microscope is equipped with two exclusive detection paths; 2D multicolor splitter and monochromatic multiplane splitter. 
+A summary of the chromatic aspects of the current setting can be found at <a href="https://www.fpbase.org/microscope/Ri8a75Em9LiY6JjA8nT9Tk/?c=colour_splitter&l=laser-405&d=photometrics-prime-bsi">FPbase</a>.
+Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.</a> and acquisiton either manually set, scripted via bash or interfaced via <a href="https://pycro-manager.readthedocs.io/en/latest/">pycro-manager</a>.  
+</p>
+<!---
+<figure class="align-center">
+    <video width=100% autoplay loop>
+        <source src="{{ site.url }}{{ site.baseurl }}/images/resources/multiplane.webm" type="video/webm" alt="four axial planes 1000Hz recording of cos7-cells">
+    </video>
+</figure>
+-->
+<h2>Schematic</h2> 
+<figure class="align-center">
+    <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/prism.png" alt="PRISM setup schematic">
+    <figcaption>PRISM setup schematic</figcaption>
+</figure>
+
+<h2>Main body </h2>
+<p>
+    The objective, the sample stages (also MadCityLabs) and the dichroic filter outlined here are added to the RM21 body from MadCityLabs (US)
+</p>
+
+<table class="Components" cellspacing="0" cellpadding="0">
+    <tr>
+        <th class="id">id</th>
+        <th class="title">Title</th>
+        <th class="descriptor">Description</th>
+        <th class="image">Image</th>
+        <th class="notes">Notes</th>
+        <th class="supplier">Costs/Supplier</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>RM21 Advanced</td>
+        <td>Precision aligned Epi-flourescence microscope platform</td>
+        <td>
+            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/rm21.jpg" alt="" class="thumbnail">
+         </td>
+        <td><a href="//www.madcitylabs.com/rm21.html">link</a></td>
+        <td>Costs/Mad City Labs</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>MicroStage Series</td>
+        <td>Large (micron - cm) displacement, precision, stepper motor driven, micropositioning system for inverted optical microscopes</td>
+        <td>   <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/microstage.jpg" alt="" class="thumbnail"> </td>
+        <td><a href="http://www.madcitylabs.com/microstage.html">link</a></td>
+        <td>Costs/Mad City Labs</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>NanoStage Series</td>
+        <td> </td>
+        <td> </td>
+        <td><a href="http://www.madcitylabs.com/microstage.html">link</a></td>
+        <td>Costs/Mad City Labs</td>
+    </tr>   
+    <tr>
+        <td>4</td>
+        <td>TIRF-module</td>
+        <td> Precision aligned linearly translatable <a href="http://www.madcitylabs.com/tirf-module.html">mirror-lens configuration</a> to control the angle of illumination and the focusing of the excitation beam onto the back focal plane of the objective lens.</td>
+        <td> 
+            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/tirf-module.jpg" alt="" class="thumbnail">
+        </td>
+        <td></td>
+        <td>Mad City Labs</td>
+    </tr> 
+    <tr>
+        <td>5</td>
+        <td>Micro-mirror </td>
+        <td>Two broadband <a href="http://www.madcitylabs.com/MicroMirrorTIRF.html">micro-mirrors</a> positioned at the back aperture of the objective lens. </td>
+        <td>
+            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/MM_TIRF.jpg" alt="" class="thumbnail">
+         </td>
+        <td></td>
+        <td>Mad City Labs</td>
+    </tr> 
+    <tr>
+        <td>6</td>
+        <td>Notch-filter</td>
+        <td> <a href="https://www.ahf.de/en/products/spectral-analysis-photonic/optical-filters/individual-filters/laser-filters/emitters/quad/2205/quad-notch-filter-400-410/488/561/631-640">F40-072</a>
+             Quad-Notch 400-410/488/561/631-640, laser clean-up filter monunted in cage plate.</td>
+        <td></td>
+        <td></td>
+        <td>AHF, Semrock/ 1100€</td>
+    </tr> 
+    <tr>
+        <td>7</td>
+        <td>Objective(s)</td>
+        <td>60X Super-Apochromate Olympus immersion medium (silicone oil, water) <a href="https://www.olympus-lifescience.com/de/objectives/uplsapo/">UPLSAPO-S/UPLSAPO-W</a> and oil immersion <a href="https://www.olympus-lifescience.com/en/objectives/detail/0-DIRECTORY::DirFrontend-itemId.511710229.html">UPLAPO60XOHR</a></td> 
+        <td> 
+            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/uplansapo_s.jpg" alt="" class="thumbnail">
+        </td>
+        <td></td>
+        <td>Olympus/</td>
+    </tr> 
+    <tr>
+        <td>8</td>
+        <td>Dichroic mirror</td>
+        <td><a href="https://www.chroma.com/products/parts/zt405-488-561-640rpcv2">ZT405/488/561/640rpcv2-UF2</a> mounted in magnetic Kinematic Fluorescence Filter Cube <a href="https://www.thorlabs.de/thorproduct.cfm?partnumber=DFM1/M">DFM1/M</a> </td>
+        <td>
+            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/dfm1.jpg" alt="" class="thumbnail">
+        </td>
+        <td></td>
+        <td>Chroma/600€
+            Thorlabs/350€
+        </td>
+    </tr> 
+    <tr>
+        <td>9</td>
+        <td>Tube lens</td>
+        <td> <a href="https://www.edmundoptics.com/p/25mm-dia-x-200mm-fl-vis-nir-inked-achromatic-lens/9772/">#49-364-INK</a> 25mm Dia. x 200mm FL, VIS-NIR, Inked, Achromatic Lens (400-1000nm)</td>
+        <td> </td>
+        <td></td>
+        <td>Edmund optics/ 120€</td>
+    </tr> 
+    <tr>
+        <td>10</td>
+        <td>Environmental chamber</td>
+        <td>Cage incubator enclosure covering the stage and trans-illuminatsion, interfacing with the 75mm rails. Edges are sealed with tape, space inbetween breadbord and body is sealed with a folded rubber sheet. Tubing interfaces are designed according to oko-lab specifications. Two doors back and front-side are fixed to the body with M6 threads and knobs.</td>
+        <td> 
+            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/RMS21_incubator_spacing.jpg" alt="" class="thumbnail">
+        </td>
+        <td></td>
+        <td><a href="{{ site.url }}{{ site.baseurl }}/images/resources/prism/RMS21_incubator_spacing.stp">self made</a></td>
+    </tr> 
+    <tr>
+        <td>10</td>
+        <td>Environmental control</td>
+        <td><a href="https://www.oko-lab.com/21-products/live-cell-imaging/top-satge-incubator/bold-line-gas-controllers/29-bold-line">Oko-lab bold line</a> temperature and CO<sub>2</sub> control</td>
+        <td> </td>
+        <td></td>
+        <td>Okolabs/</td>
+    </tr> 
+    <tr>
+        <td>11</td>
+        <td>Koehler-illumination</td>
+        <td><a href="https://www.asiimaging.com/products/modular-infinity-microscope-mim/modular-infinity-microscope-mim/illumination-components/">OLY-TRANS-ILLUM</a> 
+            transillumination kit based upon Olympus IX2-LWUCD condenser suspended on <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=XT95SD-500">95 mm One-Sided Rail</a>
+             fixed to <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=XE75L1/M">75 mm Square Construction Rails</a></td>
+        <td> <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/koehler.jpg" alt="" class="thumbnail"> </td>
+        <td>Construction rails are cut to 300mm height and fixed to the breadboard above the stage with right angle brackets</td>
+        <td>ASI/
+            Thorlabs/
+        </td>
+    </tr> 
+    <tr class = "homemade"></tr>
+</table>
+
+
+<h2>Excitation </h2>
+<p> Four visibile light excitation lasers of standard bio-application wavelengths with comparably high power levels (>500mW) are deployed. Two excitation paths are separated by a flip mirror after the laser lines are expanded, collected and co-aligned with dichroic mirrors. Main path is the Epi-TIRF path via the TIRF-module and beam-homogenisation, secondary path is a micromirror-based TIRF configuration height-separated via periscopes.  
+    All optomechanics are mounted on 12mm optical posts with postholders (Thorlabs) and adjusted to a beam height of 126mm.
+</p>
+
+<table class="Components" cellspacing="0" cellpadding="0">
+    <tr>
+        <th class="id">id</th>
+        <th class="title">Title</th>
+        <th class="descriptor">Description</th>
+        <th class="image">Image</th>
+        <th class="notes">Notes</th>
+        <th class="supplier">Costs/Supplier</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Toptica IBEAM-SMART-405-S-LP</td>
+        <td>Ultra Compact Diode Laser, 405 nm, 100 mW</td>
+        <td> </td>
+        <td>Mostly used for reactivation in STORM and photoactivation in PALM, not easily alignable with Tetraspeck beads.</td>
+        <td>Toptica / ~2700€</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Coherent Sapphire LPX-488nm</td>
+        <td>CW laser, 488 nm, 500 mW</td>
+        <td> </td>
+        <td>P<sub>min</sub>: 50mW, needs OD filters for conventional imaging</td>
+        <td>Coherent / ~15000€</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>LaserQuantum gem 561nm</td>
+        <td>DPSS laser, 561nm, 1W; with smd2 controller</td>
+        <td> </td>
+        <td></td>
+        <td>LaserQuantum / ~13000€</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>MBP communications laser, 642nm</td>
+        <td>TEM00, Modell 2RU-VFL-P-2000-642-B1R, 642nm, 2W</td>
+        <td> </td>
+        <td></td>
+        <td>MBP communications / ~21000€</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>Beam expanders</td>
+        <td>Based on 30mm cage system from Thorlabs (US) with <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=CP33/M">CP33/M cage plates</a>, 30mm rods, <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=CXY1A">CXY1A</a> xy-translating & <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=SPT1CT/M">SPT1CT/M</a> slip plate lens mounts & 1" <a href="https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_id=2696">achromatic AR coated VIS doublet lenses</a>. </td>
+        <td> </td>
+        <td>Lens pairs chosen depending on the input laser diameter to adjust laser Ø (1/e<sup>2</sup>) to 6mm. Fine adjusted with individual circular apertures downstream. Collimation is verified with a shear plate interferometer.</td>
+        <td>Thorlabs/~600€ per expander</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>Kinematic mirror mounts</td>
+        <td><a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KM100-E02">KM100</a> 1" mirror mounts with Visible Laser Quality Mirror </td>
+        <td> </td>
+        <td></td>
+        <td>Thorlabs/110€</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>Dichroic mirrors</td>
+        <td><a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KCB1/M">KCB1/M</a> mounts with broadband dielectric mirror (<a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=BB1-E02">BB1-E02</a>) and longpass dichroics 
+            <a href="https://www.idex-hs.com/store/product-detail/lm01_613_25">LM01-613-25</a>,
+            <a href="https://www.idex-hs.com/store/product-detail/lm01_503_25">LM01-503-25</a>, 
+            <a href="https://www.idex-hs.com/store/product-detail/lm01_427_25">LM01-427-25</a>
+        </td>
+        <td> </td>
+        <td></td>
+        <td>Thorlabs/600€ 
+            Semrock/250€ p.p.
+        </td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>Beam shutter</td>
+        <td><a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=SH1/M">SH1/M</a> with <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KSC101">KSC101</a> solenoid shutter controller
+        </td>
+        <td> </td>
+        <td>Camera triggered (dual BNC>SMA via solenoid controller) per detection path</td>
+        <td>Thorlabs/1500€</td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td>Flip mirror</td>
+        <td><a href="https://www.ahf.de/en/products/spectral-analysis-photonic/optical-filters/dichroic-beamsplitters/epi-fluorescence-beamsplitters/standard-beamsplitters/longpass/2550/beamsplitter-t-760-lpxr">ZT 750 LPXRxt-U2</a> in kinematic mirror mount <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KM100CP/M">KM100CP/M</a> on a <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=FM90/M">FM90</a> flip mirror mount. 
+        </td>
+        <td> </td>
+        <td></td>
+        <td>Thorlabs/200€ 
+            Chroma/250€</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>Beam homogenisation</td>
+        <td><a href="https://pishaper.com/shaper.html">piShaper (6_6 series)</a> in a <a href="https://pishaper.com/shaper_adjust.html">4-Axis πShaper Mount M27</a> mounted on a <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=BA2/M">BA2/M</a> post base on top of 12mm posts. 
+        </td>
+        <td> </td>
+        <td>Laser input requirements:  Ø (1/e<sup>2</sup>) 6mm, lateral displacement ±0,1 mm; angular tilt ±0,1&#xb0;. Robust alignment for all input lines not trivial.</td>
+        <td>AdlOptica/~5000€
+        </td>
+    </tr>    
+    <tr>
+        <td>11</td>
+        <td>Periscopes</td>
+        <td>Beam height adjustment tailored to RM21 input heights of Epi-TIRF and micromirror path with <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KCB1C/">KCB1C/M</a> 90&deg; kinematic mirror mounts, end plates and 30mm cage system.</td>
+        <td> </td>
+        <td></td>
+        <td>Thorlabs/~350€ per unit
+        </td>
+    </tr>
+    <tr class = "homemade"></tr>
+</table>
+
+
+
+<h2>Detection </h2>
+<p>
+    <figure class="align-center">
+        <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/detection.jpg" alt="Detection chamber (in build)" style="width: 50%;">
+        <figcaption>PRISM setup schematic</figcaption>
+    </figure>
+</p>
+
+<h3>Multicolor-splitter </h3>
+<p>
+</p>
+
+<table class="Components" cellspacing="0" cellpadding="0">
+    <tr>
+        <th class="id">id</th>
+        <th class="title">Title</th>
+        <th class="descriptor">Description</th>
+        <th class="image">Image</th>
+        <th class="notes">Notes</th>
+        <th class="supplier">Costs/Supplier</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Path separation mirror M<sub>ch</sub></td>
+        <td>Kinematic mirror mount on magnetic base for path separation</td>
+        <td> </td>
+        <td></td>
+        <td>Mad City Labs/
+            Thorlabs/
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>MadView multiview beam splitting platform</td>
+        <td> Mono-to-quad view adaptable beam-splitting system designed for multi-color Single Molecule Microscopy imaging.</td>
+        <td> </td>
+        <td></td>
+        <td>Mad City Labs/</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Dichroic mirror mounts</td>
+        <td>6x mounts (2 per split) for 26x38x3mm ultraflat dichroics (&lambda;/4 Peak-to-Valley flatness) </td>
+        <td> </td>
+        <td></td>
+        <td>Thorlabs/</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Fourier lenses F<sub>ci,R1</sub></td>
+        <td>225mm focal length collimation lenses conjugate to the tube lens mounted in SM1L03 lens mount</td>
+        <td> </td>
+        <td></td>
+        <td>Mad City labs /</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>Focussing lens</td>
+        <td> <a href="https://www.edmundoptics.com/p/25mm-dia-x-200mm-fl-vis-nir-inked-achromatic-lens/9772/">#49-364-INK</a> 25mm Dia. x 200mm FL, VIS-NIR, Inked, Achromatic Lens (400-1000nm)</td>
+        <td> </td>
+        <td></td>
+        <td>Edmund optics/ 120€</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>sCMOs camera</td>
+        <td>Teledyne Photometrics <a href="https://www.photometrics.com/products/prime-family/primebsiexpress">BSI Express</a></td>
+        <td> 
+            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/bsi_express.png" alt="" class="thumbnail">
+        </td>
+        <td>2048 x 2048 pixel, air cooled, 43Hz full range full chip, high sensitivity sCMOS</td>
+        <td>Teledyne Photometrics</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>Aperture / field stop</td>
+        <td><a href="https://www.owis.eu/produkte/artikel/SP-60/1">SP 60</a> square aperture with 4 separately positionable edges</td>
+        <td>        
+            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/sp60.png" alt="" class="thumbnail">
+        </td>
+        <td>max. 12 x 12 mm, shared among both detection paths (needs to be manually adjusted to preset FOVs)</td>
+        <td>Owis/ 450€</td>
+    </tr>
+    <tr class = "homemade"></tr>
+</table>
+
+
+<h3>Multiplane-splitter </h3>
+<p>
+    The multiplane splitter (horizontal separation on sensor) is built in a 30mm cage system in a 4f-setting with either a chromatic splitter (vertical separation) or a 3D printed filter wheel based on the <a href="https://github.com/ries-lab/RiesPieces/tree/master/Microscopy/Filter_wheel">Ries lab</a> design. 
+</p>
+<table class="Components" cellspacing="0" cellpadding="0">
+    <tr>
+        <th class="id">id</th>
+        <th class="title">Title</th>
+        <th class="descriptor">Description</th>
+        <th class="image">Image</th>
+        <th class="notes">Notes</th>
+        <th class="supplier">Costs/Supplier</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Fourier lens F<sub>m,R1</sub></td>
+        <td><a href="https://www.edmundoptics.com/p/25mm-dia-x-250mm-fl-vis-nir-inked-achromatic-lens/9776/">#49-366-INK</a> 25mm Dia. x 250mm FL, VIS-NIR, Inked, Achromatic Lens (400-1000nm) </td>
+        <td> </td>
+        <td></td>
+        <td>Edmund optics/ 120€</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Fourier lens F<sub>m,R2</sub></td>
+        <td> <a href="https://www.edmundoptics.com/p/25mm-dia-x-225mm-fl-vis-nir-inked-achromatic-lens/9774/">#49-365-INK</a> 25mm Dia. x 225mm FL, VIS-NIR, Inked, Achromatic Lens (400-1000nm)</td>
+        <td> </td>
+        <td></td>
+        <td>Edmund optics/ 120€</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Beam deflection mirror</sub></td>
+        <td> <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KCB1/M">KCB1/M</a> mount with broadband dielectric mirror (<a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=BB1-E02">BB1-E02</a>) </td>    
+        <td> 
+            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/kcb1.jpg" alt="" class="thumbnail">
+        </td>
+        <td>Inserted due to spatial constraints</td>
+        <td>Thorlabs 300€</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Multiplane-splitter</sub></td>
+        <td> 2x2 glass prism </td>    
+        <td>
+            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/prism_schematic.png" alt="" class="thumbnail">
+        </td>
+        <td></td>
+        <td><a href="https://www.scoptonic.com/">Scoptonic Imaging technologies</a>/10-20k€</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>Multiplane-splitter-mount</sub></td>
+        <td>Multi-plane prism aligner</td>    
+        <td>
+            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/splitter_mount.jpg" alt="" class="thumbnail">
+        </td>
+        <td>Multi-Axis stage: X, Y, Z, Pitch, Yaw and Roll adjustm</td>
+        <td><a href="https://www.scoptonic.com/">Scoptonic Imaging technologies</a></td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>2x sCMOs cameras</td>
+        <td>Teledyne Photometrics <a href="https://www.photometrics.com/products/kinetix-family/kinetix">KINETIX</a></td>
+        <td> 
+            <img id="myimg" src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/kinetix.png" alt="" class="thumbnail">
+
+            <div id="myModal" class="modal">
+                <span class="close">&times;</span>
+                <img class="modal-content" id="img01" src="https://www.debuggr.io/static/3a4bfeeaa7a69e6aa9f4ba6ae4218622/af144/cover.png">
+                <div id="caption"></div>
+            </div>
+        </td>
+        <td>3200 x 3200 pixel, air/water cooled, 83Hz full range full chip, high sensitivity sCMOS</td>
+        <td>Teledyne Photometrics</td>
+    </tr>
+    <tr class = "homemade"></tr>
+</table>
+
+
+<h2>TIRF-lock (z-stabilisation) </h2>
+<p>
+</p>
+
+<table class="Components" cellspacing="0" cellpadding="0">
+    <tr>
+        <th class="id">id</th>
+        <th class="title">Title</th>
+        <th class="descriptor">Description</th>
+        <th class="image">Image</th>
+        <th class="notes">Notes</th>
+        <th class="supplier">Costs/Supplier</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td></td>
+        <td></td>
+        <td> </td>
+        <td></td>
+        <td>Costs/Mad City Labs</td>
+    </tr>
+    <tr class = "homemade"></tr>
+</table>
+
+
+
+<style>
+
+    table.Components {
+        border-collapse:collapse;
+
+
+    }
+    
+
+    table.Components tr:nth-child(even) {
+        background: #EAEAEA;
+    }
+
+    table.Components tr:hover td {
+        background-color: #D40100;
+    }
+
+    th {
+        background-color: black;
+        color: white;
+    }
+
+    th.id {
+        width:1%;
+    }
+
+    th.id {
+        width:5%;
+    }
+
+    th.title {
+        width:15%;
+    }
+
+    th.descriptor {
+        width:35%;
+    }
+
+    th.images {
+        width:14%;
+    }
+    th.notes {
+        width:20%;
+    }
+
+    th.supplier {
+        width:15%;
+    }
+
+    figure.thumbnail img {
+        width: 80px;
+        height: 80px;
+        object-fit: scale-down;
+    }
+
+    a.fancybox img {
+        border: none;
+    } 
+
+
+
+    /* Style the Image Used to Trigger the Modal */
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
+
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+
+/* The Close Button */
+span.close {
+  position: absolute;
+  top: 50px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+span.close:hover,
+span.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+</style>
+<script>
+    var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myimg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = "https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded";
+  captionText.innerHTML = "StackOverflow";
+}
+
+// Get the <span> element that closes the modal
+var span_cl = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span_cl.onclick = function() { 
+  modal.style.display = "none";
+}
+</script>

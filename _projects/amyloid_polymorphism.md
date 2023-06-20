@@ -7,10 +7,9 @@ sidebar:
   nav: "Projs"
 date: 1906-01-01
 header: 
-feature: ../images/banner/htt_dalle.png
-teaser: images/banner/htt_dalle.png
-banner: images/banner/htt_dalle.png
-desc: "what is a description for a project"
+  teaser: /banner/htt_dalle.png
+
+excerpt: "what is a description for a project"
 tagline: "SMLM, Huntingtons" 
 Supervisor: Moritz Engelhardt
 ---
