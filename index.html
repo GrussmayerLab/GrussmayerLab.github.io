@@ -28,8 +28,76 @@ header:
       The Grussmayer Lab is a founding member of one of the new TU Delft AI labs: Biomedical Intervention Optimisation Lab - ><a href="https://www.tudelft.nl/ai/biolab">BIOLab</a>.
     </p>
   </section>
+  <section>
   <p>Please see our <a href="./terms">terms</a> when using this website</p>
   </section>
+
+
+  <section>
+    <h1>Gallery</h1>
+
+    <div class="gallery-container">
+      <div class="gallery-box">
+        <img src="{{ site.url }}{{ site.baseurl }}/images/home/ASE008.png">
+        <div class="caption">Cytoskeletal multicolor SMLM</div>
+      </div>
+      <div class="gallery-box">
+        <img src="https://source.unsplash.com/1000x802">
+        <div class="caption">what</div>
+      </div>
+      <div class="gallery-box">
+        <img src="https://source.unsplash.com/1000x804">
+        <div class="caption">what</div>
+      </div>
+      <div class="gallery-box">
+        <img src="https://source.unsplash.com/1000x806">
+        <div class="caption">what</div>
+      </div>
+    </div>
+      
+  </section>
+
+
+   <!--- needs to be added work popupiamge to work (sort of a placeholder that is displayed once the display is triggered the first time--->
+   <div class="popup-image">
+    <span>&times;</span>
+    <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/prism_schematic.png">
+    <video autoplay loop muted>
+      <source src="" type="video/mp4">
+      <source src="" type="video/webm">
+    </video>
+    <div class="text"></div>
+  </div>
+
 </main>
 
 
+
+
+
+
+<style>
+</style>
+
+<script>
+  document.querySelectorAll('.gallery-box > img').forEach(image =>{
+  image.onclick = () =>{
+      const container = image.parentNode; // Get the parent container of the image
+      const text = container.querySelector('.caption').textContent; // Get the text stored in the container
+
+      document.querySelector('.popup-image').style.display = 'block';
+      document.querySelector('.popup-image img').src = image.getAttribute('src');
+      // force new media width (somehow overwritten by some stylesheet besides gallery)
+      document.querySelector('.popup-image img').style.width = '1000px';
+      document.querySelector('.popup-image video').style.width = '1000px';
+      // reset text position
+      document.querySelector('.popup-image .text').textContent = text; // Display the text in the popup
+      document.querySelector('.popup-image .text').style.left="50%";
+      document.querySelector('.popup-image .text').style.transform="translateX(-50%)";
+  }
+});
+
+document.querySelector('.popup-image span').onclick = () => {
+  document.querySelector('.popup-image').style.display = 'none';
+}
+</script>

@@ -1,7 +1,7 @@
 ---
 layout: single
-title: "Software"
-type: software
+title: "Simulation"
+type: simulation
 collection: research
 date: 2022-11-29
 author_profile: false # true to include follow button thats rather useless it seems without further configuration

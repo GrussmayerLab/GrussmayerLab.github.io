@@ -1,7 +1,7 @@
 ---
 layout: single
 title: Contact
-permalink: /contact
+permalink: /contact/
 header: 
     overlay_image: "/banner/contact_kg.png"
     overlay_filter: 0.5

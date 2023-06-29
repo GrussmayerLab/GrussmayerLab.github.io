@@ -13,6 +13,10 @@ comments: true
 collection: resources
 ---
 {% include base_path %}
+<!--- needs to be added for table to work--> 
+<head>
+    <link rel="stylesheet" href="{{ base_path }}/assets/css/responsive_table.css"/>
+</head>
 
 
 <p>This setup is based on the <a href="https://www.nature.com/articles/s41566-018-0109-4">foundational study</a> for correlative superresolution fluorescence and multiplane quantitative phase microscopy. It is intended as a workhorse microscope for the Grussmayer Lab at TU Delft and has two excitation and detection paths. On the excitation side, four continuous wave laser sources of conventional wavelengths for biological applications (405nm, 488nm, 561nm, 642nm) and a diode laser (830nm) are mounted. Excitation paths are (I) a dyanmicaly adjustable dichroic based Epi-TIRF illumination, (II) a mirror based objective TIRF and (III) a manually positionable LED based white light transillumination. Detection paths are (1) a splitter for robust simultaneous four color imaging and (2) a multiplane imaging systems based on a 2x2-plane image splitter prism. 
@@ -55,8 +59,11 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td>RM21 Advanced</td>
         <td>Precision aligned Epi-flourescence microscope platform</td>
         <td>
-            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/rm21.jpg" alt="" class="thumbnail">
-         </td>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/rm21.jpg" alt="" class="thumbnail">
+                <div class="caption">RM21 advanced</div>
+            </div>
+        </td>
         <td><a href="//www.madcitylabs.com/rm21.html">link</a></td>
         <td>Costs/Mad City Labs</td>
     </tr>
@@ -64,7 +71,12 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td>2</td>
         <td>MicroStage Series</td>
         <td>Large (micron - cm) displacement, precision, stepper motor driven, micropositioning system for inverted optical microscopes</td>
-        <td>   <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/microstage.jpg" alt="" class="thumbnail"> </td>
+        <td>   
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/microstage.jpg" alt="" class="thumbnail"> 
+                <div class="caption">Micro-stage</div>
+            </div>
+        </td>
         <td><a href="http://www.madcitylabs.com/microstage.html">link</a></td>
         <td>Costs/Mad City Labs</td>
     </tr>
@@ -81,8 +93,11 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td>TIRF-module</td>
         <td> Precision aligned linearly translatable <a href="http://www.madcitylabs.com/tirf-module.html">mirror-lens configuration</a> to control the angle of illumination and the focusing of the excitation beam onto the back focal plane of the objective lens.</td>
         <td> 
-            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/tirf-module.jpg" alt="" class="thumbnail">
-        </td>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/tirf-module.jpg" alt="" class="thumbnail">
+                <div class="caption">TIRF-module</div>
+            </div>
+         </td>
         <td></td>
         <td>Mad City Labs</td>
     </tr> 
@@ -91,9 +106,12 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td>Micro-mirror </td>
         <td>Two broadband <a href="http://www.madcitylabs.com/MicroMirrorTIRF.html">micro-mirrors</a> positioned at the back aperture of the objective lens. </td>
         <td>
-            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/MM_TIRF.jpg" alt="" class="thumbnail">
-         </td>
-        <td></td>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/MM_TIRF.jpg" alt="" class="thumbnail">
+                <div class="caption">Broadband micro-mirrors for TIRF imaging and TIRF-lock simultaneous to dichroic based Epi-TIRF</div>
+            </div> 
+        </td>
+        <td>Broadband micro-mirrors for TIRF imaging and TIRF-lock simultaneous to dichroic based Epi-TIRF</td>
         <td>Mad City Labs</td>
     </tr> 
     <tr>
@@ -110,8 +128,11 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td>Objective(s)</td>
         <td>60X Super-Apochromate Olympus immersion medium (silicone oil, water) <a href="https://www.olympus-lifescience.com/de/objectives/uplsapo/">UPLSAPO-S/UPLSAPO-W</a> and oil immersion <a href="https://www.olympus-lifescience.com/en/objectives/detail/0-DIRECTORY::DirFrontend-itemId.511710229.html">UPLAPO60XOHR</a></td> 
         <td> 
-            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/uplansapo_s.jpg" alt="" class="thumbnail">
-        </td>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/uplansapo_s.jpg" alt="" class="thumbnail">
+                <div class="caption">60x high NA immersion objectives</div>
+            </div>
+         </td>
         <td></td>
         <td>Olympus/</td>
     </tr> 
@@ -120,7 +141,10 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td>Dichroic mirror</td>
         <td><a href="https://www.chroma.com/products/parts/zt405-488-561-640rpcv2">ZT405/488/561/640rpcv2-UF2</a> mounted in magnetic Kinematic Fluorescence Filter Cube <a href="https://www.thorlabs.de/thorproduct.cfm?partnumber=DFM1/M">DFM1/M</a> </td>
         <td>
-            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/dfm1.jpg" alt="" class="thumbnail">
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/dfm1.jpg" alt="" class="thumbnail">
+                <div class="caption">TL dichroic mirror</div>
+            </div>
         </td>
         <td></td>
         <td>Chroma/600€
@@ -140,7 +164,10 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td>Environmental chamber</td>
         <td>Cage incubator enclosure covering the stage and trans-illuminatsion, interfacing with the 75mm rails. Edges are sealed with tape, space inbetween breadbord and body is sealed with a folded rubber sheet. Tubing interfaces are designed according to oko-lab specifications. Two doors back and front-side are fixed to the body with M6 threads and knobs.</td>
         <td> 
-            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/RMS21_incubator_spacing.jpg" alt="" class="thumbnail">
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/RMS21_incubator_spacing.jpg" alt="" class="thumbnail">
+                <div class="caption">Environmental chamber designed in SolidEdge</div> 
+            </div>
         </td>
         <td></td>
         <td><a href="{{ site.url }}{{ site.baseurl }}/images/resources/prism/RMS21_incubator_spacing.stp">self made</a></td>
@@ -159,7 +186,12 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td><a href="https://www.asiimaging.com/products/modular-infinity-microscope-mim/modular-infinity-microscope-mim/illumination-components/">OLY-TRANS-ILLUM</a> 
             transillumination kit based upon Olympus IX2-LWUCD condenser suspended on <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=XT95SD-500">95 mm One-Sided Rail</a>
              fixed to <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=XE75L1/M">75 mm Square Construction Rails</a></td>
-        <td> <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/koehler.jpg" alt="" class="thumbnail"> </td>
+        <td>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/koehler.jpg" alt="" class="thumbnail"> 
+                <div class="caption">Koehler illumination based on Olympus IX2-LWUCD condenser</div> 
+            </div> 
+        </td>
         <td>Construction rails are cut to 300mm height and fixed to the breadboard above the stage with right angle brackets</td>
         <td>ASI/
             Thorlabs/
@@ -356,7 +388,10 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td>sCMOs camera</td>
         <td>Teledyne Photometrics <a href="https://www.photometrics.com/products/prime-family/primebsiexpress">BSI Express</a></td>
         <td> 
-            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/bsi_express.png" alt="" class="thumbnail">
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/bsi_express.png" alt="" class="thumbnail">
+                <div class="caption">Teledyne Photometrics BSI Express</div>
+            </div>  
         </td>
         <td>2048 x 2048 pixel, air cooled, 43Hz full range full chip, high sensitivity sCMOS</td>
         <td>Teledyne Photometrics</td>
@@ -365,8 +400,11 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td>7</td>
         <td>Aperture / field stop</td>
         <td><a href="https://www.owis.eu/produkte/artikel/SP-60/1">SP 60</a> square aperture with 4 separately positionable edges</td>
-        <td>        
-            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/sp60.png" alt="" class="thumbnail">
+        <td>   
+            <div class="img-container">    
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/sp60.png" alt="" class="thumbnail">
+                <div class="caption">Square aperture with 4 separately positionable edges</div>
+            </div> 
         </td>
         <td>max. 12 x 12 mm, shared among both detection paths (needs to be manually adjusted to preset FOVs)</td>
         <td>Owis/ 450€</td>
@@ -409,7 +447,10 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td>Beam deflection mirror</sub></td>
         <td> <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KCB1/M">KCB1/M</a> mount with broadband dielectric mirror (<a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=BB1-E02">BB1-E02</a>) </td>    
         <td> 
-            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/kcb1.jpg" alt="" class="thumbnail">
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/kcb1.jpg" alt="" class="thumbnail">
+                <div class="caption">KCB1/M</div>
+            </div>
         </td>
         <td>Inserted due to spatial constraints</td>
         <td>Thorlabs 300€</td>
@@ -417,11 +458,14 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
     <tr>
         <td>4</td>
         <td>Multiplane-splitter</sub></td>
-        <td> 2x2 glass prism </td>    
+        <td> 2x2 glass prism</td>    
         <td>
-            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/prism_schematic.png" alt="" class="thumbnail">
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/prism_schematic.png" alt="" class="thumbnail">
+                <div class="caption">2x2 glass prism</div>
+            </div>
         </td>
-        <td></td>
+        <td> Allows simultaneous detection of up to four diffraction limited images obtained at equally spaced vertical planes with only minimal alignment of the overall optical setup </td>
         <td><a href="https://www.scoptonic.com/">Scoptonic Imaging technologies</a>/10-20k€</td>
     </tr>
     <tr>
@@ -429,7 +473,10 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td>Multiplane-splitter-mount</sub></td>
         <td>Multi-plane prism aligner</td>    
         <td>
-            <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/splitter_mount.jpg" alt="" class="thumbnail">
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/splitter_mount.jpg" alt="" class="thumbnail">
+                <div class="caption">Multi-plane prism aligner, Scoptonic Imaging technologies</div>
+            </div>
         </td>
         <td>Multi-Axis stage: X, Y, Z, Pitch, Yaw and Roll adjustm</td>
         <td><a href="https://www.scoptonic.com/">Scoptonic Imaging technologies</a></td>
@@ -439,12 +486,9 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td>2x sCMOs cameras</td>
         <td>Teledyne Photometrics <a href="https://www.photometrics.com/products/kinetix-family/kinetix">KINETIX</a></td>
         <td> 
-            <img id="myimg" src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/kinetix.png" alt="" class="thumbnail">
-
-            <div id="myModal" class="modal">
-                <span class="close">&times;</span>
-                <img class="modal-content" id="img01" src="https://www.debuggr.io/static/3a4bfeeaa7a69e6aa9f4ba6ae4218622/af144/cover.png">
-                <div id="caption"></div>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/kinetix.png" alt="" class="thumbnail">
+                <div class="caption">Teledyne Photometrics KINETIX</div>
             </div>
         </td>
         <td>3200 x 3200 pixel, air/water cooled, 83Hz full range full chip, high sensitivity sCMOS</td>
@@ -478,169 +522,35 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
     <tr class = "homemade"></tr>
 </table>
 
+<!--- needs to be added work popupiamge to work (sort of a placeholder that is displayed once the display is triggered the first time--->
+   <!--- needs to be added work popupiamge to work (sort of a placeholder that is displayed once the display is triggered the first time--->
+   <div class="popup-image">
+    <span>&times;</span>
+    <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/prism_schematic.png">
+    <video autoplay loop muted>
+      <source src="" type="video/mp4">
+      <source src="" type="video/webm">
+    </video>
+    <div class="text"> This is a sample text to enlarge the div window</div>
+  </div>
 
-
-<style>
-
-    table.Components {
-        border-collapse:collapse;
-
-
-    }
-    
-
-    table.Components tr:nth-child(even) {
-        background: #EAEAEA;
-    }
-
-    table.Components tr:hover td {
-        background-color: #D40100;
-    }
-
-    th {
-        background-color: black;
-        color: white;
-    }
-
-    th.id {
-        width:1%;
-    }
-
-    th.id {
-        width:5%;
-    }
-
-    th.title {
-        width:15%;
-    }
-
-    th.descriptor {
-        width:35%;
-    }
-
-    th.images {
-        width:14%;
-    }
-    th.notes {
-        width:20%;
-    }
-
-    th.supplier {
-        width:15%;
-    }
-
-    figure.thumbnail img {
-        width: 80px;
-        height: 80px;
-        object-fit: scale-down;
-    }
-
-    a.fancybox img {
-        border: none;
-    } 
-
-
-
-    /* Style the Image Used to Trigger the Modal */
-#myImg {
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#myImg:hover {opacity: 0.7;}
-
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-}
-
-/* Modal Content (Image) */
-.modal-content {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
-}
-
-/* Caption of Modal Image (Image Text) - Same Width as the Image */
-#caption {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
-  text-align: center;
-  color: #ccc;
-  padding: 10px 0;
-  height: 150px;
-}
-
-/* Add Animation - Zoom in the Modal */
-.modal-content, #caption {
-  animation-name: zoom;
-  animation-duration: 0.6s;
-}
-
-@keyframes zoom {
-  from {transform:scale(0)}
-  to {transform:scale(1)}
-}
-
-
-/* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px){
-  .modal-content {
-    width: 100%;
-  }
-}
-
-/* The Close Button */
-span.close {
-  position: absolute;
-  top: 50px;
-  right: 35px;
-  color: #f1f1f1;
-  font-size: 40px;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-span.close:hover,
-span.close:focus {
-  color: #bbb;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-</style>
 <script>
-    var modal = document.getElementById("myModal");
+    document.querySelectorAll('.img-container img').forEach(image =>{
+    image.onclick = () =>{
+        const container = image.parentNode; // Get the parent container of the image
+        let text = container.querySelector('.caption').textContent; // Get the text stored in the container
 
-// Get the image and insert it inside the modal - use its "alt" text as a caption
-var img = document.getElementById("myimg");
-var modalImg = document.getElementById("img01");
-var captionText = document.getElementById("caption");
-img.onclick = function(){
-  modal.style.display = "block";
-  modalImg.src = "https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded";
-  captionText.innerHTML = "StackOverflow";
-}
+        document.querySelector('.popup-image').style.display = 'block';
+        document.querySelector('.popup-image img').src = image.getAttribute('src');
+        if (text.length){
+            document.querySelector('.popup-image .text').textContent = text; // Display the text in the popup
+            document.querySelector('.popup-image .text').style.left="50%";
+            document.querySelector('.popup-image .text').style.transform="translateX(-50%)";
+        }
+    }
+});
 
-// Get the <span> element that closes the modal
-var span_cl = document.getElementsByClassName("close")[0];
-
-// When the user clicks on <span> (x), close the modal
-span_cl.onclick = function() { 
-  modal.style.display = "none";
+document.querySelector('.popup-image span').onclick = () => {
+    document.querySelector('.popup-image').style.display = 'none';
 }
 </script>

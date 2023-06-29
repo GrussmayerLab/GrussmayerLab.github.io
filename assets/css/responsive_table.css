@@ -1,0 +1,68 @@
+
+
+table.Components {
+    border-collapse:collapse;
+}
+
+table.Components tr:nth-child(even) {
+    background: #EAEAEA;
+}
+
+table.Components tr:hover td {
+    background-color: #b1b1b1;
+}
+
+th {
+    background-color: black;
+    color: white;
+}
+
+th.id {
+    width:1%;
+}
+
+th.id {
+    width:5%;
+}
+
+th.title {
+    width:15%;
+}
+
+th.descriptor {
+    width:35%;
+}
+
+th.images {
+    width:14%;
+}
+th.notes {
+    width:20%;
+}
+
+th.supplier {
+    width:15%;
+}
+
+.img-container{
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    cursor: pointer;
+    object-fit: scale-down;
+}
+
+.img-container img.thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+    transition: .2 linear;
+}
+
+.img-container img.thumbnail:hover {
+    transform: scale(1.1);
+    cursor: pointer ;
+}
+
+
+
