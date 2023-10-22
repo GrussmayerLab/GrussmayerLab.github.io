@@ -1,0 +1,246 @@
+---
+title: "Open Blink Max"
+header: 
+    image: /resources/max_header.png
+layout: archive
+tag: hardware
+permalink: /resources/max/
+author_profile: false  
+toc: false
+toc_label: "Navigation"
+toc_sticky: true
+comments: true
+collection: resources
+---
+{% include base_path %}
+<!--- needs to be added for table to work--> 
+<head>
+    <link rel="stylesheet" href="{{ base_path }}/assets/css/responsive_table.css"/>
+</head>
+
+<h2>Overview</h2> 
+<p>Max is a open-source dual-color TIRF microscope with a high-power laser combiner. Why is it called Max? Because the first microscope at KG lab has the nickname of Willy/prism, a reference to the Dutch monarch family.</p>
+<p>
+
+<p>
+The laser box is composed of four lines, three of which are multimode diode lasers (405 nm, 488 nm, 638 nm), and one DPSS laser (561 nm).
+To increase the power at 638 nm, we employed two lasers that are combined with a polarisation beam splitter (PBS).
+The laser beams are delivered through a multimode optical fiber agitated to reduce the speckles. A motorised motor facilitates the switch between epi, HILO and TIRF.
+For the main frame, we adapted the <a href = "https://hohlbeinlab.github.io/miCube/index.html">Micube</a> to hold our sample stage and high NA objective.  
+</p>
+
+<p>
+    We use <a href="https://micro-manager.org/">micro-manager 1.4 gamma </a> for the image acquisition and control of most hardwares except the lasers. The lasers are modulated via an Arduino and Digital-analog converter (DAC), and controlled by customised script.
+</p>
+<p>
+    Max is inspired greatly by <a href="https://ganzingerlab.github.io/K2TIRF/K2TIRF/index.html">K2 TIRF</a> at Ganzinger lab, <a href="https://github.com/ries-lab/LaserEngine">the LaserEngine</a> at Ries lab, and this flat-field illumination <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8914601/">implementation</a>.
+    We thank the <a href="https://openlifesci.org/">Open Life Science program</a> that helped us with the documentation of this project.
+</p>
+
+</p>
+You could find the CAD model of the system (laser box and the main body), as well as the laser control (wiring and scriptis) at <a href="TBD">TBD</a>
+</p>
+
+<h2>Schematic</h2> 
+<figure class="align-center">
+    <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/max_path.png" alt="Max setup schematic">
+    <figcaption>max setup schematic</figcaption>
+</figure>
+
+<h2>Laser Box </h2>
+<figure class="align-center">
+    <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/laserbox_3d.png" alt="laserbox 3d" style="width: 300px; height: 300px;">
+    <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/laserbox_3d.png" alt="laserbox 3d" style="width: 300px; height: 300px;">
+</figure>
+
+<p>The laser box is contained within a 450*450 mm breadboard (MB4545/M) with enclosure. All lasers are raised up to 70(?) mm height with customised aluminum heat sink.</p>
+<p>Model numbers are for Thorlabs unless specified otherwise.</p>
+<table class="Components" cellspacing="0" cellpadding="0">
+    <tr>
+        <th class="id">id</th>
+        <th class="title">Title</th>
+        <th class="descriptor">Description</th>
+        <th class="image">Image</th>
+        <th class="notes">Supplier/Model</th>
+        <th class="supplier">Cost in &euro;</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Diode lasers 405 nm</td>
+        <td>500 mW, with driver   </td>
+        <td>
+            
+        </td>
+        <td><a href="https://www.lasertack.com/en/350mw-405nm-uv-diode-laser-hl40063mg/">Lasertack/LAB-405-500</a></td>
+        <td>687</td>
+    </tr>
+
+    <tr>
+        <td>2</td>
+        <td>Diode lasers 488 nm</td>
+        <td>2000 mW, with driver </td>
+        <td>
+            
+        </td>
+        <td><a href="https://www.lasertack.com/en/2w-488nm-diodenlaser-nds7175-2-2/">Lasertack/LAB-488-1000</a></td>
+        <td>3310</td>
+    </tr>
+
+    <tr>
+        <td>3</td>
+        <td>Diode lasers 638 nm, 2x. One is oriented perpendicular to the other</td>
+        <td>2x1000 mW, with drivers </td>
+        <td>
+            
+        </td>
+        <td><a href="https://www.lasertack.com/en/1w-638nm-diode-laser//">Lasertack/LAB-638-1000</a></td>
+        <td>866</td>
+    </tr>
+
+    <tr>
+        <td>4</td>
+        <td>DPSS lasers 561 nm</td>
+        <td>1000 mW, with analog modulation(0-5V)</td>
+        <td>
+            
+        </td>
+        <td><a href="http://www.cnilaser.com/PDF/MGL-FN%20Series.pdf">CNI laser/MGL-FN-561</a></td>
+        <td>11150</td>
+    </tr>
+
+    <tr>
+        <td>5</td>
+        <td>Dichroics</td>
+        <td>1" longpass dichroic mirros to combine the laser lines</td>
+        <td>
+            
+        </td>
+        <td>DMLP425/505/550/605</a></td>
+        <td>708</td>
+    </tr>
+
+    <tr>
+        <td>6</td>
+        <td>PBS</td>
+        <td>1" polarisation beam spliter, mounted by <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KM100PM/M">KM100PM/M</a> and <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=PM4/M">PM4/M</a>, in order to combine two 638 nm lasers</td>
+        <td></td>
+        <td>PBS251</td>
+        <td>315</td>
+    </tr>
+
+    <tr>
+        <td>7</td>
+        <td>Fiber launcher</td>
+        <td>A 1/2" 19mm ach. doublet (AC127-019-A) to focus the combined beam into the fiber. Mounted in 1" tubale lens tube (SM05V10, SM1A6, SM1M15, SM1TC), FC/PC adaptor(SM1FC)</td>
+        <td>
+            
+        </td>
+        <td></a></td>
+        <td>220</td>
+    </tr>
+
+    <tr>
+        <td>8</td>
+        <td>Multimode fiber</td>
+        <td>70*70 um square profiled MM optical fiber, NA=0.22</td>
+        <td>
+            
+        </td>
+        <td>Ceram Optec/Customized</a></td>
+        <td>350</td>
+    </tr>
+
+    <tr>
+        <td>9</td>
+        <td>Vibrational motor</td>
+        <td>9000 RPM vibrational motors that are taped onto the optical fiber to break down the speckles in the output beam profile</td>
+        <td>
+            
+        </td>
+        <td><a href="https://www.hackerstore.nl/Artikel/916">Hackerstore.nl</a></td>
+        <td>4</td>
+    </tr>
+
+
+    <tr class = "homemade"></tr>
+</table>
+
+
+
+
+<h2>Excitation </h2>
+<p> Four visibile light excitation lasers of standard bio-application wavelengths with comparably high power levels (>500mW) are deployed. Two excitation paths are separated by a flip mirror after the laser lines are expanded, collected and co-aligned with dichroic mirrors. Main path is the Epi-TIRF path via the TIRF-module and beam-homogenisation, secondary path is a micromirror-based TIRF configuration height-separated via periscopes.  
+    All optomechanics are mounted on 12mm optical posts with postholders (Thorlabs) and adjusted to a beam height of 126mm.
+</p>
+
+<table class="Components" cellspacing="0" cellpadding="0">
+    <tr>
+        <th class="id">id</th>
+        <th class="title">Title</th>
+        <th class="descriptor">Description</th>
+        <th class="image">Image</th>
+        <th class="notes">Notes</th>
+        <th class="supplier">Costs/Supplier</th>
+    </tr>
+   
+    <tr>
+        <td>6</td>
+        <td>Kinematic mirror mounts</td>
+        <td><a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KM100-E02">KM100</a> 1" mirror mounts with Visible Laser Quality Mirror </td>
+        <td> </td>
+        <td></td>
+        <td>Thorlabs/110€</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>Dichroic mirrors</td>
+        <td><a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KCB1/M">KCB1/M</a> mounts with broadband dielectric mirror (<a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=BB1-E02">BB1-E02</a>) and longpass dichroics 
+            <a href="https://www.idex-hs.com/store/product-detail/lm01_613_25">LM01-613-25</a>,
+            <a href="https://www.idex-hs.com/store/product-detail/lm01_503_25">LM01-503-25</a>, 
+            <a href="https://www.idex-hs.com/store/product-detail/lm01_427_25">LM01-427-25</a>
+        </td>
+        <td> </td>
+        <td></td>
+        <td>Thorlabs/600€ 
+            Semrock/250€ p.p.
+        </td>
+    </tr>
+
+    <tr class = "homemade"></tr>
+</table>
+
+
+
+
+<!--- needs to be added work popupiamge to work (sort of a placeholder that is displayed once the display is triggered the first time--->
+   <!--- needs to be added work popupiamge to work (sort of a placeholder that is displayed once the display is triggered the first time--->
+   <div class="popup-image">
+    <span>&times;</span>
+    <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/prism_schematic.png">
+    <video autoplay loop muted>
+      <source src="" type="video/mp4">
+      <source src="" type="video/webm">
+    </video>
+    <div class="text"> This is a sample text to enlarge the div window</div>
+  </div>
+
+<script>
+    document.querySelectorAll('.img-container img').forEach(image =>{
+    image.onclick = () =>{
+        const container = image.parentNode; // Get the parent container of the image
+        let text = container.querySelector('.caption').textContent; // Get the text stored in the container
+
+        document.querySelector('.popup-image').style.display = 'block';
+        document.querySelector('.popup-image img').src = image.getAttribute('src');
+        if (text.length){
+            document.querySelector('.popup-image .text').textContent = text; // Display the text in the popup
+            document.querySelector('.popup-image .text').style.left="50%";
+            document.querySelector('.popup-image .text').style.transform="translateX(-50%)";
+        }
+    }
+});
+
+document.querySelector('.popup-image span').onclick = () => {
+    document.querySelector('.popup-image').style.display = 'none';
+}
+</script>
