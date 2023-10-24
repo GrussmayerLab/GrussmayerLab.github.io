@@ -1,7 +1,7 @@
 ---
 title: "Open Blink Max"
 header: 
-    image: /resources/max_header.png
+    image: /resources/max/max_header.png
 layout: archive
 tag: hardware
 permalink: /resources/max/
@@ -50,7 +50,7 @@ You could find the CAD model of the system (laser box and the main body), as wel
 <h2>Laser Box </h2>
 <figure class="align-center">
     <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/laserbox_3d.png" alt="laserbox 3d" style="width: 300px; height: 300px;">
-    <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/laserbox_3d.png" alt="laserbox 3d" style="width: 300px; height: 300px;">
+    <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/photo_laserbox.jpg" alt="laserbox 3d" style="width: 300px; height: 300px;">
 </figure>
 
 <p>The laser box is contained within a 450*450 mm breadboard (MB4545/M) with enclosure. All lasers are raised up to 70(?) mm height with customised aluminum heat sink.</p>
@@ -61,7 +61,7 @@ You could find the CAD model of the system (laser box and the main body), as wel
         <th class="title">Title</th>
         <th class="descriptor">Description</th>
         <th class="image">Image</th>
-        <th class="notes">Supplier/Model</th>
+        <th class="notes">Supplier, Model</th>
         <th class="supplier">Cost in &euro;</th>
     </tr>
     <tr>
@@ -69,9 +69,12 @@ You could find the CAD model of the system (laser box and the main body), as wel
         <td>Diode lasers 405 nm</td>
         <td>500 mW, with driver   </td>
         <td>
-            
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/lasertack.png" alt="" class="thumbnail">
+                <div class="caption">Diode laser and driver</div>
+            </div>
         </td>
-        <td><a href="https://www.lasertack.com/en/350mw-405nm-uv-diode-laser-hl40063mg/">Lasertack/LAB-405-500</a></td>
+        <td><a href="https://www.lasertack.com/en/350mw-405nm-uv-diode-laser-hl40063mg/">Lasertack, LAB-405-500</a></td>
         <td>687</td>
     </tr>
 
@@ -82,7 +85,7 @@ You could find the CAD model of the system (laser box and the main body), as wel
         <td>
             
         </td>
-        <td><a href="https://www.lasertack.com/en/2w-488nm-diodenlaser-nds7175-2-2/">Lasertack/LAB-488-1000</a></td>
+        <td><a href="https://www.lasertack.com/en/2w-488nm-diodenlaser-nds7175-2-2/">Lasertack, LAB-488-1000</a></td>
         <td>3310</td>
     </tr>
 
@@ -93,7 +96,7 @@ You could find the CAD model of the system (laser box and the main body), as wel
         <td>
             
         </td>
-        <td><a href="https://www.lasertack.com/en/1w-638nm-diode-laser//">Lasertack/LAB-638-1000</a></td>
+        <td><a href="https://www.lasertack.com/en/1w-638nm-diode-laser//">Lasertack, LAB-638-1000</a></td>
         <td>866</td>
     </tr>
 
@@ -104,7 +107,7 @@ You could find the CAD model of the system (laser box and the main body), as wel
         <td>
             
         </td>
-        <td><a href="http://www.cnilaser.com/PDF/MGL-FN%20Series.pdf">CNI laser/MGL-FN-561</a></td>
+        <td><a href="http://www.cnilaser.com/PDF/MGL-FN%20Series.pdf">CNI laser, MGL-FN-561</a></td>
         <td>11150</td>
     </tr>
 
@@ -115,7 +118,7 @@ You could find the CAD model of the system (laser box and the main body), as wel
         <td>
             
         </td>
-        <td>DMLP425/505/550/605</a></td>
+        <td>Thorlabs, DMLP425/505/550/605</a></td>
         <td>708</td>
     </tr>
 
@@ -123,8 +126,13 @@ You could find the CAD model of the system (laser box and the main body), as wel
         <td>6</td>
         <td>PBS</td>
         <td>1" polarisation beam spliter, mounted by <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KM100PM/M">KM100PM/M</a> and <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=PM4/M">PM4/M</a>, in order to combine two 638 nm lasers</td>
-        <td></td>
-        <td>PBS251</td>
+        <td>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/photo_PBS.jpg" alt="" class="thumbnail">
+                <div class="caption">PBS</div>
+            </div>
+        </td>
+        <td>Thorlabs, PBS251</td>
         <td>315</td>
     </tr>
 
@@ -133,9 +141,12 @@ You could find the CAD model of the system (laser box and the main body), as wel
         <td>Fiber launcher</td>
         <td>A 1/2" 19mm ach. doublet (AC127-019-A) to focus the combined beam into the fiber. Mounted in 1" tubale lens tube (SM05V10, SM1A6, SM1M15, SM1TC), FC/PC adaptor(SM1FC)</td>
         <td>
-            
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/photo_fiberlauncher.jpg" alt="" class="thumbnail">
+                <div class="caption">Fiber launcher</div>
+            </div>
         </td>
-        <td></a></td>
+        <td>Thorlabs</a></td>
         <td>220</td>
     </tr>
 
@@ -146,7 +157,7 @@ You could find the CAD model of the system (laser box and the main body), as wel
         <td>
             
         </td>
-        <td>Ceram Optec/Customized</a></td>
+        <td>Ceram Optec, Customized</a></td>
         <td>350</td>
     </tr>
 
@@ -155,7 +166,16 @@ You could find the CAD model of the system (laser box and the main body), as wel
         <td>Vibrational motor</td>
         <td>9000 RPM vibrational motors that are taped onto the optical fiber to break down the speckles in the output beam profile</td>
         <td>
-            
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/photo_motor2.jpg" alt="" class="thumbnail">
+    
+                <div class="caption">Vibrational motor</div>
+            </div>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/photo_motor.jpg" alt="" class="thumbnail">
+    
+                <div class="caption">Vibrational motor mounting</div>
+            </div>
         </td>
         <td><a href="https://www.hackerstore.nl/Artikel/916">Hackerstore.nl</a></td>
         <td>4</td>
@@ -166,12 +186,19 @@ You could find the CAD model of the system (laser box and the main body), as wel
 </table>
 
 
+<h3>Laser box control</h3>
+<figure class="align-center">
+    <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/photo_lasercontrol.jpg" alt="lasercontrol", style="width: 25%;" >
+</figure>
+Since all lasers in the laser box take 0-5V analog signal as instensity modulation signal, we used DAC chips and Arduino UNO to control the laser lines. You could found the scripts run on Arduino IDE, where simple interactive control is realized by serial communication between the PC and Arduino UNO.
+The wiring between the Arduino, DACs, and the laser drivers is a prototype on breadboard, and has been running in KG lab. Interlock and laser safety measures should be implemented in any circumstance.
+
+<h2>Excitation</h2>
 
 
-<h2>Excitation </h2>
-<p> Four visibile light excitation lasers of standard bio-application wavelengths with comparably high power levels (>500mW) are deployed. Two excitation paths are separated by a flip mirror after the laser lines are expanded, collected and co-aligned with dichroic mirrors. Main path is the Epi-TIRF path via the TIRF-module and beam-homogenisation, secondary path is a micromirror-based TIRF configuration height-separated via periscopes.  
-    All optomechanics are mounted on 12mm optical posts with postholders (Thorlabs) and adjusted to a beam height of 126mm.
-</p>
+<figure class="align-center">
+    <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/photo_excitation.jpg" alt="micube" style="width: 50%;">
+</figure>
 
 <table class="Components" cellspacing="0" cellpadding="0">
     <tr>
@@ -179,37 +206,238 @@ You could find the CAD model of the system (laser box and the main body), as wel
         <th class="title">Title</th>
         <th class="descriptor">Description</th>
         <th class="image">Image</th>
-        <th class="notes">Notes</th>
-        <th class="supplier">Costs/Supplier</th>
+        <th class="notes">Supplier, Model</th>
+        <th class="supplier">Cost in &euro;</th>
     </tr>
-   
+    <tr>
+        <td>1</td>
+        <td>Fiber adaptor</td>
+        <td>Couple out the beam at the output of the optical fiber mounted on cage plate (CP33/M)</td>
+        <td></td>
+        <td>Thorlabs, SM1FC </td>
+        <td>30 </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Laser collimator</td>
+        <td>A 30 mm achromatic doublet to collimate the beam at the output of the optical fiber. Mounted in 1" cage after the fiber adaptor</td>
+        <td>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/photo_collimator.jpg" alt="" class="thumbnail">
+                <div class="caption">Laser collimator</div>
+            </div>
+        </td>
+        <td>Thorlabs, AC254-030-A</td>
+        <td>85 </td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Laser cleanup filter</td>
+        <td>Filter out the autofluorescence from the MMF</td>
+        <td></td>
+        <td>Chroma, ZET 405/488/561/640xv2</td>
+        <td>575 </td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>TIRF stage</td>
+        <td>1D motorised stage scanning the laser beam across the back focal plane(BFP) of the objective</td>
+        <td>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/photo_tirfstage.jpg" alt="" class="thumbnail">
+                <div class="caption">TIRF stage assembly</div>
+            </div>
+        </td>
+        <td>Thorlabs, KMTS25E/M</td>
+        <td>1500 </td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>TIRF lens</td>
+        <td>150 mm achromatic doublets to focus the beam onto the BFP of the objective, mounted on CXY1A</td>
+        <td></td>
+        <td>Edmund Optics, 147-643</td>
+        <td>283 </td>
+    </tr>
     <tr>
         <td>6</td>
-        <td>Kinematic mirror mounts</td>
-        <td><a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KM100-E02">KM100</a> 1" mirror mounts with Visible Laser Quality Mirror </td>
-        <td> </td>
+        <td>Elliptical mirror</td>
+        <td>Mounted on KCB1E/M and assembled with the TIRF lens on the TIRF stage</td>
         <td></td>
-        <td>Thorlabs/110€</td>
+        <td>Thorlabs, BBE1-E02</td>
+        <td>70 </td>
     </tr>
-    <tr>
-        <td>7</td>
-        <td>Dichroic mirrors</td>
-        <td><a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KCB1/M">KCB1/M</a> mounts with broadband dielectric mirror (<a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=BB1-E02">BB1-E02</a>) and longpass dichroics 
-            <a href="https://www.idex-hs.com/store/product-detail/lm01_613_25">LM01-613-25</a>,
-            <a href="https://www.idex-hs.com/store/product-detail/lm01_503_25">LM01-503-25</a>, 
-            <a href="https://www.idex-hs.com/store/product-detail/lm01_427_25">LM01-427-25</a>
-        </td>
-        <td> </td>
-        <td></td>
-        <td>Thorlabs/600€ 
-            Semrock/250€ p.p.
-        </td>
-    </tr>
-
     <tr class = "homemade"></tr>
 </table>
 
 
+<h2>Microscope Body </h2>
+
+<figure class="align-center">
+    <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/micube.png" alt="micube" style="width: 25%;" >
+</figure>
+
+<table class="Components" cellspacing="0" cellpadding="0">
+    <tr>
+        <th class="id">id</th>
+        <th class="title">Title</th>
+        <th class="descriptor">Description</th>
+        <th class="image">Image</th>
+        <th class="notes">Supplier, Model</th>
+        <th class="supplier">Cost in &euro;</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Modified MiCube</td>
+        <td>Adapted from MiCube. Reduced in size to accommodate 150 mm focusing lens</td>
+        <td>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/photo_micube2.jpg" alt="" class="thumbnail">
+                <div class="caption">Micube</div>
+            </div>
+        </td>
+        <td>in-house CNC milled</td>
+        <td>1700 </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>XYZ stage</td>
+        <td>Nano precision sample stage </td>
+        <td></td>
+        <td>Smaract, CLS5252</td>
+        <td>14000 </td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Objective</td>
+        <td>Oil immersion objective, NA = 1,5. Mounted on the micube with M27 to RMS adaptor (RMSA3)</td>
+        <td></td>
+        <td>Olympus, UPLAPO60XOHR</td>
+        <td>12400 </td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Quad-band dichroic</td>
+        <td>Dichroic mirror under the objective, mounted on DFM1/M and fixed on the micube with screws on the back</td>
+        <td></td>
+        <td>Chroma, zt405/488/561/640rpc</td>
+        <td>575 </td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>Elliptical mirror</td>
+        <td>Mounted under the dichroic mirror with KCB1E/M and C4W-CC</td>
+        <td>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/photo_quadichroic.jpg" alt="" class="thumbnail">
+                <div class="caption">QUad-band dichroic and mirror mounted inside of Micube</div>
+            </div>
+        </td>
+        <td>THorlabs, BBE1-E02</td>
+        <td>65 </td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>Sample holder</td>
+        <td>Home-made slide holder, mounted onto the stage</td>
+        <td></td>
+        <td>In-house CNC milled</td>
+        <td>\ </td>
+    </tr>
+    <tr class = "homemade"></tr>
+</table>
+
+<h2>Detection </h2>
+
+<figure class="align-center">
+    <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/photo_det.jpg" alt="detection" style="width: 50%;" >
+</figure>
+
+<table class="Components" cellspacing="0" cellpadding="0">
+    <tr>
+        <th class="id">id</th>
+        <th class="title">Title</th>
+        <th class="descriptor">Description</th>
+        <th class="image">Image</th>
+        <th class="notes">Supplier, Model</th>
+        <th class="supplier">Cost in &euro;</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Tube lens</td>
+        <td>180 mm tube lens compatible with Olympus objectives</td>
+        <td></td>
+        <td>Thorlabs, TTL180-A</td>
+        <td>686 </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Notch filter</td>
+        <td>Filter out the excitation laser beam</td>
+        <td></td>
+        <td>Chroma, ZET405/488/561/640m-TRFv2</td>
+        <td>1000 </td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Slit</td>
+        <td>Semi rectangular slit adjustable from two directions, cropping the image to fit in a single channel on camera. Alternative could be <a href=" https://www.owis.eu/produkte/artikel/SP-60/1">Owis SP60</a></td>
+        <td>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/photo_slit.jpg" alt="" class="thumbnail">
+                <div class="caption">Slit</div>
+            </div>
+        </td>
+        <td>Recycled from MadCityLab RM21</td>
+        <td> </td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>4f lenses</td>
+        <td>Three 300 mm  achromatic doublet mounted on LMR1/M  </td>
+        <td>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/photo_4f.jpg" alt="" class="thumbnail">
+                <div class="caption">Two channle 4F system</div>
+            </div>
+        </td>
+        <td>Qioptiq, G32 2336 322</td>
+        <td>300 </td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>Dichroic mirror</td>
+        <td>Long-pass dichroic splits image into red and green channels, mounted on compact KMS/M</td>
+        <td></td>
+        <td>Chroma, ZT640rdc-UF3</td>
+        <td>450 </td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>Square mirror</td>
+        <td>Reflects the green channel with maxium surface, mounted on compact KMS/M</td>
+        <td></td>
+        <td>Thorlabs, BBSQ1-E02</td>
+        <td>74 </td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>Emission filters</td>
+        <td>Band-pass filters in the red and green channels respectively</td>
+        <td></td>
+        <td>AHF, ET685/70, ET595/50</td>
+        <td>650 </td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>Camera</td>
+        <td>sCMOS camera</td>
+        <td></td>
+        <td>Teledyne Prime BSI Express</td>
+        <td>10800 </td>
+    </tr>
+    <tr class = "homemade"></tr>
+</table>
 
 
 <!--- needs to be added work popupiamge to work (sort of a placeholder that is displayed once the display is triggered the first time--->
