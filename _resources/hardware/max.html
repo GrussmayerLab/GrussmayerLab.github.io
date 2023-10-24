@@ -2,6 +2,7 @@
 title: "Open Blink Max"
 header: 
     overlay_image: /resources/max/max_header.png
+    teaser: /resources/max/max_header.png
 layout: archive
 tag: hardware
 permalink: /resources/max/
@@ -25,7 +26,7 @@ collection: resources
 <p>
 The laser box is composed of four lines, three of which are multimode diode lasers (405 nm, 488 nm, 638 nm), and one DPSS laser (561 nm).
 To increase the power at 638 nm, we employed two lasers that are combined with a polarisation beam splitter (PBS).
-The laser beams are delivered through a multimode optical fiber agitated to reduce the speckles. A motorised motor facilitates the switch between epi, HILO and TIRF.
+The laser beams are delivered through a multimode optical fiber agitated to reduce the speckles. A motorised motor facilitates the switch between epi, HILO and TIRF. 
 For the main frame, we adapted the <a href = "https://hohlbeinlab.github.io/miCube/index.html">Micube</a> to hold our sample stage and high NA objective.  
 </p>
 
@@ -349,6 +350,7 @@ The wiring between the Arduino, DACs, and the laser drivers is a prototype on br
 
 <h2>Detection </h2>
 
+We adapt the detection scheme in <a href="https://ganzingerlab.github.io/K2TIRF/K2TIRF/index.html">K2 TIRF</a> at Ganzinger lab for our dual channel detection.
 <figure class="align-center">
     <img src="{{ site.url }}{{ site.baseurl }}/images/resources/max/photo_det.jpg" alt="detection" style="width: 50%;" >
 </figure>
@@ -407,7 +409,7 @@ The wiring between the Arduino, DACs, and the laser drivers is a prototype on br
     <tr>
         <td>5</td>
         <td>Dichroic mirror</td>
-        <td>Long-pass dichroic splits image into red and green channels, mounted on compact KMS/M</td>
+        <td>Long-pass dichroic splits image into red and green channels, glued on compact KMS/M with <a href="https://www.picodent.de/cms/upload/download/Katalog-2015-GB.pdf">picodent Twinsil</a></td>
         <td></td>
         <td>Chroma, ZT640rdc-UF3</td>
         <td>450 </td>
