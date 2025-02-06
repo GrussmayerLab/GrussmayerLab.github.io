@@ -1,0 +1,45 @@
+---
+title: "RM21Blanket"
+header: 
+    overlay_image: /resources/landscape_cell_blanket.png
+    teaser: /resources/landscape_cell_blanket.png
+layout: archive
+tag: hardware
+permalink: /live-cell-incubator/
+author_profile: false  
+toc: false
+toc_label: "Navigation"
+toc_sticky: true
+comments: true
+collection: resources
+---
+{% include base_path %}
+<!--- needs to be added for table to work--> 
+<head>
+    <link rel="stylesheet" href="{{ base_path }}/assets/css/responsive_table.css"/>
+</head>
+
+ 
+<p>This is a placeholder page to <a href = "https://grussmayerlab.github.io/live-cell-incubator/">link</a> to the RM21 Blanket repository, which describes a live-cell incubator design for the RM21 microscope platform by MadCityLabs.<p>
+
+
+<script>
+    document.querySelectorAll('.img-container img').forEach(image =>{
+    image.onclick = () =>{
+        const container = image.parentNode; // Get the parent container of the image
+        let text = container.querySelector('.caption').textContent; // Get the text stored in the container
+
+        document.querySelector('.popup-image').style.display = 'block';
+        document.querySelector('.popup-image img').src = image.getAttribute('src');
+        if (text.length){
+            document.querySelector('.popup-image .text').textContent = text; // Display the text in the popup
+            document.querySelector('.popup-image .text').style.left="50%";
+            document.querySelector('.popup-image .text').style.transform="translateX(-50%)";
+        }
+    }
+});
+
+document.querySelector('.popup-image span').onclick = () => {
+    document.querySelector('.popup-image').style.display = 'none';
+}
+</script>

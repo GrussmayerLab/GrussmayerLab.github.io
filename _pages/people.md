@@ -4,7 +4,7 @@ title: "People"
 heading: "People"
 permalink: /people/
 header: 
-    overlay_image: /people/kg_group_01.jpg
+    overlay_image: /group.jpg
     overlay_filter: 0.5
 excerpt: "KG lab members"
 author_profile: false # true to include follow button thats rather useless it seems without further configuration
@@ -14,8 +14,8 @@ search: true
 
 # Meet the team
 
-![Grussmayer_lab_2022]({{ site.url }}{{ site.baseurl }}/images/banner/kg_group_01_1200x800.png){:class="img-responsive"}
-*Grussmayer Lab, Oct 2022*
+![Grussmayer_lab_2024]({{ site.url }}{{ site.baseurl }}/images/group.jpg){:class="img-responsive"}
+*Grussmayer Lab, May 2024*
 
 <hr><br>
 
@@ -79,5 +79,7 @@ search: true
 <h1>Archive</h1>
 <hr><br>
 
+![Grussmayer_lab_2022]({{ site.url }}{{ site.baseurl }}/images/banner/kg_group_01_1200x800.png){:class="img-responsive"}
+*Grussmayer Lab, Oct 2022*
 
 
