@@ -20,26 +20,13 @@ collection: resources
 </head>
 
 <h2>Overview</h2> 
-<p>Max is a open-source dual-color TIRF microscope with a high-power laser combiner. Why is it called Max? Because the first microscope at KG lab has the nickname of Willy/prism, a reference to the Dutch monarch family.</p>
+<p>
+Open Blink (Max) is a low-cost TIRF microscopy with laser combiner providing high-power homogeneous illumination for single-molecule based super-resolution imaging. The control system is fully integrated in <a href="https://micro-manager.org/">micro-manager 2.0 </a>.
 <p>
 
 <p>
-The laser box is composed of four lines, three of which are multimode diode lasers (405 nm, 488 nm, 638 nm), and one DPSS laser (561 nm).
-To increase the power at 638 nm, we employed two lasers that are combined with a polarisation beam splitter (PBS).
-The laser beams are delivered through a multimode optical fiber agitated to reduce the speckles. A motorised motor facilitates the switch between epi, HILO and TIRF. 
-For the main frame, we adapted the <a href = "https://hohlbeinlab.github.io/miCube/index.html">Micube</a> to hold our sample stage and high NA objective.  
-</p>
-
-<p>
-    We use <a href="https://micro-manager.org/">micro-manager 1.4 gamma </a> for the image acquisition and control of most hardwares except the lasers. The lasers are modulated via an Arduino and Digital-analog converter (DAC), and controlled by customised script.
-</p>
-<p>
-    Max is inspired greatly by <a href="https://ganzingerlab.github.io/K2TIRF/K2TIRF/index.html">K2 TIRF</a> at Ganzinger lab, <a href="https://github.com/ries-lab/LaserEngine">the LaserEngine</a> at Ries lab, and this flat-field illumination <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8914601/">implementation</a>.
-    We thank the <a href="https://openlifesci.org/">Open Life Science program</a> that helped us with the documentation of this project.
-</p>
-
-</p>
-You could find the CAD model of the system (laser box and the main body), as well as the laser control (wiring and scriptis) at <a href="TBD">TBD</a>
+    Open Blink is inspired greatly by <a href="https://ganzingerlab.github.io/K2TIRF/K2TIRF/index.html">K2 TIRF</a> at Ganzinger lab, <a href="https://github.com/ries-lab/LaserEngine">the LaserEngine</a> at Ries lab, and an flat-field illumination <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8914601/">implementation</a>.
+    We also thank the <a href="https://openlifesci.org/"> Open Life Science program</a> for helping with the documentation, and <a href="https://openlifesci.org/"> Open Hardware Funding at TU Delft</a> for sponsoring parts of the project.
 </p>
 
 <h2>Schematic</h2> 
