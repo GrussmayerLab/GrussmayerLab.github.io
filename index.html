@@ -8,6 +8,7 @@ header:
   video: "/banner/blink_kdz.mp4"
   caption: "credit: Klarinda de Zwaan"
 ---
+
 <main>
   <section>
     <h1>Welcome</h1>
@@ -28,75 +29,34 @@ header:
       The Grussmayer Lab is a founding member of one of the new TU Delft AI labs: Biomedical Intervention Optimisation Lab - ><a href="https://www.tudelft.nl/ai/biolab">BIOLab</a>.
     </p>
   </section>
-  <section>
-  <p>Please see our <a href="./terms">terms</a> when using this website</p>
-  </section>
-
 
   <section>
     <h1>Gallery</h1>
-
-    <div class="gallery-container">
-      <div class="gallery-box">
-        <img src="{{ site.url }}{{ site.baseurl }}/images/home/ASE008.png">
-        <div class="caption">Cytoskeletal ratiometric multicolor SMLM</div>
+    <div class="gallery-slider" data-manifest="/images/home/gallery/gallery.json" id="homeGallery" aria-label="Image gallery">
+      <button class="gallery-btn prev" aria-label="Previous image" title="Previous">
+        &#10094;
+      </button>
+    
+      <div class="gallery-viewport">
+        <img class="gallery-image" alt="" loading="lazy">
+        <div class="gallery-caption" aria-live="polite"></div>
       </div>
-      <div class="gallery-box">
-        <img src="{{ site.url }}{{ site.baseurl }}/images/research/ewald_sphere.png">
-        <div class="caption">QPI</div>
-      </div>
-      <div class="gallery-box">
-        <img src="{{ site.url }}{{ site.baseurl }}/images/home/brac2_rad51.png">
-        <div class="caption">DNA-repair sequential multicolor SMLM</div>
-      </div>
-      <div class="gallery-box">
-        <img src="{{ site.url }}{{ site.baseurl }}/images/home/htt_thx.png">
-        <div class="caption">Transient aggregate staining</div>
-      </div>
+    
+      <button class="gallery-btn next" aria-label="Next image" title="Next">
+        &#10095;
+      </button>
+    
+      <div class="gallery-dots" aria-label="Slide navigation"></div>
     </div>
-      
   </section>
 
-   <!--- needs to be added work popupiamge to work (sort of a placeholder that is displayed once the display is triggered the first time--->
-   <div class="popup-image">
-    <span>&times;</span>
-    <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/prism_schematic.png">
-    <video autoplay loop muted>
-      <source src="" type="video/mp4">
-      <source src="" type="video/webm">
-    </video>
-    <div class="text"></div>
-  </div>
+  <section>
+    <p>Please see our <a href="./terms">terms</a> when using this website. </p>
+    <br>
+    <p><a href="./about">About us</a></p>
+    </section>
 
 </main>
 
 
-
-
-
-
-<style>
-</style>
-
-<script>
-  document.querySelectorAll('.gallery-box > img').forEach(image =>{
-  image.onclick = () =>{
-      const container = image.parentNode; // Get the parent container of the image
-      const text = container.querySelector('.caption').textContent; // Get the text stored in the container
-
-      document.querySelector('.popup-image').style.display = 'block';
-      document.querySelector('.popup-image img').src = image.getAttribute('src');
-      // force new media width (somehow overwritten by some stylesheet besides gallery)
-      document.querySelector('.popup-image img').style.width = '1000px';
-      document.querySelector('.popup-image video').style.width = '1000px';
-      // reset text position
-      document.querySelector('.popup-image .text').textContent = text; // Display the text in the popup
-      document.querySelector('.popup-image .text').style.left="50%";
-      document.querySelector('.popup-image .text').style.transform="translateX(-50%)";
-  }
-});
-
-document.querySelector('.popup-image span').onclick = () => {
-  document.querySelector('.popup-image').style.display = 'none';
-}
-</script>
+<script src="{{ site.url }}{{ site.baseurl }}/assets/js/new_gallery.js"></script>
