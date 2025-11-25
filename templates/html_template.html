@@ -1,0 +1,104 @@
+---
+title: "title"
+header: 
+    video: /resources/multiplane.webm
+layout: archive
+tag: hardware_software_data
+permalink: /template/_html_/
+author_profile: false  
+toc: false
+toc_label: "Navigation"
+toc_sticky: true
+comments: false
+collection: resources_protocols
+---
+{% include base_path %}
+<!--- needs to be added for responsive table to work--> 
+<head>
+    <link rel="stylesheet" href="{{ base_path }}/assets/css/responsive_table.css"/>
+</head>
+
+
+<h1>First headline</h1> 
+<p>paragraph 1</p>
+
+<h2>Second headline</h2>
+<p>A <a href="https://grussmayerlab.github.io/">link</a> to your favourite website </p>
+
+
+<h2>Figure</h2> 
+<figure class="align-center">
+    <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/prism.png" alt="PRISM setup schematic">
+    <figcaption>PRISM setup schematic</figcaption>
+</figure>
+
+
+<h2>Table </h2>
+
+<table class="Components" cellspacing="0" cellpadding="0">
+    <tr>
+        <th class="id">id</th>
+        <th class="title">Title</th>
+        <th class="descriptor">Description</th>
+        <th class="image">Image</th>
+        <th class="notes">Notes</th>
+        <th class="supplier">Costs/Supplier</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>test title</td>
+        <td>test description </td>
+        <td> 
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/bsi_express.png" alt="" class="thumbnail">
+                <div class="caption">test image caption</div>
+            </div>  
+        </td>
+        <td>test notes</td>
+        <td>test costs/supplier</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>test title without image</td>
+        <td>test description</td>
+        <td>   </td>
+        <td>test notes</td>
+        <td>test costs/supplier</td>
+    </tr>
+    <tr class = "homemade"></tr>
+</table>
+
+
+
+<!--- needs to be added work popupiamge to work (sort of a placeholder that is displayed once the display is triggered the first time--->
+   <!--- needs to be added work popupiamge to work (sort of a placeholder that is displayed once the display is triggered the first time--->
+   <div class="popup-image">
+    <span>&times;</span>
+    <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/prism_schematic.png">
+    <video autoplay loop muted>
+      <source src="" type="video/mp4">
+      <source src="" type="video/webm">
+    </video>
+    <div class="text"> This is a sample text to enlarge the div window</div>
+  </div>
+
+<script>
+    document.querySelectorAll('.img-container img').forEach(image =>{
+    image.onclick = () =>{
+        const container = image.parentNode; // Get the parent container of the image
+        let text = container.querySelector('.caption').textContent; // Get the text stored in the container
+
+        document.querySelector('.popup-image').style.display = 'block';
+        document.querySelector('.popup-image img').src = image.getAttribute('src');
+        if (text.length){
+            document.querySelector('.popup-image .text').textContent = text; // Display the text in the popup
+            document.querySelector('.popup-image .text').style.left="50%";
+            document.querySelector('.popup-image .text').style.transform="translateX(-50%)";
+        }
+    }
+});
+
+document.querySelector('.popup-image span').onclick = () => {
+    document.querySelector('.popup-image').style.display = 'none';
+}
+</script>

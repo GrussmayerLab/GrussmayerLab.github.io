@@ -1,19 +1,16 @@
 # main links links
 main:
-  - title: "People"
-    url: /people/    
+  - title: "Hardware"
+    url: /resources/hardware/    
 
-  - title: "Publications"
-    url: /publications/
+  - title: "Software"
+    url: /resources/software/
 
-  - title: "Research"
-    url: /research/
-    
-  - title: "Resources"
-    url: /resources/
+  - title: "Data"
+    url: /resources/data/
 
-  - title: "Join the lab"
-    url: /projects/
+  - title: "Protocols"
+    url: /resources/protocols/
   
   - title: "Contact"
     url: /contact/  

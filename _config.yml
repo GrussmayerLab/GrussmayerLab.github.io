@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-UK"
-title                    : "Grussmayer Lab"
+title                    : "| Grussmayer Lab"
 title_separator          : "|"
 name                     : &name "Grussmayer lab members"
 description              : &description "Members of the Grussmayer Lab TU Delft"
@@ -192,19 +192,10 @@ kramdown:
 
 # Collections
 collections:
-  people:
-    output: true
-    permalink: /:collection/:path/
-  publications:
-    output: true
-    permalink: /:collection/:path/
   resources:
     output: true
     permalink: /:collection/:path/
-  research:
-    output: true
-    permalink: /:collection/:path/
-  projects:
+  protocols:
     output: true
     permalink: /:collection/:path/
   contact:
@@ -232,32 +223,6 @@ defaults:
     values:
       layout: single
       author_profile: true
-  # _people
-  - scope:
-      path: ""
-      type: people
-    values:
-      layout: single
-      author_profile: false
-      comments: false
-  # _teaching
-  - scope:
-      path: ""
-      type: teaching
-    values:
-      layout: single
-      author_profile: true
-      share: true
-      comments: true
-  # _publications
-  - scope:
-      path: ""
-      type: publications
-    values:
-      layout: single
-      author_profile: false
-      share: false
-      comments: false
   # _resources
   - scope:
       path: ""
