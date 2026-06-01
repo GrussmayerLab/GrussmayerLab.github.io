@@ -34,8 +34,10 @@ Open Blink is a low-cost TIRF microscopy with laser combiner providing high-powe
 </p>
 
 <p>
-    Design files are available in <a href="https://doi.org/10.4121/bc373b4b-29f1-4108-b166-85420628ff97">4TU repository</a>. To cite the project, please refer to our <a href="https://www.biorxiv.org/content/10.64898/2026.03.10.710894v1">pre-print</a>.
+    The project is licensed under <a href="https://opensource.org/license/cern-ohl-s-2.0"> CERN-OHL-S-2.0</a>. Design files are available in <a href="https://doi.org/10.4121/bc373b4b-29f1-4108-b166-85420628ff97">4TU repository</a>. To cite the project, please refer to our <a href="https://www.biorxiv.org/content/10.64898/2026.03.10.710894v1">pre-print</a>.
 </p>
+
+
 
 <h2>Schematic</h2> 
 <figure class="align-center">
@@ -529,6 +531,17 @@ Open Blink is a low-cost TIRF microscopy with laser combiner providing high-powe
     </tr>
     <tr class="homemade"></tr>
 </table>
+
+<h2>Contributors </h2>
+<ul>
+    <li>Ran Huo</li>
+    <li>Jelle Komen</li>
+    <li>Moritz Engelhardt</li>
+    <li>Anaïs Millot</li>
+    <li>Jérôme Extermann</li>
+    <li>Kristin Grußmayer</li>
+</ul>
+
 <!--- needs to be added work popupiamge to work (sort of a placeholder that is displayed once the display is triggered the first time--->
    <!--- needs to be added work popupiamge to work (sort of a placeholder that is displayed once the display is triggered the first time--->
    <div class="popup-image">
@@ -545,7 +558,8 @@ Open Blink is a low-cost TIRF microscopy with laser combiner providing high-powe
     document.querySelectorAll('.img-container img').forEach(image =>{
     image.onclick = () =>{
         const container = image.parentNode; // Get the parent container of the image
-        let text = container.querySelector('.caption').textContent; // Get the text stored in the container
+        const caption = container.querySelector('.caption');
+        const text = caption ? caption.textContent : '';
 
         document.querySelector('.popup-image').style.display = 'block';
         document.querySelector('.popup-image img').src = image.getAttribute('src');
