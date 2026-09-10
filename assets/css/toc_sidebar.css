@@ -1,0 +1,40 @@
+/* Table of contents in the left-hand column.
+
+   The archive layout reserves a left sidebar that renders empty on pages with
+   author_profile: false, so the TOC is placed there instead of floating on the
+   right. That frees the full remaining width for the text.
+
+   Scoped to .archive--toc, which the layout only emits when page.toc is set,
+   so archive listing pages keep the theme's default grid.
+
+   Breakpoint is the theme's $large (925px = 57.8125em in _variables.scss); note
+   the 1200px/1800px block just above it there is commented out. The sidebar
+   width and the .archive--toc padding must stay in step. */
+
+@media (min-width: 57.8125em) {
+  .toc-sidebar {
+    float: left;
+    width: 220px;
+    margin: 0 0 1em;
+    padding-right: 1.5em;
+  }
+
+  .toc-sidebar.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 2em;
+  }
+
+  .toc-sidebar.sticky .toc__menu {
+    overflow-y: auto;
+    max-height: calc(100vh - 7em);
+  }
+
+  .archive--toc {
+    float: none;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 220px;
+  }
+}
