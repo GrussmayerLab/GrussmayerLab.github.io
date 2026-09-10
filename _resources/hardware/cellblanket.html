@@ -26,13 +26,13 @@ collection: resources
 <script>
     document.querySelectorAll('.img-container img').forEach(image =>{
     image.onclick = () =>{
-        const container = image.parentNode; // Get the parent container of the image
-        let text = container.querySelector('.caption').textContent; // Get the text stored in the container
+        const container = image.parentNode; /* Get the parent container of the image */
+        let text = container.querySelector('.caption').textContent; /* Get the text stored in the container */
 
         document.querySelector('.popup-image').style.display = 'block';
         document.querySelector('.popup-image img').src = image.getAttribute('src');
         if (text.length){
-            document.querySelector('.popup-image .text').textContent = text; // Display the text in the popup
+            document.querySelector('.popup-image .text').textContent = text; /* Display the text in the popup */
             document.querySelector('.popup-image .text').style.left="50%";
             document.querySelector('.popup-image .text').style.transform="translateX(-50%)";
         }
