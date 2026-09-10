@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 570" width="900" height="570" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="900" height="570" fill="#ffffff"/>
+
+  <text x="40" y="38" font-size="19" font-weight="600" fill="#1b1b1b">Arduino Uno TTL hub &#8211; digital output assignment</text>
+  <text x="40" y="60" font-size="13" fill="#5c5c5c">Laser line switching for the four excitation wavelengths, driven by the micro-manager Arduino adapter over COM9 (57600 baud, 8N1)</text>
+
+  <!-- board -->
+  <rect x="40" y="88" width="250" height="300" rx="10" fill="#eef1f2" stroke="#3a4a52" stroke-width="1.6"/>
+  <rect x="40" y="88" width="250" height="30" rx="10" fill="#3a4a52"/>
+  <rect x="40" y="108" width="250" height="10" fill="#3a4a52"/>
+  <text x="56" y="109" font-size="13" font-weight="600" fill="#ffffff">Arduino Uno R3</text>
+  <text x="56" y="148" font-size="12" fill="#5c5c5c">ATmega328P</text>
+  <text x="56" y="167" font-size="12" fill="#5c5c5c">stock micro-manager</text>
+  <text x="56" y="184" font-size="12" fill="#5c5c5c">firmware sketch</text>
+
+  <rect x="56" y="326" width="52" height="34" rx="3" fill="#ffffff" stroke="#8a9aa3" stroke-width="1.2"/>
+  <text x="82" y="348" font-size="11" fill="#5c5c5c" text-anchor="middle">USB</text>
+  <text x="118" y="341" font-size="11" fill="#8a9aa3">to workstation</text>
+  <text x="118" y="356" font-size="11" fill="#8a9aa3">COM9</text>
+
+  <!-- digital header strip -->
+  <rect x="236" y="112" width="38" height="252" rx="4" fill="#2b3940"/>
+  <text x="255" y="408" font-size="11" fill="#8a9aa3" text-anchor="middle">digital header</text>
+
+  <g font-size="13">
+    <!-- pin 13 : bit 5 : spare -->
+    <rect x="244" y="123" width="22" height="22" rx="3" fill="#9aa7ad"/>
+    <text x="255" y="139" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">13</text>
+    <line x1="274" y1="134" x2="420" y2="134" stroke="#ccd4d8" stroke-width="2" stroke-dasharray="5 4"/>
+    <text x="432" y="139" fill="#9aa7ad">bit 5 &#160;&#183;&#160; value 32 &#160;&#183;&#160; spare</text>
+
+    <!-- pin 12 : bit 4 : spare -->
+    <rect x="244" y="165" width="22" height="22" rx="3" fill="#9aa7ad"/>
+    <text x="255" y="181" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">12</text>
+    <line x1="274" y1="176" x2="420" y2="176" stroke="#ccd4d8" stroke-width="2" stroke-dasharray="5 4"/>
+    <text x="432" y="181" fill="#9aa7ad">bit 4 &#160;&#183;&#160; value 16 &#160;&#183;&#160; spare</text>
+
+    <!-- pin 11 : bit 3 : 405 -->
+    <rect x="244" y="207" width="22" height="22" rx="3" fill="#7B4FE0"/>
+    <text x="255" y="223" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">11</text>
+    <line x1="274" y1="218" x2="420" y2="218" stroke="#7B4FE0" stroke-width="2.4"/>
+    <circle cx="420" cy="218" r="4" fill="#7B4FE0"/>
+    <text x="432" y="223" font-weight="600" fill="#1b1b1b">405 nm</text>
+    <text x="502" y="223" fill="#5c5c5c">bit 3 &#160;&#183;&#160; value 8</text>
+
+    <!-- pin 10 : bit 2 : 488 -->
+    <rect x="244" y="249" width="22" height="22" rx="3" fill="#0FA3D6"/>
+    <text x="255" y="265" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">10</text>
+    <line x1="274" y1="260" x2="420" y2="260" stroke="#0FA3D6" stroke-width="2.4"/>
+    <circle cx="420" cy="260" r="4" fill="#0FA3D6"/>
+    <text x="432" y="265" font-weight="600" fill="#1b1b1b">488 nm</text>
+    <text x="502" y="265" fill="#5c5c5c">bit 2 &#160;&#183;&#160; value 4</text>
+
+    <!-- pin 9 : bit 1 : 561 -->
+    <rect x="244" y="291" width="22" height="22" rx="3" fill="#57A733"/>
+    <text x="255" y="307" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">9</text>
+    <line x1="274" y1="302" x2="420" y2="302" stroke="#57A733" stroke-width="2.4"/>
+    <circle cx="420" cy="302" r="4" fill="#57A733"/>
+    <text x="432" y="307" font-weight="600" fill="#1b1b1b">561 nm</text>
+    <text x="502" y="307" fill="#5c5c5c">bit 1 &#160;&#183;&#160; value 2</text>
+
+    <!-- pin 8 : bit 0 : 642 -->
+    <rect x="244" y="333" width="22" height="22" rx="3" fill="#D93E36"/>
+    <text x="255" y="349" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">8</text>
+    <line x1="274" y1="344" x2="420" y2="344" stroke="#D93E36" stroke-width="2.4"/>
+    <circle cx="420" cy="344" r="4" fill="#D93E36"/>
+    <text x="432" y="349" font-weight="600" fill="#1b1b1b">642 nm</text>
+    <text x="502" y="349" fill="#5c5c5c">bit 0 &#160;&#183;&#160; value 1</text>
+  </g>
+
+  <!-- laser combiner bracket -->
+  <line x1="640" y1="205" x2="640" y2="357" stroke="#dfe4e6" stroke-width="1.4"/>
+  <text x="656" y="275" font-size="12" fill="#8a9aa3">to laser</text>
+  <text x="656" y="291" font-size="12" fill="#8a9aa3">combiner</text>
+
+  <!-- worked example -->
+  <rect x="40" y="430" width="820" height="72" rx="6" fill="#f6f8f9" stroke="#dfe4e6"/>
+  <text x="60" y="455" font-size="12.5" font-weight="600" fill="#1b1b1b">The switch state is the sum of the active bits</text>
+  <text x="60" y="477" font-size="12.5" fill="#3f3f3f">preset 405_488_561 &#8594; 8 + 4 + 2 = state 14</text>
+  <text x="330" y="477" font-size="12.5" fill="#3f3f3f">preset 405_642 &#8594; 8 + 1 = state 9</text>
+  <text x="560" y="477" font-size="12.5" fill="#3f3f3f">preset 488 &#8594; state 4</text>
+  <text x="60" y="494" font-size="11.5" fill="#8a9aa3">All sixteen presets in the laser_shutter group decode this way.</text>
+
+  <!-- notes -->
+  <text x="40" y="527" font-size="11.5" fill="#6b6b6b">Pin 2 (trigger input) is unused: every preset sets Arduino-Switch Sequence to Off, so line switching is issued over serial rather than hardware-triggered.</text>
+  <text x="40" y="545" font-size="11.5" fill="#6b6b6b">Arduino-Shutter gates the whole pattern in firmware rather than occupying its own pin; pins 12 and 13 stay free for a fifth and sixth line.</text>
+  <text x="40" y="563" font-size="11.5" fill="#6b6b6b">Bit-to-wavelength values are read from the micro-manager presets; bit-to-pin ordering follows the adapter's Uno convention (outputs on pins 8&#8211;13, bit 0 = pin 8).</text>
+</svg>

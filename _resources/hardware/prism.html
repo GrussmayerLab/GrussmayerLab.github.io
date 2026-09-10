@@ -1,49 +1,131 @@
 ---
 title: "PRISM"
-header: 
+header:
     video: /resources/multiplane.webm
 layout: archive
 tag: hardware
 permalink: /resources/prism/
-author_profile: false  
-toc: false
+author_profile: false
+toc: true
 toc_label: "Navigation"
 toc_sticky: true
 comments: true
 collection: resources
 ---
 {% include base_path %}
-<!--- needs to be added for table to work--> 
+<!--- needs to be added for table to work-->
 <head>
     <link rel="stylesheet" href="{{ base_path }}/assets/css/responsive_table.css"/>
+    <link rel="stylesheet" href="{{ base_path }}/assets/css/toc_sidebar.css"/>
 </head>
 
 
-<p>This setup is based on the <a href="https://www.nature.com/articles/s41566-018-0109-4">foundational study</a> for correlative superresolution fluorescence and multiplane quantitative phase microscopy. It is intended as a workhorse microscope for the Grussmayer Lab at TU Delft and has two excitation and detection paths. On the excitation side, four continuous wave laser sources of conventional wavelengths for biological applications (405nm, 488nm, 561nm, 642nm) and a diode laser (830nm) are mounted. Excitation paths are (I) a dyanmicaly adjustable dichroic based Epi-TIRF illumination, (II) a mirror based objective TIRF and (III) a manually positionable LED based white light transillumination. Detection paths are (1) a splitter for robust simultaneous four color imaging and (2) a multiplane imaging systems based on a 2x2-plane image splitter prism. 
-
-The implementation we use at the Grussmayer Lab is based on a the RM21 MadCityLabs body, which is commercially licensed and can unfortunately not be shown in CAD. Hence we use reduced representations of the microscope in the following sections. 
-However the PRISM implementation is not restricted to this body and can be facilitated in essentially all widefield and camera-based configurations. 
-The microscope is equipped with two exclusive detection paths; 2D multicolor splitter and monochromatic multiplane splitter. 
-A summary of the chromatic aspects of the current setting can be found at <a href="https://www.fpbase.org/microscope/Ri8a75Em9LiY6JjA8nT9Tk/?c=colour_splitter&l=laser-405&d=photometrics-prime-bsi">FPbase</a>.
-Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.</a> and acquisiton either manually set, scripted via bash or interfaced via <a href="https://pycro-manager.readthedocs.io/en/latest/">pycro-manager</a>.  
-</p>
-<!---
-<figure class="align-center">
-    <video width=100% autoplay loop>
-        <source src="{{ site.url }}{{ site.baseurl }}/images/resources/multiplane.webm" type="video/webm" alt="four axial planes 1000Hz recording of cos7-cells">
-    </video>
-</figure>
--->
-<h2>Schematic</h2> 
-<figure class="align-center">
-    <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/prism.png" alt="PRISM setup schematic">
-    <figcaption>PRISM setup schematic</figcaption>
-</figure>
-
-<h2>Main body </h2>
 <p>
-    The objective, the sample stages (also MadCityLabs) and the dichroic filter outlined here are added to the RM21 body from MadCityLabs (US)
+PRISM is the widefield multiplane, multicolour super-resolution platform of the Grussmayer Lab at TU Delft. It follows the
+<a href="https://www.nature.com/articles/s41566-018-0109-4">foundational study</a> on correlative super-resolution fluorescence and multiplane
+quantitative phase microscopy, and is built as a workhorse instrument: one sample, one illumination arm, and several exchangeable detection arms that
+can be addressed without realigning the microscope.
 </p>
+
+<p>
+On the excitation side four continuous-wave lasers covering the standard wavelengths for biological applications (405&nbsp;nm, 488&nbsp;nm, 561&nbsp;nm,
+642&nbsp;nm) plus an infrared diode laser (830&nbsp;nm) for the focus lock are mounted. Three illumination geometries are available:
+(I) a dynamically adjustable dichroic-based Epi-TIRF path with refractive beam shaping, (II) a micro-mirror based objective TIRF path, and
+(III) a manually positionable LED-based Koehler transillumination for brightfield and quantitative phase imaging.
+Emission is directed into one of three detection arms: (1) an image-splitting prism producing eight simultaneous focal planes on two sCMOS cameras,
+(2) a 2D spectral splitter for robust simultaneous multicolour imaging, and (3) an event-based sensor (EBS) arm for high-speed, sparse-signal imaging.
+</p>
+
+<p>
+The implementation used in the lab is based on an RM21 body (Mad City Labs, US), which is commercially licensed and can therefore not be shown in CAD;
+reduced representations of the body are used in the figures below. The PRISM detection concept is not restricted to this body and can be implemented in
+essentially any widefield, camera-based configuration.
+A summary of the chromatic properties of the current configuration is available at
+<a href="https://www.fpbase.org/microscope/Ri8a75Em9LiY6JjA8nT9Tk/?c=colour_splitter&l=laser-405&d=photometrics-prime-bsi">FPbase</a>.
+Devices are controlled through <a href="https://micro-manager.org/">micro-manager 2</a>, with acquisitions either set manually, scripted in beanshell,
+or interfaced through <a href="https://pycro-manager.readthedocs.io/en/latest/">pycro-manager</a>.
+</p>
+
+<h2 id="system-overview">System overview</h2>
+<figure class="align-center">
+    <a href="{{ site.url }}{{ site.baseurl }}/images/resources/prism/overview_cad.jpg" target="_blank">
+        <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/overview_cad.jpg" alt="CAD overview of the PRISM setup with colour-coded subsystems">
+    </a>
+    <figcaption>CAD overview of the instrument. Colour coding by subsystem: body and trans-illumination, illumination path, focus lock,
+    multiplane emission path, 2D spectral splitting path and EBS path. The RM21 body is shown as a reduced representation.</figcaption>
+</figure>
+
+<figure class="align-center">
+    <a href="{{ site.url }}{{ site.baseurl }}/images/resources/prism/schematic.png" target="_blank">
+        <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/schematic.png" alt="PRISM setup schematic">
+    </a>
+    <figcaption>Optical schematic. The four laser lines are expanded and collimated, gated by single-line and global shutters, homogenised by the
+    refractive beam shaper and scaled by the illumination field size control telescopes before entering the body. Transillumination is provided by an LED
+    through field stop, aperture stop and filter wheel. On the emission side the tube lens and quad notch filter form the primary image, which is relayed
+    either into the refractive axial splitter prism (two sCMOS) or into the second arm feeding a beamsplitter cube, an sCMOS and the event-based sensor.
+    The 830&nbsp;nm focus-lock beam is read out on a quadrant photodiode.</figcaption>
+</figure>
+
+<table class="Components" cellspacing="0" cellpadding="0">
+    <tr>
+        <th class="title">Property</th>
+        <th class="descriptor">Specification</th>
+    </tr>
+    <tr>
+        <td>Excitation</td>
+        <td>405&nbsp;nm / 488&nbsp;nm / 561&nbsp;nm / 642&nbsp;nm CW, up to 2&nbsp;W per line; refractive beam shaping (flat-top) on the Epi-TIRF path</td>
+    </tr>
+    <tr>
+        <td>Illumination modes</td>
+        <td>Epi, dichroic-based Epi-TIRF (translatable TIRF module), micro-mirror objective TIRF, LED Koehler transillumination</td>
+    </tr>
+    <tr>
+        <td>Objectives</td>
+        <td>60&times; silicone/water immersion (UPLSAPO60XS/W) and 60&times; oil immersion high-NA (UPLAPO60XOHR)</td>
+    </tr>
+    <tr>
+        <td>Sampling</td>
+        <td>108&nbsp;nm per pixel in the sample plane (200&nbsp;mm tube lens, 6.5&nbsp;&micro;m sensor pitch), verified on both camera models against a calibration grid</td>
+    </tr>
+    <tr>
+        <td>Multiplane detection</td>
+        <td>8 simultaneous focal planes, distributed 4 + 4 over two Kinetix sCMOS cameras</td>
+    </tr>
+    <tr>
+        <td>Spectral detection</td>
+        <td>2D splitter for up to four colours on a single BSI Express sCMOS; optional two-colour row splitting in the multiplane arm</td>
+    </tr>
+    <tr>
+        <td>Stabilisation</td>
+        <td>830&nbsp;nm reflection focus lock (Mad City Labs TIRF Lock, quadrant photodiode) on the micro-mirror path, closed loop onto the piezo z-stage</td>
+    </tr>
+    <tr>
+        <td>Environment</td>
+        <td>Custom cage incubator with Okolab bold-line temperature and CO<sub>2</sub> control (37&nbsp;&deg;C, 5&nbsp;% CO<sub>2</sub>)</td>
+    </tr>
+    <tr>
+        <td>Control</td>
+        <td>micro-manager 2 + pycro-manager, Arduino-based shutter and line switching, Mad City Labs MicroDrive XY and NanoDrive Z, PVCAM cameras</td>
+    </tr>
+</table>
+
+
+<h2 id="main-body">Main body</h2>
+<p>
+The objective, the sample stages (also Mad City Labs) and the dichroic filter cube outlined here are mounted in the RM21 body. The body carries the
+Koehler transillumination on 95&nbsp;mm rails above the sample, the sample and objective positioners, and the emission splitting dichroic mount that
+feeds the detection breadboard.
+</p>
+
+<figure class="align-center">
+    <a href="{{ site.url }}{{ site.baseurl }}/images/resources/prism/body_cad.png" target="_blank">
+        <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/body_cad.png" alt="CAD sections of the microscope body and mechanical stability measurements">
+    </a>
+    <figcaption>(a, b) Front and side section of the body inside the incubator enclosure, showing the Koehler illumination, the illumination and sample
+    mounts, the TIRF stage and the emission splitting dichroic mount. (c) Lateral sample position over 10<sup>4</sup> frames with and without the
+    environmental control running, and (d) the corresponding amplitude spectra &mdash; active gas and temperature control adds low-frequency drift but no
+    dominant vibrational resonance.</figcaption>
+</figure>
 
 <table class="Components" cellspacing="0" cellpadding="0">
     <tr>
@@ -71,36 +153,36 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td>2</td>
         <td>MicroStage Series</td>
         <td>Large (micron - cm) displacement, precision, stepper motor driven, micropositioning system for inverted optical microscopes</td>
-        <td>   
+        <td>
             <div class="img-container">
-                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/microstage.jpg" alt="" class="thumbnail"> 
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/microstage.jpg" alt="" class="thumbnail">
                 <div class="caption">Micro-stage</div>
             </div>
         </td>
-        <td><a href="http://www.madcitylabs.com/microstage.html">link</a></td>
+        <td>Addressed as <i>MicroDrive XY Stage</i> and <i>MicroDrive Z Stage</i> in micro-manager</td>
         <td>Costs/Mad City Labs</td>
     </tr>
     <tr>
         <td>3</td>
         <td>NanoStage Series</td>
+        <td>Closed-loop piezo z-positioner used for z-stacks, multiplane calibration and as the actuator of the focus lock</td>
         <td> </td>
-        <td> </td>
-        <td><a href="http://www.madcitylabs.com/microstage.html">link</a></td>
+        <td>Addressed as <i>MCL NanoDrive Z Stage</i> in micro-manager</td>
         <td>Costs/Mad City Labs</td>
-    </tr>   
+    </tr>
     <tr>
         <td>4</td>
         <td>TIRF-module</td>
         <td> Precision aligned linearly translatable <a href="http://www.madcitylabs.com/tirf-module.html">mirror-lens configuration</a> to control the angle of illumination and the focusing of the excitation beam onto the back focal plane of the objective lens.</td>
-        <td> 
+        <td>
             <div class="img-container">
                 <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/tirf-module.jpg" alt="" class="thumbnail">
                 <div class="caption">TIRF-module</div>
             </div>
          </td>
-        <td></td>
+        <td>Continuous transition between epi, HILO and TIRF illumination</td>
         <td>Mad City Labs</td>
-    </tr> 
+    </tr>
     <tr>
         <td>5</td>
         <td>Micro-mirror </td>
@@ -109,33 +191,33 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
             <div class="img-container">
                 <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/MM_TIRF.jpg" alt="" class="thumbnail">
                 <div class="caption">Broadband micro-mirrors for TIRF imaging and TIRF-lock simultaneous to dichroic based Epi-TIRF</div>
-            </div> 
+            </div>
         </td>
         <td>Broadband micro-mirrors for TIRF imaging and TIRF-lock simultaneous to dichroic based Epi-TIRF</td>
         <td>Mad City Labs</td>
-    </tr> 
+    </tr>
     <tr>
         <td>6</td>
         <td>Notch-filter</td>
         <td> <a href="https://www.ahf.de/en/products/spectral-analysis-photonic/optical-filters/individual-filters/laser-filters/emitters/quad/2205/quad-notch-filter-400-410/488/561/631-640">F40-072</a>
-             Quad-Notch 400-410/488/561/631-640, laser clean-up filter monunted in cage plate.</td>
+             Quad-Notch 400-410/488/561/631-640, mounted in a cage plate.</td>
         <td></td>
-        <td></td>
-        <td>AHF, Semrock/ 1100€</td>
-    </tr> 
+        <td>Placed in the emission path behind the tube lens, blocking all four excitation lines ahead of the splitting optics</td>
+        <td>AHF, Semrock/ 1100&euro;</td>
+    </tr>
     <tr>
         <td>7</td>
         <td>Objective(s)</td>
-        <td>60X Super-Apochromate Olympus immersion medium (silicone oil, water) <a href="https://www.olympus-lifescience.com/de/objectives/uplsapo/">UPLSAPO-S/UPLSAPO-W</a> and oil immersion <a href="https://www.olympus-lifescience.com/en/objectives/detail/0-DIRECTORY::DirFrontend-itemId.511710229.html">UPLAPO60XOHR</a></td> 
-        <td> 
+        <td>60X Super-Apochromate Olympus immersion medium (silicone oil, water) <a href="https://www.olympus-lifescience.com/de/objectives/uplsapo/">UPLSAPO-S/UPLSAPO-W</a> and oil immersion <a href="https://www.olympus-lifescience.com/en/objectives/detail/0-DIRECTORY::DirFrontend-itemId.511710229.html">UPLAPO60XOHR</a></td>
+        <td>
             <div class="img-container">
                 <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/uplansapo_s.jpg" alt="" class="thumbnail">
                 <div class="caption">60x high NA immersion objectives</div>
             </div>
          </td>
-        <td></td>
+        <td>Silicone and water immersion for live-cell volumes, oil immersion for single-molecule work close to the coverslip</td>
         <td>Olympus/</td>
-    </tr> 
+    </tr>
     <tr>
         <td>8</td>
         <td>Dichroic mirror</td>
@@ -146,65 +228,241 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
                 <div class="caption">TL dichroic mirror</div>
             </div>
         </td>
-        <td></td>
-        <td>Chroma/600€
-            Thorlabs/350€
+        <td>Ultraflat version to preserve the wavefront across the full field</td>
+        <td>Chroma/600&euro;
+            Thorlabs/350&euro;
         </td>
-    </tr> 
+    </tr>
     <tr>
         <td>9</td>
         <td>Tube lens</td>
-        <td> <a href="https://www.edmundoptics.com/p/25mm-dia-x-200mm-fl-vis-nir-inked-achromatic-lens/9772/">#49-364-INK</a> 25mm Dia. x 200mm FL, VIS-NIR, Inked, Achromatic Lens (400-1000nm)</td>
+        <td>Thorlabs <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=TTL200-A">TTL200-A</a> f&nbsp;=&nbsp;200&nbsp;mm tube lens</td>
         <td> </td>
-        <td></td>
-        <td>Edmund optics/ 120€</td>
-    </tr> 
+        <td>With the 60&times; objectives this yields 108&nbsp;nm sampling on 6.5&nbsp;&micro;m pixels. Mounting is detailed in the detection front end table</td>
+        <td>Thorlabs</td>
+    </tr>
     <tr>
         <td>10</td>
         <td>Environmental chamber</td>
         <td>Cage incubator enclosure covering the stage and trans-illuminatsion, interfacing with the 75mm rails. Edges are sealed with tape, space inbetween breadbord and body is sealed with a folded rubber sheet. Tubing interfaces are designed according to oko-lab specifications. Two doors back and front-side are fixed to the body with M6 threads and knobs.</td>
-        <td> 
+        <td>
             <div class="img-container">
                 <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/RMS21_incubator_spacing.jpg" alt="" class="thumbnail">
-                <div class="caption">Environmental chamber designed in SolidEdge</div> 
+                <div class="caption">Environmental chamber designed in SolidEdge</div>
             </div>
         </td>
-        <td></td>
+        <td>Design and assembly are documented on the <a href="{{ site.url }}{{ site.baseurl }}/live-cell-incubator/">live-cell incubator</a> page</td>
         <td><a href="{{ site.url }}{{ site.baseurl }}/images/resources/prism/RMS21_incubator_spacing.stp">self made</a></td>
-    </tr> 
+    </tr>
     <tr>
-        <td>10</td>
+        <td>11</td>
         <td>Environmental control</td>
         <td><a href="https://www.oko-lab.com/21-products/live-cell-imaging/top-satge-incubator/bold-line-gas-controllers/29-bold-line">Oko-lab bold line</a> temperature and CO<sub>2</sub> control</td>
         <td> </td>
-        <td></td>
+        <td>Setpoints of 37&nbsp;&deg;C and 5&nbsp;% CO<sub>2</sub> are reached and held within about an hour after closing the enclosure</td>
         <td>Okolabs/</td>
-    </tr> 
+    </tr>
     <tr>
-        <td>11</td>
+        <td>12</td>
         <td>Koehler-illumination</td>
-        <td><a href="https://www.asiimaging.com/products/modular-infinity-microscope-mim/modular-infinity-microscope-mim/illumination-components/">OLY-TRANS-ILLUM</a> 
-            transillumination kit based upon Olympus IX2-LWUCD condenser suspended on <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=XT95SD-500">95 mm One-Sided Rail</a>
-             fixed to <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=XE75L1/M">75 mm Square Construction Rails</a></td>
+        <td><a href="https://www.asiimaging.com/products/modular-infinity-microscope-mim/modular-infinity-microscope-mim/illumination-components/">OLY-TRANS-ILLUM</a>
+            transillumination kit based upon Olympus IX2-LWUCD condenser suspended on a <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=XT95SD-250">XT95SD-250</a>
+             95 mm one-sided rail with <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=XT95RC4/M">XT95RC4/M</a> rail carriers, fixed to
+             <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=XE50L1/M">XE50L1/M</a> 50 mm square construction rails</td>
         <td>
             <div class="img-container">
-                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/koehler.jpg" alt="" class="thumbnail"> 
-                <div class="caption">Koehler illumination based on Olympus IX2-LWUCD condenser</div> 
-            </div> 
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/koehler.jpg" alt="" class="thumbnail">
+                <div class="caption">Koehler illumination based on Olympus IX2-LWUCD condenser</div>
+            </div>
         </td>
         <td>Construction rails are cut to 300mm height and fixed to the breadboard above the stage with right angle brackets</td>
         <td>ASI/
             Thorlabs/
         </td>
-    </tr> 
+    </tr>
+    <tr>
+        <td>13</td>
+        <td>Trans-illumination stops and filter wheel</td>
+        <td>Field stop, two filter wheels. One in the LED transillumination arm above the condenser, used to set Koehler conditions and to insert
+            neutral density or chromatic filters for brightfield and quantitative phase imaging. The other an emission path filter wheel which has been removed by now due to the split detection paths, but can be implemented per chromatic path for computational control. </td>
+        <td> </td>
+        <td>Emission path filter wheel based on the <a href="https://github.com/ries-lab/RiesPieces/tree/master/Microscopy/Filter_wheel">Ries lab</a> 3D printed design</td>
+        <td>self made</td>
+    </tr>
+    <tr>
+        <td>14</td>
+        <td>Sample positioning</td>
+        <td>Long-travel xy stage, short-travel xyz stage and a manual z-stage</td>
+        <td> </td>
+        <td>Long-travel xy = MicroStage, short-travel xyz = NanoStage (rows 2 and 3); manual axial sample positioner</td>
+        <td>Mad City Labs/</td>
+    </tr>
+    <tr>
+        <td>15</td>
+        <td>Optical table</td>
+        <td>Thorlabs <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=T1530D">T1530D</a> Nexus optical table, 1.5&nbsp;m &times; 3&nbsp;m &times; 310&nbsp;mm, M6 mounting holes</td>
+        <td> </td>
+        <td>Carries body, illumination and detection breadboards</td>
+        <td>Thorlabs</td>
+    </tr>
+    <tr class = "homemade"></tr>
+</table>
+
+<figure class="align-center">
+    <a href="{{ site.url }}{{ site.baseurl }}/images/resources/prism/incubator.png" target="_blank">
+        <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/incubator.png" alt="Cage incubator design, environmental control performance and live-cell time lapse">
+    </a>
+    <figcaption>(a) Cage incubator enclosing the body: air intake, cable glands for the stage, camera and sensor cabling, sensor and CO<sub>2</sub> inlets,
+    and doors in black and clear PMMA. (b) Temperature and CO<sub>2</sub> traces against their setpoints after closing the chamber.
+    (c) Live-cell time lapse acquired inside the enclosure over 2.5&nbsp;h.</figcaption>
+</figure>
+
+<p>
+The enclosure is a workshop-manufactured PMMA box (drawing set GELD010084) that seals against the breadboard and the 75&nbsp;mm construction rails. Its
+bill of materials is reproduced below; the individual part drawings and the STEP geometry are linked under
+<a href="{{ site.url }}{{ site.baseurl }}/live-cell-incubator/">design files</a>.
+</p>
+
+<table class="Components" cellspacing="0" cellpadding="0">
+    <tr>
+        <th class="id">id</th>
+        <th class="title">Part</th>
+        <th class="descriptor">Description</th>
+        <th class="image">Qty</th>
+        <th class="notes">Material</th>
+        <th class="supplier">Supplier / order number</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>GELD010084-M201&ndash;M204</td>
+        <td>Front, back, left and right wall</td>
+        <td>1 each</td>
+        <td>PMMA black (Plexiglas)</td>
+        <td>workshop manufactured</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>GELD010084-M205&ndash;M207, M211</td>
+        <td>Bottom cover, top cover, bottom cover sides and close-off</td>
+        <td>1&ndash;2 each</td>
+        <td>PMMA black (Plexiglas)</td>
+        <td>workshop manufactured</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>GELD010084-M208</td>
+        <td>Side covers / doors</td>
+        <td>2</td>
+        <td>PMMA clear + black</td>
+        <td>workshop manufactured</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>GELD010084-M209, M217, M218</td>
+        <td>Side cover gaskets and rubber sealing plates between breadboard and body</td>
+        <td>2 / 2 / 1</td>
+        <td>NBR 70 SUPERBA sheet</td>
+        <td>ERIKS 10017236</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>GELD010084-K201, K202, K204, K206</td>
+        <td>Self-adhesive cell rubber sealing strips along the enclosure edges</td>
+        <td>1&ndash;2 each</td>
+        <td>CR FEST cell rubber, black</td>
+        <td>ERIKS 10000000</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>GELD010084-K207</td>
+        <td>Icotek KVT 50-2 cable entry frame &mdash; main pass-through for stage, camera and sensor cabling</td>
+        <td>1</td>
+        <td>Polycarbonate</td>
+        <td>RS 2844658</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>GELD010084-K208&ndash;K211</td>
+        <td>Icotek QVT 20, QT3, KT 4|3 and KT 2|6 cable grommets for the &Oslash;3&nbsp;mm, &Oslash;4&nbsp;mm and &Oslash;6&nbsp;mm cables</td>
+        <td>1 each</td>
+        <td>Polycarbonate / elastomer</td>
+        <td>RS 2836507, 2836500, 2844652, 2837600</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>GELD010084-K213</td>
+        <td>ITEM angle bracket 60&times;40&times;20, fixing the enclosure to the construction rails</td>
+        <td>4</td>
+        <td>Zinc plated steel</td>
+        <td>ITEM 0047461</td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td>GELD010084-K214</td>
+        <td>Knurled torque knob M5 &times; 20, 22&nbsp;mm diameter, for the doors</td>
+        <td>8</td>
+        <td>&mdash;</td>
+        <td>RS 702-7541</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>GELD010084-K215</td>
+        <td>Connector 2711-nc13 for the sensor and CO<sub>2</sub> feedthroughs</td>
+        <td>2</td>
+        <td>&mdash;</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td>GELD010084-M219</td>
+        <td>Adjusting plate</td>
+        <td>2</td>
+        <td>Aluminium</td>
+        <td>workshop manufactured</td>
+    </tr>
+    <tr>
+        <td>12</td>
+        <td>GELD010084-S202</td>
+        <td>Two-step platform</td>
+        <td>1</td>
+        <td>Various</td>
+        <td>workshop manufactured</td>
+    </tr>
+    <tr>
+        <td>13</td>
+        <td>DIN 912</td>
+        <td>Socket head cap screws M3&times;10 (10&times;), M5&times;16 (4&times;), M6&times;12 (8&times;)</td>
+        <td>22</td>
+        <td>Stainless A2-70</td>
+        <td>Fabory 51050.030.010 / .050.016 / .060.012</td>
+    </tr>
     <tr class = "homemade"></tr>
 </table>
 
 
-<h2>Excitation </h2>
-<p> Four visibile light excitation lasers of standard bio-application wavelengths with comparably high power levels (>500mW) are deployed. Two excitation paths are separated by a flip mirror after the laser lines are expanded, collected and co-aligned with dichroic mirrors. Main path is the Epi-TIRF path via the TIRF-module and beam-homogenisation, secondary path is a micromirror-based TIRF configuration height-separated via periscopes.  
-    All optomechanics are mounted on 12mm optical posts with postholders (Thorlabs) and adjusted to a beam height of 126mm.
+<h2 id="excitation">Excitation</h2>
+<p>
+Four visible excitation lasers with comparably high power levels (&gt;500&nbsp;mW for the imaging lines) are deployed. The lines are individually expanded,
+co-aligned on dichroic mirrors and split into two illumination paths by a flip mirror. The main path passes the refractive beam shaper and enters the
+TIRF module for dichroic-based Epi-TIRF; the secondary path is routed via height-separated periscopes to the micro-mirror TIRF configuration.
+All optomechanics are mounted on 12&nbsp;mm optical posts and post holders (Thorlabs) at a beam height of 126&nbsp;mm.
 </p>
+<p>
+Beam shaping matters for quantitative single-molecule work: the Gaussian profile delivered by the expanders is converted into a flat top, which
+widens the usable field, equalises the switching rate across it and removes the intensity gradient that otherwise biases localisation statistics.
+Behind the shaper two switchable telescopes (2&times; and 0.67&times;) set the diameter of the illuminated field, trading field size against intensity, and a
+flip mirror sends the beam to a monitoring camera for the profile measurements shown below.
+</p>
+
+<figure class="align-center">
+    <a href="{{ site.url }}{{ site.baseurl }}/images/resources/prism/illumination.jpg" target="_blank">
+        <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/illumination.jpg" alt="Illumination path CAD and beam homogeneity characterisation">
+    </a>
+    <figcaption>(a) CAD of the illumination path: four laser heads, individual beam expanders, co-alignment periscopes, multiplexing and global shutters,
+    the beam shaper on its telescope platform and the TIRF stage. (b) Measured beam profiles per wavelength before and after beam shaping, with the
+    corresponding line profiles. (c) Full width at half maximum, plateau uniformity and flatness factor per wavelength before and after shaping.
+    (d) Effect of the demagnification setting (0.5&times;, 1&times;, 2&times;) on the illuminated field and the peak intensity.</figcaption>
+</figure>
 
 <table class="Components" cellspacing="0" cellpadding="0">
     <tr>
@@ -221,7 +479,7 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td>Ultra Compact Diode Laser, 405 nm, 100 mW</td>
         <td> </td>
         <td>Mostly used for reactivation in STORM and photoactivation in PALM, not easily alignable with Tetraspeck beads.</td>
-        <td>Toptica / ~2700€</td>
+        <td>Toptica / ~2700&euro;</td>
     </tr>
     <tr>
         <td>2</td>
@@ -229,31 +487,31 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td>CW laser, 488 nm, 500 mW</td>
         <td> </td>
         <td>P<sub>min</sub>: 50mW, needs OD filters for conventional imaging</td>
-        <td>Coherent / ~15000€</td>
+        <td>Coherent / ~15000&euro;</td>
     </tr>
     <tr>
         <td>3</td>
         <td>LaserQuantum gem 561nm</td>
         <td>DPSS laser, 561nm, 1W; with smd2 controller</td>
         <td> </td>
-        <td></td>
-        <td>LaserQuantum / ~13000€</td>
+        <td>Serial control through micro-manager</td>
+        <td>LaserQuantum / ~13000&euro;</td>
     </tr>
     <tr>
         <td>4</td>
         <td>MBP communications laser, 642nm</td>
         <td>TEM00, Modell 2RU-VFL-P-2000-642-B1R, 642nm, 2W</td>
         <td> </td>
-        <td></td>
-        <td>MBP communications / ~21000€</td>
+        <td>Main STORM excitation line, used at several kW&nbsp;cm<sup>-2</sup> at the sample for off-switching</td>
+        <td>MBP communications / ~21000&euro;</td>
     </tr>
     <tr>
         <td>5</td>
         <td>Beam expanders</td>
-        <td>Based on 30mm cage system from Thorlabs (US) with <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=CP33/M">CP33/M cage plates</a>, 30mm rods, <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=CXY1A">CXY1A</a> xy-translating & <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=SPT1CT/M">SPT1CT/M</a> slip plate lens mounts & 1" <a href="https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_id=2696">achromatic AR coated VIS doublet lenses</a>. </td>
+        <td>Based on 30mm cage system from Thorlabs (US) with <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=CP33/M">CP33/M cage plates</a>, 30mm rods, <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=CXY1A">CXY1A</a> xy-translating &amp; <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=SPT1CT/M">SPT1CT/M</a> slip plate lens mounts &amp; 1" <a href="https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_id=2696">achromatic AR coated VIS doublet lenses</a>. </td>
         <td> </td>
-        <td>Lens pairs chosen depending on the input laser diameter to adjust laser Ø (1/e<sup>2</sup>) to 6mm. Fine adjusted with individual circular apertures downstream. Collimation is verified with a shear plate interferometer.</td>
-        <td>Thorlabs/~600€ per expander</td>
+        <td>Lens pairs chosen depending on the input laser diameter to adjust laser &Oslash; (1/e<sup>2</sup>) to 6mm. Fine adjusted with individual circular apertures downstream. Collimation is verified with a shear plate interferometer.</td>
+        <td>Thorlabs/~600&euro; per expander</td>
     </tr>
     <tr>
         <td>6</td>
@@ -261,20 +519,20 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td><a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KM100-E02">KM100</a> 1" mirror mounts with Visible Laser Quality Mirror </td>
         <td> </td>
         <td></td>
-        <td>Thorlabs/110€</td>
+        <td>Thorlabs/110&euro;</td>
     </tr>
     <tr>
         <td>7</td>
         <td>Dichroic mirrors</td>
-        <td><a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KCB1/M">KCB1/M</a> mounts with broadband dielectric mirror (<a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=BB1-E02">BB1-E02</a>) and longpass dichroics 
+        <td><a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KCB1/M">KCB1/M</a> mounts with broadband dielectric mirror (<a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=BB1-E02">BB1-E02</a>) and longpass dichroics
             <a href="https://www.idex-hs.com/store/product-detail/lm01_613_25">LM01-613-25</a>,
-            <a href="https://www.idex-hs.com/store/product-detail/lm01_503_25">LM01-503-25</a>, 
+            <a href="https://www.idex-hs.com/store/product-detail/lm01_503_25">LM01-503-25</a>,
             <a href="https://www.idex-hs.com/store/product-detail/lm01_427_25">LM01-427-25</a>
         </td>
         <td> </td>
-        <td></td>
-        <td>Thorlabs/600€ 
-            Semrock/250€ p.p.
+        <td>Co-alignment of the four lines onto a common axis ahead of the beam shaper</td>
+        <td>Thorlabs/600&euro;
+            Semrock/250&euro; p.p.
         </td>
     </tr>
     <tr>
@@ -283,54 +541,357 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td><a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=SH1/M">SH1/M</a> with <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KSC101">KSC101</a> solenoid shutter controller
         </td>
         <td> </td>
-        <td>Camera triggered (dual BNC>SMA via solenoid controller) per detection path</td>
-        <td>Thorlabs/1500€</td>
+        <td>Camera triggered (dual BNC&gt;SMA via solenoid controller) per detection path; a global shutter plus per-line multiplexing shutters allow sequential multicolour acquisition</td>
+        <td>Thorlabs/1500&euro;</td>
     </tr>
     <tr>
         <td>9</td>
         <td>Flip mirror</td>
-        <td><a href="https://www.ahf.de/en/products/spectral-analysis-photonic/optical-filters/dichroic-beamsplitters/epi-fluorescence-beamsplitters/standard-beamsplitters/longpass/2550/beamsplitter-t-760-lpxr">ZT 750 LPXRxt-U2</a> in kinematic mirror mount <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KM100CP/M">KM100CP/M</a> on a <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=FM90/M">FM90</a> flip mirror mount. 
+        <td><a href="https://www.ahf.de/en/products/spectral-analysis-photonic/optical-filters/dichroic-beamsplitters/epi-fluorescence-beamsplitters/standard-beamsplitters/longpass/2550/beamsplitter-t-760-lpxr">ZT 750 LPXRxt-U2</a> in kinematic mirror mount <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KM100CP/M">KM100CP/M</a> on a <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=FM90/M">FM90</a> flip mirror mount.
         </td>
         <td> </td>
-        <td></td>
-        <td>Thorlabs/200€ 
-            Chroma/250€</td>
+        <td>Selects between the Epi-TIRF and micro-mirror TIRF paths; the longpass edge lets the 830&nbsp;nm focus-lock beam share the path</td>
+        <td>Thorlabs/200&euro;
+            Chroma/250&euro;</td>
     </tr>
     <tr>
         <td>10</td>
         <td>Beam homogenisation</td>
-        <td><a href="https://pishaper.com/shaper.html">piShaper (6_6 series)</a> in a <a href="https://pishaper.com/shaper_adjust.html">4-Axis πShaper Mount M27</a> mounted on a <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=BA2/M">BA2/M</a> post base on top of 12mm posts. 
+        <td><a href="https://pishaper.com/shaper.html">piShaper (6_6 series)</a> in a <a href="https://pishaper.com/shaper_adjust.html">4-Axis &pi;Shaper Mount M27</a> mounted on a <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=BA2/M">BA2/M</a> post base on top of 12mm posts.
         </td>
         <td> </td>
-        <td>Laser input requirements:  Ø (1/e<sup>2</sup>) 6mm, lateral displacement ±0,1 mm; angular tilt ±0,1&#xb0;. Robust alignment for all input lines not trivial.</td>
-        <td>AdlOptica/~5000€
+        <td>Laser input requirements:  &Oslash; (1/e<sup>2</sup>) 6mm, lateral displacement &plusmn;0,1 mm; angular tilt &plusmn;0,1&#xb0;. Robust alignment for all input lines not trivial.</td>
+        <td>AdlOptica/~5000&euro;
         </td>
-    </tr>    
+    </tr>
     <tr>
         <td>11</td>
         <td>Periscopes</td>
         <td>Beam height adjustment tailored to RM21 input heights of Epi-TIRF and micromirror path with <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KCB1C/">KCB1C/M</a> 90&deg; kinematic mirror mounts, end plates and 30mm cage system.</td>
         <td> </td>
-        <td></td>
-        <td>Thorlabs/~350€ per unit
+        <td>The CAD assembly models these as KCB1EC/M right-angle kinematic mounts on ER cage rods</td>
+        <td>Thorlabs/~350&euro; per unit
         </td>
+    </tr>
+    <tr>
+        <td>12</td>
+        <td>Single-line shutters</td>
+        <td>One mechanical shutter per laser line ahead of the co-alignment dichroics, for line multiplexing during sequential multicolour acquisition.
+             <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=SH05R/M">SH05R/M</a> shutters with SHB05 blades in
+            <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=SHCP025/M">SHCP025/M</a> cage plates</td>
+        <td> </td>
+        <td>Switched over the Arduino TTL hub (<i>Arduino-Shutter</i> / <i>Arduino-Switch</i> in micro-manager). Run indepdenetly of the global shutter SH1/M unit in row 8</td>
+        <td>Thorlabs</td>
+    </tr>
+    <tr>
+        <td>13</td>
+        <td>Illumination field size control telescopes</td>
+        <td>A bi-directional galilean type telescope (2&times; and 0.5&times;) behind the beam shaper that set the diameter of the illuminated field at the sample without
+            changing the flat-top profile.        
+        </td>
+        <td> </td>
+        <td>Corresponds to the 0.5&times; / 1&times; / 2&times; settings characterised in the illumination figure. Uses a f = 50mm convex doublet (<a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=AC254-050-A">AC254-050-A</a>) and a f = −25mm bi-concave singlet (<a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=LD2297-A">LD2297-A</a>) on kinematic translation mounts in a ø1” cageplate with 100mm cage rods.
+             </td>
+        <td>Thorlabs</td>
+    </tr>
+    <tr>
+        <td>14</td>
+        <td>Beam monitoring camera</td>
+        <td>IDS GigE uEye CP Rev.&nbsp;2 (housed) CMOS camera with 1"-32&nbsp;UN C-mount thread, RJ45 GigE interface and 8-pin I/O, mounted in the beam path of the removable mirror on the magnatic base  
+            behind the beam shaper to record the beam profiles for the flatness and plateau uniformity measurements</td>
+        <td> </td>
+        <td>Addressed in micro-manager as <i>IDSCam</i> through the IDS peak device adapter; also used for the infinity alignment target tooling</td>
+        <td>IDS</td>
+    </tr>
+    <tr>
+        <td>15</td>
+        <td>Relay and collimation lenses</td>
+        <td>Mounted achromatic doublets in the expander and relay stages, e.g. <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=AC254-200-AB-ML">AC254-200-AB-ML</a>
+            (&Oslash;1", f&nbsp;=&nbsp;200&nbsp;mm) and MAP103050-A matched achromatic pairs</td>
+        <td> </td>
+        <td>Held in LMR1/M, LM1XY/M or CXY1A mounts depending on the position in the path</td>
+        <td>Thorlabs</td>
+    </tr>
+    <tr>
+        <td>16</td>
+        <td>Irises and beam stops</td>
+        <td><a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=SM1D12D">SM1D12D</a> SM1 iris diaphragms used to trim the expanded beams and as
+            alignment references along each line</td>
+        <td> </td>
+        <td>One per line downstream of the expander, as described in row 5</td>
+        <td>Thorlabs</td>
+    </tr>
+    <tr>
+        <td>17</td>
+        <td>Optomechanics</td>
+        <td>TR20V/TR30V/TR50V/TR75V &Oslash;12&nbsp;mm posts in PH20/PH50/PH100/M post holders on BA1S/M and BA2/M bases, CF125C/M clamping forks,
+            KB25/M, KB75/M and KBM1/M kinematic magnetic bases, ER-series cage rods and LCP33/M, LCP34/M, LCP4S, CP36 cage plates</td>
+        <td> </td>
+        <td></td>
+        <td>Thorlabs</td>
     </tr>
     <tr class = "homemade"></tr>
 </table>
 
 
 
-<h2>Detection </h2>
+<h2 id="detection">Detection</h2>
 <p>
-    <figure class="align-center">
-        <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/detection.jpg" alt="Detection chamber (in build)" style="width: 50%;">
-        <figcaption>PRISM setup schematic</figcaption>
-    </figure>
+The emission is collected by the objective, passes the tube lens and a shared square field stop, and is then directed by a flip mirror (M<sub>ch</sub>)
+into one of the detection arms. Each arm is built as a 4f relay so that the field stop is imaged onto the sensor and the splitting element sits close to
+a pupil plane.
+</p>
+<figure class="align-center">
+    <a href="{{ site.url }}{{ site.baseurl }}/images/resources/prism/detection.jpg" target="_blank">
+        <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/detection.jpg" alt="Detection chamber (in build)" style="width: 70%;">
+    </a>
+    <figcaption>Detection breadboard during assembly.</figcaption>
+</figure>
+
+<table class="Components" cellspacing="0" cellpadding="0">
+    <tr>
+        <th class="id">id</th>
+        <th class="title">Title</th>
+        <th class="descriptor">Description</th>
+        <th class="image">Image</th>
+        <th class="notes">Notes</th>
+        <th class="supplier">Costs/Supplier</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Emission tube lens</td>
+        <td>Thorlabs <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=TTL200-A">TTL200-A</a> f&nbsp;=&nbsp;200&nbsp;mm tube lens in a
+            <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=CXY2A">CXY2A</a> 60&nbsp;mm cage XY translating mount, carried by LCP33/M and
+            LCP34/M cage plates on ER cage rods and PH50/M post holders</td>
+        <td> </td>
+        <td>Forms the primary image together with the objective; sets the 108&nbsp;nm sampling</td>
+        <td>Thorlabs</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Quad notch filter</td>
+        <td>Quad-notch 400-410/488/561/631-640 emission filter in the collimated space behind the tube lens (see the body table, row 6)</td>
+        <td> </td>
+        <td>Blocks the four excitation lines ahead of the splitting optics</td>
+        <td>AHF, Semrock/ 1100&euro;</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Field stop</td>
+        <td><a href="https://www.owis.eu/produkte/artikel/SP-60/1">SP 60</a> square aperture with four separately positionable edges, mounted on a
+            BA1S/M base with a clamping pedestal at the primary image</td>
+        <td>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/sp60.png" alt="" class="thumbnail">
+                <div class="caption">Square aperture with 4 separately positionable edges</div>
+            </div>
+        </td>
+        <td>max. 12 x 12 mm, shared between the detection arms; has to be set manually to the preset field of view of the selected arm</td>
+        <td>Owis/ 450&euro;</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Path selection mirror M<sub>ch</sub></td>
+        <td>Broadband dielectric mirror (<a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=BB1-E02">BB1-E02</a>) in a KMS/M kinematic mount on
+            RS-series pillar posts, seated on a KBM1/M kinematic magnetic base</td>
+        <td> </td>
+        <td>The magnetic base allows switching between the detection arms and returning to the aligned position without realignment</td>
+        <td>Thorlabs</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>Detection breadboard</td>
+        <td>Thorlabs <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=MB3030/M">MB3030/M</a> 300&nbsp;&times;&nbsp;300&nbsp;mm aluminium
+            breadboard carrying the splitter and the cameras, raised on RS-series pillar posts</td>
+        <td> </td>
+        <td>Keeps the whole splitter arm as one transportable, pre-aligned unit</td>
+        <td>Thorlabs</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>Light shielding</td>
+        <td>Enclosure separating the two detection arms and shielding the sensors from stray room light</td>
+        <td> </td>
+        <td>Self made, based on blackout metal and cardboard sheets sliding into 25mm <a href="https://www.thorlabs.com/25-mm-optical-construction-rails?tabName=Overview">construction rails</a>, modelled by workshop. Walls and illumination side cover made from anodized aluminium with small cutouts for cable management. Detection side top cover made from blackout cardboard (<a>href="https://www.thorlabs.com/item/TB4">TB4</a>) for simplified adjustments (needs to be cleaned for splinters after cutting).  </td>
+        <td>self made</td>
+    </tr>
+    <tr class = "homemade"></tr>
+</table>
+
+<h3 id="multiplane-splitter">Multiplane splitter</h3>
+<p>
+The multiplane arm images eight focal planes simultaneously. An image-splitting prism with three totally internally reflecting faces divides the beam into
+eight paths of successively increasing optical path length; four of these are relayed onto camera 1 and four onto camera 2, so that each sensor records a
+row of four laterally separated sub-images. The optical path increment <i>d</i> between neighbouring paths translates into an axial plane spacing of
+<i>d</i>/(<i>n&middot;m</i><sub>t</sub>) in sample space, set by the refractive index of the prism glass and the transverse magnification of the relay.
+The prism used here measures 59.3&nbsp;mm &times; 27.3&nbsp;mm.
+</p>
+<p>
+The arm can be operated monochromatically, or with an optional spectral-unmixing insert that splits the field into two colour rows ahead of the prism:
+a longpass dichroic separates the emission, each arm is filtered by its own bandpass, and the two beams are recombined at slightly different angles
+(&plusmn;&theta;) so that they land as two vertically offset rows on each camera. Combined with the eight planes this gives up to sixteen sub-images.
+An alternative, simpler four-plane arrangement based on a 50:50 beamsplitter and a right-angle prism (plane spacing <i>L</i>/2<i>n</i>) is shown in the
+same figure for setups that do not need eight planes.
+</p>
+<p>
+Ahead of the prism a set of kinematic folding mirrors introduces small, adjustable path length offsets between the sub-beams (+3&nbsp;mm and
+&minus;2&nbsp;mm in the current configuration), which shifts the plane spacing without exchanging the prism.
+Plane calibration is then performed on fluorescent beads: a z-stack through the sample yields the brightness profile of every sub-image, and the offsets
+between the profile maxima give the axial position of each plane as well as the inter-plane distances used in the reconstruction.
 </p>
 
-<h3>Multicolor-splitter </h3>
+<figure class="align-center">
+    <a href="{{ site.url }}{{ site.baseurl }}/images/resources/prism/multiplane_path.png" target="_blank">
+        <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/multiplane_path.png" alt="Multiplane detection path, prism geometry and plane calibration">
+    </a>
+    <figcaption>(a) CAD of the multiplane emission path with the field stop, relay lenses, prism and both cameras; the dashed box marks the optional
+    spectral unmixing insert. (b) Prism geometry, distribution of the eight focal planes over the two cameras and the resulting focal plane order.
+    (c) Spectral unmixing insert: longpass dichroic, bandpass filters and folding mirrors that recombine the two colour channels under &plusmn;&theta;.
+    (d) Alternative four-plane arrangement using a 50:50 beamsplitter and a right-angle prism. (e) Bead fields recorded on both cameras and
+    (f) median bead brightness versus z-slice per sub-image, from which the plane positions are calibrated.</figcaption>
+</figure>
+
+<table class="Components" cellspacing="0" cellpadding="0">
+    <tr>
+        <th class="id">id</th>
+        <th class="title">Title</th>
+        <th class="descriptor">Description</th>
+        <th class="image">Image</th>
+        <th class="notes">Notes</th>
+        <th class="supplier">Costs/Supplier</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Fourier lens F<sub>m,R1</sub></td>
+        <td><a href="https://www.edmundoptics.com/p/25mm-dia-x-250mm-fl-vis-nir-inked-achromatic-lens/9776/">#49-366-INK</a> 25mm Dia. x 250mm FL, VIS-NIR, Inked, Achromatic Lens (400-1000nm) </td>
+        <td> </td>
+        <td>Collimates the intermediate image relayed from the field stop</td>
+        <td>Edmund optics/ 120&euro;</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Fourier lens F<sub>m,R2</sub></td>
+        <td> <a href="https://www.edmundoptics.com/p/25mm-dia-x-225mm-fl-vis-nir-inked-achromatic-lens/9774/">#49-365-INK</a> 25mm Dia. x 225mm FL, VIS-NIR, Inked, Achromatic Lens (400-1000nm)</td>
+        <td> </td>
+        <td>Sets the transverse magnification m<sub>t</sub> of the relay and with it the axial plane spacing</td>
+        <td>Edmund optics/ 120&euro;</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Beam deflection mirror</td>
+        <td> <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KCB1/M">KCB1/M</a> mount with broadband dielectric mirror (<a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=BB1-E02">BB1-E02</a>) </td>
+        <td>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/kcb1.jpg" alt="" class="thumbnail">
+                <div class="caption">KCB1/M</div>
+            </div>
+        </td>
+        <td>Inserted due to spatial constraints</td>
+        <td>Thorlabs 300&euro;</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Multiplane-splitter</td>
+        <td>Image splitting prism with three TIR reflectors, 59.3&nbsp;mm &times; 27.3&nbsp;mm, distributing eight optical paths over two cameras</td>
+        <td>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/prism_schematic.png" alt="" class="thumbnail">
+                <div class="caption">Image splitting prism, eight paths distributed over two cameras</div>
+            </div>
+        </td>
+        <td> Allows simultaneous detection of diffraction limited images at equally spaced axial planes with only minimal alignment of the overall optical setup. Assembly from off-the-shelf beamsplitters is documented on the <a href="{{ site.url }}{{ site.baseurl }}/prism-fabrication/">prism fabrication</a> page </td>
+        <td><a href="https://www.scoptonic.com/">Scoptonic Imaging technologies</a>/10-20k&euro;</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>Multiplane-splitter-mount</td>
+        <td>Multi-plane prism aligner</td>
+        <td>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/splitter_mount.jpg" alt="" class="thumbnail">
+                <div class="caption">Multi-plane prism aligner, Scoptonic Imaging technologies</div>
+            </div>
+        </td>
+        <td>Multi-Axis stage: X, Y, Z, Pitch, Yaw and Roll adjustment</td>
+        <td><a href="https://www.scoptonic.com/">Scoptonic Imaging technologies</a></td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>Spectral unmixing insert</td>
+        <td>Longpass dichroic, two bandpass filters and three folding mirrors placed at 112.5&nbsp;mm / 115.0&nbsp;mm / 110.0&nbsp;mm that recombine two colour channels under &plusmn;&theta;</td>
+        <td> </td>
+        <td>Optional; splits every plane into two vertically offset colour rows on the sensor</td>
+        <td>Thorlabs, Semrock/</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>2x sCMOs cameras</td>
+        <td>Teledyne Photometrics <a href="https://www.photometrics.com/products/kinetix-family/kinetix">KINETIX</a></td>
+        <td>
+            <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/kinetix.png" alt="" class="thumbnail">
+                <div class="caption">Teledyne Photometrics KINETIX</div>
+            </div>
+        </td>
+        <td>3200 x 3200 pixel, air/water cooled, 83Hz full range full chip, high sensitivity sCMOS; addressed as a MultiCamera device through PVCAM</td>
+        <td>Teledyne Photometrics</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>Path length trim mirrors</td>
+        <td>Kinematic folding mirrors (labelled I, II<sub>a,b</sub>, III in the schematic) that add the +3&nbsp;mm and &minus;2&nbsp;mm optical path
+            offsets between the sub-beams before the prism</td>
+        <td> </td>
+        <td>Used to fine-tune the interplane spacing without exchanging the prism; mirror substrates BB1-E02 in KM100CP/M and KMS/M mounts</td>
+        <td>Thorlabs</td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td>Prism mount and translation</td>
+        <td>Prism aligner on a <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KM200B/M">KM200B/M</a> kinematic mount with an XYT1/M
+            translation mount, bolted to the MB3030/M detection breadboard</td>
+        <td> </td>
+        <td>Alternative off the shelf prism mount, the Scoptonic six-axis aligner in row 5 is the main mounting option</td>
+        <td>Thorlabs</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>Camera mounting adapter</td>
+        <td>Machined adapter plate coupling the Kinetix housing to the breadboard, setting sensor height (112.5mm center)and orthogonality with respect to the prism</td>
+        <td>
+              <div class="img-container">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/prism_adapter.png" alt="" class="thumbnail">
+                <div class="caption">Camera translation stage adapter</div>
+            </div>
+        </td>
+        <td>Self made (<i>kinetix_to_plate_adapter</i>)</td>
+        <td></td>
+    </tr>
+    <tr class = "homemade"></tr>
+</table>
+
+
+<h3 id="2d-spectral-splitter">2D spectral splitter</h3>
 <p>
+The second detection arm splits the field into up to four spectral channels that are tiled onto a single sCMOS sensor, which makes simultaneous
+multicolour imaging robust against sample motion and against bleaching between sequential colour frames. The channels are separated by ultraflat
+dichroics in a mono-to-quad view splitting platform and re-imaged by a common Fourier lens pair; the shared square field stop with four independently
+positionable edges defines the tile size.
 </p>
+<p>
+Channel registration and the point spread function of each channel are calibrated on beads. The measured PSF widths of the two main channels agree to
+within a few percent laterally (about 0.37&ndash;0.40&nbsp;&micro;m) and axially (about 0.95&ndash;0.97&nbsp;&micro;m), which is what allows localisations from
+different channels to be combined into a single, spectrally demixed reconstruction.
+</p>
+
+<figure class="align-center">
+    <a href="{{ site.url }}{{ site.baseurl }}/images/resources/prism/spectral_splitter.jpg" target="_blank">
+        <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/spectral_splitter.jpg" alt="Spectral splitter CAD, PSF characterisation and demixed reconstruction">
+    </a>
+    <figcaption>(a) CAD of the splitting optics: relay lenses L<sub>II,1</sub> and L<sub>II,2</sub>, dichroic mirror, folding mirrors M<sub>1</sub> and
+    M<sub>2</sub>, field stop and tube lens ahead of the sCMOS. (b) Widefield and single-molecule frames of the same field.
+    (c, d) Measured lateral and axial PSF of both channels. (e) Two-colour super-resolved reconstruction and the individual channels.</figcaption>
+</figure>
 
 <table class="Components" cellspacing="0" cellpadding="0">
     <tr>
@@ -346,7 +907,7 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td>Path separation mirror M<sub>ch</sub></td>
         <td>Kinematic mirror mount on magnetic base for path separation</td>
         <td> </td>
-        <td></td>
+        <td>The magnetic base allows switching between detection arms without realignment</td>
         <td>Mad City Labs/
             Thorlabs/
         </td>
@@ -364,7 +925,7 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td>Dichroic mirror mounts</td>
         <td>6x mounts (2 per split) for 26x38x3mm ultraflat dichroics (&lambda;/4 Peak-to-Valley flatness) </td>
         <td> </td>
-        <td></td>
+        <td>Flatness is critical to avoid channel-dependent aberrations</td>
         <td>Thorlabs/</td>
     </tr>
     <tr>
@@ -381,17 +942,17 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td> <a href="https://www.edmundoptics.com/p/25mm-dia-x-200mm-fl-vis-nir-inked-achromatic-lens/9772/">#49-364-INK</a> 25mm Dia. x 200mm FL, VIS-NIR, Inked, Achromatic Lens (400-1000nm)</td>
         <td> </td>
         <td></td>
-        <td>Edmund optics/ 120€</td>
+        <td>Edmund optics/ 120&euro;</td>
     </tr>
     <tr>
         <td>6</td>
         <td>sCMOs camera</td>
         <td>Teledyne Photometrics <a href="https://www.photometrics.com/products/prime-family/primebsiexpress">BSI Express</a></td>
-        <td> 
+        <td>
             <div class="img-container">
                 <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/bsi_express.png" alt="" class="thumbnail">
                 <div class="caption">Teledyne Photometrics BSI Express</div>
-            </div>  
+            </div>
         </td>
         <td>2048 x 2048 pixel, air cooled, 43Hz full range full chip, high sensitivity sCMOS</td>
         <td>Teledyne Photometrics</td>
@@ -400,23 +961,52 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
         <td>7</td>
         <td>Aperture / field stop</td>
         <td><a href="https://www.owis.eu/produkte/artikel/SP-60/1">SP 60</a> square aperture with 4 separately positionable edges</td>
-        <td>   
-            <div class="img-container">    
+        <td>
+            <div class="img-container">
                 <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/sp60.png" alt="" class="thumbnail">
                 <div class="caption">Square aperture with 4 separately positionable edges</div>
-            </div> 
+            </div>
         </td>
         <td>max. 12 x 12 mm, shared among both detection paths (needs to be manually adjusted to preset FOVs)</td>
-        <td>Owis/ 450€</td>
+        <td>Owis/ 450&euro;</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>Emission filters</td>
+        <td>One bandpass filter per spectral channel behind the splitting dichroics</td>
+        <td> </td>
+        <td>Filter set follows the <a href="https://www.fpbase.org/microscope/Ri8a75Em9LiY6JjA8nT9Tk/?c=colour_splitter&l=laser-405&d=photometrics-prime-bsi">FPbase configuration</a></td>
+        <td>AHF, Semrock</td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td>Folding mirrors M<sub>1</sub>, M<sub>2</sub></td>
+        <td>Kinematically mounted broadband dielectric mirrors that fold the split channels onto their tiles on the sensor</td>
+        <td> </td>
+        <td></td>
+        <td>Thorlabs</td>
     </tr>
     <tr class = "homemade"></tr>
 </table>
 
 
-<h3>Multiplane-splitter </h3>
+<h3 id="event-based-sensor-path">Event-based sensor path</h3>
 <p>
-    The multiplane splitter (horizontal separation on sensor) is built in a 30mm cage system in a 4f-setting with either a chromatic splitter (vertical separation) or a 3D printed filter wheel based on the <a href="https://github.com/ries-lab/RiesPieces/tree/master/Microscopy/Filter_wheel">Ries lab</a> design. 
+A third detection arm carries an event-based sensor (EBS). Instead of integrating frames, every pixel reports asynchronous ON/OFF events whenever the
+logarithm of the incident intensity crosses a threshold, which gives microsecond temporal resolution at low data rates for sparse, moving signals.
+On PRISM the arm shares the splitter path through a 50:50 beamsplitter, so the same field can be recorded on the sCMOS and on the EBS at the same time.
+That makes the arm useful for fast single-particle tracking, where the frame rate of a conventional camera limits the accessible dynamics.
 </p>
+
+<figure class="align-center">
+    <a href="{{ site.url }}{{ site.baseurl }}/images/resources/prism/ebs_path.jpg" target="_blank">
+        <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/ebs_path.jpg" alt="Event-based sensor path, pixel architecture and tracking comparison">
+    </a>
+    <figcaption>(a) CAD of the EBS arm alongside the splitter optics. (b) Pixel architecture: logarithmic photoreceptor, differential unit and comparator
+    generating ON/OFF events. (c, d) Event generation for a moving stimulus, with the corresponding intensity, differential voltage and event traces.
+    (e, f) The same bead field recorded on the sCMOS and reconstructed from events, with (g, h) the resulting trajectories of two diffusing beads.</figcaption>
+</figure>
+
 <table class="Components" cellspacing="0" cellpadding="0">
     <tr>
         <th class="id">id</th>
@@ -428,78 +1018,54 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
     </tr>
     <tr>
         <td>1</td>
-        <td>Fourier lens F<sub>m,R1</sub></td>
-        <td><a href="https://www.edmundoptics.com/p/25mm-dia-x-250mm-fl-vis-nir-inked-achromatic-lens/9776/">#49-366-INK</a> 25mm Dia. x 250mm FL, VIS-NIR, Inked, Achromatic Lens (400-1000nm) </td>
+        <td>Event-based sensor</td>
+        <td><a href="https://www.prophesee.ai/event-camera-evk4/">Prophesee EVK4</a> event camera with a Sony IMX636 sensor, 1280&nbsp;&times;&nbsp;720
+            pixels at 4.86&nbsp;&micro;m pitch</td>
         <td> </td>
-        <td></td>
-        <td>Edmund optics/ 120€</td>
+        <td>Recorded through Metavision in EVT3 format (sensor generation 4.2); bias settings are stored alongside each recording</td>
+        <td>Prophesee</td>
     </tr>
     <tr>
         <td>2</td>
-        <td>Fourier lens F<sub>m,R2</sub></td>
-        <td> <a href="https://www.edmundoptics.com/p/25mm-dia-x-225mm-fl-vis-nir-inked-achromatic-lens/9774/">#49-365-INK</a> 25mm Dia. x 225mm FL, VIS-NIR, Inked, Achromatic Lens (400-1000nm)</td>
+        <td>Beamsplitter cube</td>
+        <td>Thorlabs <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=CCM1-BS013/M">CCM1-BS013/M</a> cage-cube-mounted non-polarising 50:50
+            beamsplitter, splitting the arm between the sCMOS and the event sensor</td>
         <td> </td>
-        <td></td>
-        <td>Edmund optics/ 120€</td>
+        <td>Allows the same field to be recorded on both sensors simultaneously for the frame-based versus event-based comparison</td>
+        <td>Thorlabs</td>
     </tr>
     <tr>
         <td>3</td>
-        <td>Beam deflection mirror</sub></td>
-        <td> <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=KCB1/M">KCB1/M</a> mount with broadband dielectric mirror (<a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=BB1-E02">BB1-E02</a>) </td>    
-        <td> 
-            <div class="img-container">
-                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/kcb1.jpg" alt="" class="thumbnail">
-                <div class="caption">KCB1/M</div>
-            </div>
-        </td>
-        <td>Inserted due to spatial constraints</td>
-        <td>Thorlabs 300€</td>
+        <td>Relay lens</td>
+        <td>Focussing lens imaging the relayed intermediate image onto the event sensor</td>
+        <td> </td>
+        <td>F=160mm achromatic doublet, as the sensor pitch (4.86&nbsp;&micro;m) differs from the sCMOS, so the effective sampling on the EBS is 113.9nm</td>
+        <td>Edmund Optics</td>
     </tr>
     <tr>
         <td>4</td>
-        <td>Multiplane-splitter</sub></td>
-        <td> 2x2 glass prism</td>    
-        <td>
-            <div class="img-container">
-                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/prism_schematic.png" alt="" class="thumbnail">
-                <div class="caption">2x2 glass prism</div>
-            </div>
-        </td>
-        <td> Allows simultaneous detection of up to four diffraction limited images obtained at equally spaced vertical planes with only minimal alignment of the overall optical setup </td>
-        <td><a href="https://www.scoptonic.com/">Scoptonic Imaging technologies</a>/10-20k€</td>
-    </tr>
-    <tr>
-        <td>5</td>
-        <td>Multiplane-splitter-mount</sub></td>
-        <td>Multi-plane prism aligner</td>    
-        <td>
-            <div class="img-container">
-                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/splitter_mount.jpg" alt="" class="thumbnail">
-                <div class="caption">Multi-plane prism aligner, Scoptonic Imaging technologies</div>
-            </div>
-        </td>
-        <td>Multi-Axis stage: X, Y, Z, Pitch, Yaw and Roll adjustm</td>
-        <td><a href="https://www.scoptonic.com/">Scoptonic Imaging technologies</a></td>
-    </tr>
-    <tr>
-        <td>6</td>
-        <td>2x sCMOs cameras</td>
-        <td>Teledyne Photometrics <a href="https://www.photometrics.com/products/kinetix-family/kinetix">KINETIX</a></td>
-        <td> 
-            <div class="img-container">
-                <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/kinetix.png" alt="" class="thumbnail">
-                <div class="caption">Teledyne Photometrics KINETIX</div>
-            </div>
-        </td>
-        <td>3200 x 3200 pixel, air/water cooled, 83Hz full range full chip, high sensitivity sCMOS</td>
-        <td>Teledyne Photometrics</td>
+        <td>Sensor mount</td>
+        <td>Adapter and post assembly holding the EVK4 at the beam height of the detection breadboard</td>
+        <td> </td>
+        <td><i>Prophesee_EV4K</i> mounting hardware via C-mount, cage plate and cage system to ensure orthogonality + a lens tube for light protection</td>
+        <td>self made</td>
     </tr>
     <tr class = "homemade"></tr>
 </table>
 
 
-<h2>TIRF-lock (z-stabilisation) </h2>
+<h2 id="focus-lock">Focus lock</h2>
 <p>
+Axial drift is suppressed by an infrared reflection focus lock. An 830&nbsp;nm collimated diode beam is coupled in through the micro-mirror path, totally
+internally reflected at the sample coverslip and imaged onto a quadrant photodiode; the lateral position of the reflected spot on the quadrants is
+proportional to the axial displacement of the coverslip and is fed back onto the piezo z-stage. Readout and feedback are handled by the Mad City Labs
+<a href="https://www.madcitylabs.com/tirf-lock.html">TIRF Lock</a>, which closes the loop in software onto the nanopositioner. Because the lock operates
+beyond the emission bands and enters through the micro-mirror path, it can run simultaneously with dichroic-based Epi-TIRF imaging.
+</p>
+<p>
+The benefit shows in long single-molecule acquisitions: with the lock engaged the mean axial position of the localisations stays flat over tens of
+thousands of frames, while it drifts continuously when the lock is off &mdash; in particular with the incubator running, which is exactly the regime needed
+for live-cell measurements.
 </p>
 
 <table class="Components" cellspacing="0" cellpadding="0">
@@ -513,17 +1079,323 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
     </tr>
     <tr>
         <td>1</td>
-        <td></td>
-        <td></td>
+        <td>IR diode laser</td>
+        <td>830&nbsp;nm collimated laser diode module, coupled into the micro-mirror TIRF path through the longpass flip mirror</td>
+        <td> </td>
+        <td>Outside the detection bands, so it does not contaminate the fluorescence channels. The CAD assembly <i>TIRF_lock_excitation</i> carries a
+            Thorlabs CPS-series module as a stand-in geometry</td>
+        <td>Thorlabs</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Beam steering</td>
+        <td>KCB1EC/M right-angle kinematic mount and a four-inch two-mirror periscope on ER8 cage rods, with a KAD11F kinematic adapter and an XYT1/M
+            XY translation mount for lateral positioning of the beam in the back focal plane</td>
+        <td> </td>
+        <td>Positioning in the pupil sets the incidence angle and therefore the lateral shift per unit of defocus</td>
+        <td>Thorlabs</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Focussing optics</td>
+        <td>Lens and right angle prism (<a href="https://www.thorlabs.com/item/PS605">PS615</a> and
+            <a href="https://www.thorlabs.com/item/AMA007">AMA007</a> mounting adapter) that focus the returning NIR beam via a mirror onto the QPD</td>
         <td> </td>
         <td></td>
-        <td>Costs/Mad City Labs</td>
+        <td>Thorlabs, Mad City Labs</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>IR separation dichroic</td>
+        <td>Thorlabs <a href="https://www.thorlabs.com/thorproduct.cfm?partnumber=DMLP730">DMLP730B</a> longpass dichroic (730&nbsp;nm cut-on) separating
+            the returning IR beam from the fluorescence emission</td>
+        <td> </td>
+        <td>Mounted in a KM100B/M kinematic mount in the CAD assembly</td>
+        <td>Thorlabs</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>Reflection readout</td>
+        <td>Quadrant photodiode head of the Mad City Labs <a href="https://www.madcitylabs.com/tirf-lock.html">TIRF Lock</a>, reading the position of the
+            beam reflected at the coverslip; 400&ndash;1000&nbsp;nm range, 2.4&nbsp;&times;&nbsp;2.4&nbsp;mm sensor, peak responsivity 0.4&nbsp;A/W at
+            635&nbsp;nm and 0.67&nbsp;A/W at 900&nbsp;nm</td>
+        <td> </td>
+        <td>The lateral spot position on the quadrants encodes the axial sample position</td>
+        <td>Mad City Labs</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>Controller</td>
+        <td>Mad City Labs <a href="https://www.madcitylabs.com/tirf-lock.html">TIRF Lock</a> controller, connected over USB 2.0 with a LabVIEW based
+            software interface that closes the loop from the quadrant signal onto the nanopositioner</td>
+        <td> </td>
+        <td>Software feedback rather than an analogue loop; designed for the RM21 platform together with the MicroMirror TIRF system and TIRF module</td>
+        <td>Mad City Labs</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>Actuator</td>
+        <td>Mad City Labs NanoDrive piezo z-stage, driven in closed loop from the readout signal</td>
+        <td> </td>
+        <td>Shared with z-stack acquisition and multiplane calibration</td>
+        <td>Mad City Labs/</td>
     </tr>
     <tr class = "homemade"></tr>
 </table>
 
+
+<h2 id="control-and-acquisition">Control and acquisition</h2>
+<p>
+All devices are addressed through micro-manager 2: the two Kinetix cameras through PVCAM as a combined MultiCamera device, the BSI Express on the splitter
+path, the Mad City Labs MicroDrive XY and Z stages and the NanoDrive piezo, the laser heads over their serial interfaces, and the shutters and line
+switching through an Arduino hub. Acquisition routines are written against pycro-manager, which allows the acquisition engine to be extended with
+per-frame image processors and hooks.
+</p>
+<p>
+Three routines carry most of the day-to-day work: an on-the-fly processor that regroups the interleaved multi-camera stream into per-plane TIFF files with
+matching metadata while the acquisition is running; an unattended multi-position routine that autofocuses, segments the brightfield channel with Cellpose
+and only stores fields that actually contain cells; and a closed-loop STORM controller that estimates the density of active emitters per frame and adjusts
+the 405&nbsp;nm reactivation power through a PI controller to hold the blinking density in the optimal range.
+</p>
+
+<figure class="align-center">
+    <a href="{{ site.url }}{{ site.baseurl }}/images/resources/prism/control_diagrams.png" target="_blank">
+        <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/control_diagrams.png" alt="Acquisition control flow diagrams">
+    </a>
+    <figcaption>(a) On-the-fly multi-camera processor: frames are buffered per timepoint, cropped, registered, reordered and written per plane together
+    with their metadata. (b) Unattended acquisition over an xy grid with autofocus and Cellpose-based cell detection. (c) Closed-loop control of the
+    405&nbsp;nm reactivation power from the number of predicted emitters per frame.</figcaption>
+</figure>
+
+<figure class="align-center">
+    <a href="{{ site.url }}{{ site.baseurl }}/images/resources/prism/arduino_pinout.svg" target="_blank">
+        <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/arduino_pinout.svg" alt="Arduino Uno digital output assignment for laser line switching">
+    </a>
+    <figcaption>Digital output assignment of the TTL hub. The micro-manager Arduino adapter exposes the Uno outputs on pins 8&ndash;13 as a single
+    bitmask, and the <i>Arduino-Switch</i> state in each preset of the <i>laser_shutter</i> group is the sum of the active bits, so four of the six
+    available lines carry the excitation wavelengths and two remain free. Sequencing is off in every preset, so the trigger input on pin 2 is unused and
+    line switching is issued over the serial link.</figcaption>
+</figure>
+
+<table class="Components" cellspacing="0" cellpadding="0">
+    <tr>
+        <th class="id">id</th>
+        <th class="title">Device / component</th>
+        <th class="descriptor">Description</th>
+        <th class="image">Image</th>
+        <th class="notes">micro-manager device / notes</th>
+        <th class="supplier">Costs/Supplier</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Acquisition software</td>
+        <td><a href="https://micro-manager.org/">micro-manager 2</a> for device control, with beanshell scripts for the camera ROIs of the different
+            splitter geometries and <a href="https://pycro-manager.readthedocs.io/en/latest/">pycro-manager</a> for scripted acquisitions</td>
+        <td> </td>
+        <td>ROI scripts exist per configuration (2&times;2 splitter, 3&times;2 and 4&times;2 Scoptonic splitter, multicolour splitter)</td>
+        <td>open source</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>TTL hub</td>
+        <td>Arduino Uno running the stock micro-manager Arduino firmware, driving the laser line switching and the shutters over a serial port</td>
+        <td> </td>
+        <td><i>Arduino-Hub</i> with the <i>Arduino-Switch</i> and <i>Arduino-Shutter</i> child devices; COM9 at 57600&nbsp;baud, 8N1, no handshaking,
+            normal logic. The switch state is a bitmask over the digital outputs on pins 8&ndash;13, of which four are used (see the diagram above):
+            642&nbsp;nm on pin 8 (value 1), 561&nbsp;nm on pin 9 (value 2), 488&nbsp;nm on pin 10 (value 4) and 405&nbsp;nm on pin 11 (value 8), so a
+            combined state such as 405&thinsp;+&thinsp;488&thinsp;+&thinsp;561 is written as 14. The micro-manager sketch targets the ATmega328P, so an
+            Uno R3 rather than an R4 is the safe board for a rebuild</td>
+        <td>Arduino / ~25&euro;</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Cameras</td>
+        <td>Two Kinetix and one BSI Express addressed through the PVCAM adapter; the two Kinetix are combined into one logical device for synchronous
+            multiplane acquisition</td>
+        <td> </td>
+        <td><i>Camera-1</i>, <i>Camera-2</i> (PVCAM) and <i>MultiCamera</i> (Utilities)</td>
+        <td>Teledyne Photometrics</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Stages</td>
+        <td>Mad City Labs MicroDrive xy and z stages for coarse positioning and the NanoDrive piezo for fine z</td>
+        <td> </td>
+        <td><i>MicroDrive XY Stage</i>, <i>MicroDrive Z Stage</i> (MCL_MicroDrive) and <i>MCL NanoDrive Z Stage</i> (MCL_NanoDrive)</td>
+        <td>Mad City Labs</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>Laser control</td>
+        <td>Serial control of the four excitation lines, with dedicated adapters for the 561&nbsp;nm and 405&nbsp;nm heads and generic serial devices for
+            the 488&nbsp;nm and 642&nbsp;nm heads</td>
+        <td> </td>
+        <td><i>561 - LaserQuantum</i> (LaserQuantumLaser), <i>405 - iBeamSmartCW</i> (Toptica_iBeamSmartCW), <i>488 - Sapphire</i> and <i>642 - MBPC</i>
+            (UserDefinedSerial); config groups <i>laser_I/O</i> and <i>laser_shutter</i></td>
+        <td>&mdash;</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>Event camera acquisition</td>
+        <td>Prophesee Metavision software recording EVT3 raw streams with per-recording bias settings, run alongside the micro-manager acquisition</td>
+        <td> </td>
+        <td>Not integrated into the micro-manager acquisition engine. Synchronisation with the sCMOS stream from the data itself, using the shutter opening as reference.</td>
+        <td>Prophesee</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>Environmental control logging</td>
+        <td>Python service (<i>tctrl</i>) that logs and plots the Okolab temperature and CO<sub>2</sub> readings over the measurement</td>
+        <td> </td>
+        <td>Produces the traces shown in the incubator figure</td>
+        <td>self made</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>On-line analysis</td>
+        <td>Cellpose segmentation of the brightfield channel for unattended acquisition, and an emitter density estimator feeding the PI controller for the
+            405&nbsp;nm reactivation power</td>
+        <td> </td>
+        <td>Run as pycro-manager image processors; model weights and thresholds are stored with the acquisition metadata</td>
+        <td>open source</td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td>Acquisition computer</td>
+        <td>Supermicro Super Server on an H12SSL-NT mainboard with an AMD EPYC 7502 32-core processor at 2.5&nbsp;GHz (64 logical processors) and
+            128&nbsp;GB RAM, running 64-bit Windows 10 Enterprise (build 19045)</td>
+        <td> </td>
+        <td>The core count and memory carry the two full-chip Kinetix streams plus the on-the-fly per-plane writing and on-line segmentation</td>
+        <td>Supermicro</td>
+    </tr>
+    <tr class = "homemade"></tr>
+</table>
+
+
+<h2 id="characterisation-and-performance">Characterisation and performance</h2>
+<p>
+The instrument is characterised with a small set of routine measurements: pixel size against a calibration ruler, illumination flatness per line, plane
+positions from bead stacks, PSF per spectral channel, mechanical and axial stability, and a phase calibration against a step of known height for the
+quantitative phase modality. The standards and routines used for each are listed below.
+</p>
+
+<table class="Components" cellspacing="0" cellpadding="0">
+    <tr>
+        <th class="id">id</th>
+        <th class="title">Measurement</th>
+        <th class="descriptor">Standard / sample</th>
+        <th class="image">Image</th>
+        <th class="notes">Routine</th>
+        <th class="supplier">Result</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Pixel size</td>
+        <td>Calibration ruler with 10&nbsp;&micro;m line spacing, <a href="https://www.thorlabs.com/item/R1L3S2P">R1L3S2P</a> </td>
+        <td> </td>
+        <td>Column or row projection with automatic bright-peak / dark-valley selection, outlier rejection on the inter-line distances; on the BSI the two
+            differently illuminated sensor halves are evaluated separately as a uniformity cross-check</td>
+        <td>108&nbsp;nm per pixel on both the BSI Express and the Kinetix</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Beam homogeneity</td>
+        <td>Direct imaging of the beam on the monitoring camera, per laser line, before and after the beam shaper</td>
+        <td> </td>
+        <td>FWHM, plateau uniformity and flatness factor from the recorded profiles</td>
+        <td>See the illumination figure; flat-top profiles for all four lines</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Collimation</td>
+        <td>Thorlabs <a href="https://www.thorlabs.com/shearing-interferometers?tabName=Overview">shearing interferometer</a>, size matched to the
+            6&nbsp;mm (1/e<sup>2</sup>) collimated beams</td>
+        <td> </td>
+        <td>Checked per line after the beam expander; a wedged shear plate turns residual divergence into a tilt of the interference fringes against the
+            reference line</td>
+        <td>Collimation verified for each expander</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Plane positions and PSF</td>
+        <td>Fluorescent bead sample made from 100nm TetraSpeck beads <a href="https://www.thermofisher.com/order/catalog/product/T14792">T14792</a></td>
+        <td> </td>
+        <td>Piezo z-stack over the beads, median bead brightness per sub-image versus z-slice, maxima give plane positions and inter-plane distances</td>
+        <td>Eight planes calibrated per acquisition configuration</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>Channel PSF</td>
+        <td>Same bead sample, imaged through the spectral splitter</td>
+        <td> </td>
+        <td>Lateral and axial profiles fitted per channel</td>
+        <td>~0.37&ndash;0.40&nbsp;&micro;m lateral, ~0.95&ndash;0.97&nbsp;&micro;m axial for both channels</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>Mechanical stability</td>
+        <td>Immobilised sample imaged over 10<sup>4</sup> frames with the environmental control on and off</td>
+        <td> </td>
+        <td>Lateral position per frame plus the amplitude spectrum of the trace</td>
+        <td>No dominant vibrational resonance introduced by the incubator; added low-frequency drift</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>Axial stability</td>
+        <td>Single-molecule acquisition with the focus lock engaged and disengaged</td>
+        <td> </td>
+        <td>Mean axial position of the localisations per frame, drift corrected against the lock-on trace</td>
+        <td>Flat axial position with the lock on over tens of thousands of frames</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>Quantitative phase</td>
+        <td>Custom etched borosilicate staircase sample, with corners as displayed in panel (a),  step height rangning from 50nm to 200nm.</td>
+        <td> </td>
+        <td>Horizontal and vertical line profiles across the step edges, measured against the theoretical phase to fix the scaling factor</td>
+        <td>Scaling factor &alpha;&nbsp;&asymp;&nbsp;3.58 for the current configuration</td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td>Resolution</td>
+        <td>Immunolabelled microtubules (tubulin / Alexa&nbsp;647) in U2OS cells</td>
+        <td> </td>
+        <td>Localisation precision histograms (NeNA) and Fourier ring correlation on the reconstruction</td>
+        <td>~30&nbsp;nm lateral and ~90&nbsp;nm axial localisation precision</td>
+    </tr>
+    <tr class = "homemade"></tr>
+</table>
+
+<figure class="align-center">
+    <a href="{{ site.url }}{{ site.baseurl }}/images/resources/prism/performance.jpg" target="_blank">
+        <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/performance.jpg" alt="Imaging performance of the PRISM setup">
+    </a>
+    <figcaption>(a) Widefield versus STORM reconstruction of the same field. (b) Number of on-frames per localisation without and with beam shaping.
+    (c, d) Colour-coded axial positions in the lateral and axial projection of a multiplane STORM acquisition. (e) Lateral and axial localisation
+    precision and (f) the corresponding Fourier ring correlation. (g) Brightfield and reconstructed quantitative phase of the same field.
+    (h) Correlative brightfield, Htt-eGFP and Htt-Alexa647 images across four planes.</figcaption>
+</figure>
+
+<figure class="align-center">
+    <a href="{{ site.url }}{{ site.baseurl }}/images/resources/prism/qpi_calibration.png" target="_blank">
+        <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/qpi_calibration.png" alt="Quantitative phase calibration against a step standard">
+    </a>
+    <figcaption>Quantitative phase calibration. (a) Topography of the step standard, (b) raw brightfield and (c) reconstructed phase of the same region.
+    (d) Horizontal and vertical line profiles across the step edges and (e) the resulting comparison of measured against theoretical phase, which fixes the
+    scaling factor of the reconstruction.</figcaption>
+</figure>
+
+
+<h2 id="design-files-and-related-pages">Design files and related pages</h2>
+<ul>
+    <li><a href="{{ site.url }}{{ site.baseurl }}/prism-fabrication/">Prism fabrication</a> &mdash; assembly of multiplane splitters from off-the-shelf beamsplitters.</li>
+    <li><a href="{{ site.url }}{{ site.baseurl }}/live-cell-incubator/">Live-cell incubator</a> &mdash; the cage incubator design for the RM21 platform.</li>
+    <li><a href="{{ site.url }}{{ site.baseurl }}/images/resources/prism/RMS21_incubator_spacing.stp">Incubator STEP file</a> &mdash; enclosure geometry as used on this system.</li>
+    <li><a href="https://www.fpbase.org/microscope/Ri8a75Em9LiY6JjA8nT9Tk/?c=colour_splitter&l=laser-405&d=photometrics-prime-bsi">FPbase configuration</a> &mdash; spectra of the current filter and splitter configuration.</li>
+    <li><a href="http://github.com/GrussmayerLab">GrussmayerLab on GitHub</a> &mdash; acquisition and processing code for the multiplane pipeline.</li>
+</ul>
+
 <!--- needs to be added work popupiamge to work (sort of a placeholder that is displayed once the display is triggered the first time--->
-   <!--- needs to be added work popupiamge to work (sort of a placeholder that is displayed once the display is triggered the first time--->
    <div class="popup-image">
     <span>&times;</span>
     <img src="{{ site.url }}{{ site.baseurl }}/images/resources/prism/prism_schematic.png">
@@ -537,13 +1409,14 @@ Devices are controlled via <a href="https://micro-manager.org/">micro-manager 2.
 <script>
     document.querySelectorAll('.img-container img').forEach(image =>{
     image.onclick = () =>{
-        const container = image.parentNode; // Get the parent container of the image
-        let text = container.querySelector('.caption').textContent; // Get the text stored in the container
+        const container = image.parentNode; /* Get the parent container of the image */
+        const caption = container.querySelector('.caption');
+        const text = caption ? caption.textContent : ''; /* Get the text stored in the container */
 
         document.querySelector('.popup-image').style.display = 'block';
         document.querySelector('.popup-image img').src = image.getAttribute('src');
         if (text.length){
-            document.querySelector('.popup-image .text').textContent = text; // Display the text in the popup
+            document.querySelector('.popup-image .text').textContent = text; /* Display the text in the popup */
             document.querySelector('.popup-image .text').style.left="50%";
             document.querySelector('.popup-image .text').style.transform="translateX(-50%)";
         }
